@@ -73,6 +73,40 @@ function App() {
             </div>
         </section>
 
+        <section id="WhyDoIt">
+            <div className="why-do-it-header">
+                <span className="subtitle">why do it?</span>
+                <h2>YOUR COMMUNITY NEEDS YOU</h2>
+                <p>that is more than enough reason</p>
+            </div>
+
+            <div className="cards-container">
+                <div className="card">
+                    <div className="card-icon">[ ICON ]</div>
+                    <h3>GROWING FOOD INSECURITY</h3>
+                    <p>
+                        A dramatic drop in farm workers translates directly to an inability to maintain food <strong>self-sufficiency</strong>, forcing the country to rely heavily on expensive imported commodities.
+                    </p>
+                </div>
+
+                <div className="card">
+                    <div className="card-icon">[ ICON ]</div>
+                    <h3>GRAYING WORKFORCE</h3>
+                    <p>
+                        The average age of the Filipino farmer ranges between <strong>57 and 59 years old</strong>. Experts predict a critical shortage of farmers within the next 10 to 12 years if younger generations do not step up.
+                    </p>
+                </div>
+
+                <div className="card">
+                    <div className="card-icon">[ ICON ]</div>
+                    <h3>BREAKING STEREOTYPES</h3>
+                    <p>
+                        Agriculture is widely stigmatized in rural communities as an unprofitable, low-status, and physically exhausting <strong>"poor man's profession."</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <section id="Register">
         <h1>Register Here!</h1>
         <form>
