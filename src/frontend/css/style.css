@@ -18,7 +18,7 @@
     --font-title: "Lexend Deca";
     --font-normal: "Host Grotesk";
     --font-detail: "JetBrains Mono";
-    /* --font-branding: "Lexend Zetta"; */
+    --font-branding: "Lexend Zetta";
 }
 
 /*  ---------- FONT FAMILIES ----------  */
@@ -43,12 +43,12 @@
     font-style: normal;
 }
 
-/* .lexend-zetta-black {
+.lexend-zetta-black {
     font-family: "Lexend Zetta", sans-serif;
     font-optical-sizing: auto;
     font-weight: 900;
     font-style: normal;
-} */
+}
 
 .host-grotesk-bold {
     font-family: var(--font-normal), sans-serif;
@@ -68,6 +68,7 @@
 html {
     scroll-behavior: smooth;
     height: 100%;
+    cursor: default;
 }
 
 body {
@@ -78,18 +79,18 @@ body {
     flex-direction: column;
 }
 
+main {
+    flex: 1; /* Pushes the footer to bottom ofscreen */
+    padding: 120px 26px 60px 26px; 
+    color: var(--color-light);
+}
+
 .app-container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     max-width: 100vw;
     position: relative;
-}
-
-main {
-    flex: 1; /* Pushes the footer to bottom ofscreen */
-    padding: 120px 26px 60px 26px; 
-    color: var(--color-light);
 }
 
 /*  ---------- NAVBAR ----------  */
@@ -139,12 +140,21 @@ main {
 .nav-links > a {
     color: var(--color-major);
     font-family: var(--font-normal), sans-serif;
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 900;
     text-decoration: none;
     padding: 8px 16px;
+    border-radius: 50px;
+    text-shadow: 0 0 10px 5px color-mix(in srgb, var(--color-accent) 70%, transparent);
+    transition: transform 0.2s ease, background-color 0.2s ease, text-shadow 0.2s ease;
 }
 
+.nav-links > a:hover:not(.contact-link) {
+    color: var(--color-accent);
+    text-shadow: 0 0 8px color-mix(in srgb, var(--color-accent) 70%, transparent);
+    text-shadow: 0 0 4px #fff, 0 0 12px color-mix(in srgb, var(--color-accent) 70%, transparent);
+    transform: translateY(-1px);
+}
 .nav-links .contact-link {
     display: flex;
     align-items: center;
@@ -161,18 +171,32 @@ main {
     height: 70%;
     width: 100%;
     position: absolute;
+    transition: background-color 0.3s ease; 
 }
 
 .nav-links .contact-link span {
     color: var(--color-light);
     font-family: var(--font-normal), sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     position: relative;
     z-index: 2;
     text-align: center;
     width: 100%;
+    text-shadow: 0 0 0px transparent;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
+
+.nav-links .contact-link:hover span {
+    color: var(--color-major);
+    text-shadow: 0 0 8px color-mix(in srgb, var(--color-major) 70%, transparent);
+    transform: translateY(-1px);
+}
+
+.nav-links .contact-link:hover .special-bg {
+    background-color: var(--color-accent);
+}
+
 
 .account-btn {
     height: 47px;
@@ -185,11 +209,24 @@ main {
     z-index: 1;
 }
 
+.account-btn:hover .action-bg { 
+    background: var(--color-major); 
+    border-radius: 40px; 
+    box-shadow: 0px 0px 8px var(--shadow); 
+    transform: translateY(2px);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.account-btn:hover span {
+    transform: translateY(2px);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
 .account-btn .action-bg {
     backdrop-filter: blur(2px);
     border: 1px solid var(--color-light);
     border-radius: 40px;
-    box-shadow: 0px 4px 4px var(--shadow);
+    box-shadow: 0px 4px 8px var(--shadow);
     height: 100%;
     width: 100%;
     position: absolute;
@@ -207,7 +244,7 @@ main {
     width: 100%;
     position: relative;
     z-index: 2;
-    text-shadow: 0px 4px 4px var(--shadow);
+    text-shadow: 0px 4px 8px var(--shadow);
 }
 
 /*  ---------- FOOTER STYLING ----------  */
@@ -216,7 +253,7 @@ main {
     border-radius: 50px 50px 0px 0px;
     position: relative;
     width: 100%;
-    padding: 60px 10% 40px 10%;
+    padding: 60px 0% 20px 0%;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: 7fr 1fr 1fr;
@@ -228,14 +265,15 @@ main {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    padding-left: 8vw;
 }
 
 .brand-title {
     color: var(--color-accent);
-    font-family: var(--font-title), sans-serif;
+    font-family: var(--font-branding), sans-serif;
     font-size: 25px;
     font-weight: 900;
-    letter-spacing: 50%;
+    letter-spacing: 10%;
     margin: 0;
 }
 
@@ -255,11 +293,46 @@ main {
     color: var(--color-minor);
 }
 
+.cta-button {
+    grid-column: span 1;
+    width: fit-content;
+    justify-self: start;
+    background: var(--color-major);
+    box-shadow: 0px 4px 8px var(--shadow);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-button:hover {
+    box-shadow: 0px 0px 8px var(--shadow);
+    transform: translateY(2px);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-icon {
+    color: var(--color-light);
+}
+
+.cta-text {
+    color: var(--color-light);
+    font-family: var(--font-normal), sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+}
+
 .links-section {
     grid-column: 2 / span 2;
     display: flex;
     justify-content: space-around;
-    gap: 20px;
+    gap: 40px;
+    padding-right: 8vw;
 }
 
 .column {
@@ -287,15 +360,16 @@ main {
 }
 
 .link:hover {
-    color: var(--color-minor);
+    color: var(--color-accent);
+    transform: scale(1.02);
 }
 
-/* Mission Tagline Separation Layer */
 .tagline-group {
     grid-column: 1 / -1;
     width: 100%;
     text-align: center;
-    margin: 30px 0 15px 0;
+    margin: 0;
+    display: inline-flexbox;
     position: relative;
     border-top: 2px solid var(--color-tagline-opacity);
     border-bottom: 2px solid var(--color-tagline-opacity);
@@ -312,43 +386,7 @@ main {
 }
 
 .decorative-line {
-    display: none; /* Replaced by elegant pure CSS borders built above */
-}
-
-/* Call To Action Volunteer Button */
-.cta-button {
-    grid-column: 1;
-    justify-self: start;
-    background: var(--color-major);
-    border: none;
-    border-radius: 30px;
-    padding: 12px 28px;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.cta-button:hover {
-    background-color: var(--color-minor);
-    transform: translateY(-2px);
-}
-
-.cta-bg {
-    display: none; /* Replaced by dynamic button box modeling */
-}
-
-.cta-icon {
-    color: var(--color-light);
-}
-
-.cta-text {
-    color: var(--color-light);
-    font-family: var(--font-normal), sans-serif;
-    font-size: 16px;
-    font-weight: 700;
+    display: none;
 }
 
 .copyright {
@@ -359,5 +397,5 @@ main {
     font-size: 16px;
     font-weight: 300;
     letter-spacing: 2px;
-    margin: 20px 0 0 0;
+    margin: 0;
 }

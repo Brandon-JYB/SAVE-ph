@@ -1,6 +1,7 @@
 import React from 'react'
-import Navbar from './components/Navbar'
 import './css/style.css'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 function App() {
     return (
@@ -11,6 +12,8 @@ function App() {
             <h1>Welcome to My App</h1>
             <p>This is where the main content of your page will live.</p>
         </main>
+
+        <Footer />
         </>
     )
 }
