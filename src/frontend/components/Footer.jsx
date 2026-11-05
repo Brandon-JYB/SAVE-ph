@@ -43,12 +43,6 @@ export default function Footer() {
 
             <div className="links-section">
                 <div className="column">
-                    <h4 className="column-title">CONNECT</h4>
-                    <a href="#register" className="link">Register</a>
-                    <a href="#email" className="link">Email</a>
-                </div>
-
-                <div className="column">
                     <h4 className="column-title">PAGE</h4>
                     <a href="#home" className="link">Home</a>
                     <a href="#about" className="link">About</a>
@@ -56,16 +50,19 @@ export default function Footer() {
                     <a href="#faq" className="link">FAQ</a>
                     <a href="#discover" className="link">Discover</a>
                 </div>
+                <div className="column">
+                    <h4 className="column-title">CONNECT</h4>
+                    <a href="#register" className="link">Register</a>
+                    <a href="#email" className="link">Email</a>
+                </div>
             </div>
 
             <div className="tagline-group">
-                <img className="decorative-line" 
-                    alt="Decorative top line" src={topDecorationLine} />
+                <img className="decorative-line"/>
                 <p className="mission-text">
                     SUPPORTING AGRICULTURE VIA VOLUNTEER ENGAGEMENT
                 </p>
-                <img className="decorative-line" 
-                    alt="Decorative bottom line" src={bottomDecorationLine} />
+                <img className="decorative-line"/>
             </div>
 
             <p className="copyright">© 2026 • SAVE PH</p>
