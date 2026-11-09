@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Brandon-JYB/Supporting-Agriculture-via-Volunteer-Engagement-SAVE-#readme",
   "dependencies": {
+    "framer-motion": "^14.10.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
