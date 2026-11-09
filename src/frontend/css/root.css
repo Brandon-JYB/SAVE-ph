@@ -3,11 +3,14 @@
     --color-major: #124C11;
     --color-minor: #50975B;
     --color-accent: #EAC400;
+
     --color-cream: #F6F2E4;
     --color-mint: #DCEBD8;
+    --color-deep: #0C3A0B;
+
     --color-light: #FFFFFF;
-    --color-dark: #000000;
     --color-gray: #626262;
+    --color-dark: #000000;
     --shadow: #00000080;
     
     /*  ---------- TRANSPARENT COLORS ----------  */
@@ -21,4 +24,8 @@
     --font-normal: "Host Grotesk";
     --font-detail: "JetBrains Mono";
     --font-branding: "Lexend Zetta";
+
+    /*  ---------- SEMANTICS ----------  */
+    --content-width: 1100px;
+    --side-padding: clamp(20px, 5vw, 80px);
 }

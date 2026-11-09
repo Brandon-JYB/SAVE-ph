@@ -1,14 +1,17 @@
-/* ---------- SECTIONS ---------- */
+/*  ---------- SECTIONS ----------  */
+
 .section {
     position: relative;
-    overflow: hidden;           /* crops the giant watermark at the edges */
-    padding: 110px 26px;
+    overflow: hidden;                       /* clips the watermark to the rounded panel */
+    margin: 0 var(--side-padding) 24px;     /* space left/right, and a gap between panels */
+    padding: 110px clamp(20px, 4vw, 60px);  /* space inside the panel */
+    border-radius: 40px;
 }
 
 .section__content {
     position: relative;
-    z-index: 1;                 /* content sits above the watermark */
-    max-width: 1100px;
+    z-index: 1;
+    max-width: var(--content-width);
     margin: 0 auto;
 }
 
@@ -18,28 +21,65 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: none;       /* never blocks clicks */
+    pointer-events: none;
     z-index: 0;
 }
 
 .section__watermark {
     font-family: var(--font-section), sans-serif;
     font-weight: 700;
-    font-size: clamp(6rem, 22vw, 20rem);
     line-height: 1;
     white-space: nowrap;
     user-select: none;
+    /* Reduced viewport width allocation from 88vw to 75vw */
+    font-size: min(calc(75vw / (7 * 0.9)), 15rem);
 }
 
-/* tones: background + text color + watermark color */
-.section--dark  { background: var(--color-major);  color: var(--color-light); }
-.section--dark  .section__watermark { color: rgba(255, 255, 255, 0.06); }
+/* ---- tones ---- */
+.section--dark {
+    background: var(--color-major);
+    color: var(--color-light);
+}
+.section--dark .section__watermark {
+    color: rgba(255, 255, 255, 0.06);
+}
 
-.section--light { background: var(--color-cream);  color: var(--color-dark); }
-.section--light .section__watermark { color: rgba(18, 76, 17, 0.08); }
+.section--light {
+    background: var(--color-cream);
+    color: var(--color-dark);
+}
+.section--light .section__watermark {
+    color: rgba(18, 76, 17, 0.08);
+}
 
-.section--mint  { background: var(--color-mint);   color: var(--color-dark); }
-.section--mint  .section__watermark { color: rgba(18, 76, 17, 0.09); }
+.section--mint {
+    background: var(--color-mint);
+    color: var(--color-dark);
+}
+.section--mint .section__watermark {
+    color: rgba(18, 76, 17, 0.09);
+}
 
-.section--accent { background: var(--color-accent); color: var(--color-major); }
-.section--accent .section__watermark { color: rgba(18, 76, 17, 0.10); }
+.section--accent {
+    background: var(--color-accent);
+    color: var(--color-major);
+}
+.section--accent .section__watermark {
+    color: rgba(18, 76, 17, 0.10);
+}
+
+/* ---- text fixes on light backgrounds ---- */
+.section--light h2,
+.section--mint h2 {
+    color: var(--color-major);
+}
+
+.section--light .subtitle,
+.section--mint .subtitle {
+    color: #A38700;
+}
+
+/* ---- hero (plain section) needs space for the fixed navbar ---- */
+#Home {
+    padding-top: 140px;
+}
