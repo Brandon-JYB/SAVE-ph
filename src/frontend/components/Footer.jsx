@@ -34,16 +34,16 @@ export default function Footer() {
             <div className="footer__links-section">
                 <div className="footer__column">
                     <h4 className="footer__column-title">PAGE</h4>
-                    <a href="#home" className="footer__link">Home</a>
-                    <a href="#about" className="footer__link">About</a>
-                    <a href="#process" className="footer__link">Process</a>
-                    <a href="#faq" className="footer__link">FAQ</a>
-                    <a href="#discover" className="footer__link">Discover</a>
+                    <a href="#Home" className="footer__link">Home</a>
+                    <a href="#About" className="footer__link">About</a>
+                    <a href="#Process" className="footer__link">Process</a>
+                    <a href="#Questions" className="footer__link">FAQ</a>
+                    <a href="#Discover" className="footer__link">Discover</a>
                 </div>
                 <div className="footer__column">
                     <h4 className="footer__column-title">CONNECT</h4>
-                    <a href="#register" className="footer__link">Register</a>
-                    <a href="#email" className="footer__link">Email</a>
+                    <a href="#Register" className="footer__link">Register</a>
+                    <a href="#Register" className="footer__link">Email</a>
                 </div>
             </div>
 

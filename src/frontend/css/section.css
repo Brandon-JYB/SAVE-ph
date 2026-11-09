@@ -31,7 +31,6 @@
     line-height: 1;
     white-space: nowrap;
     user-select: none;
-    /* Reduced viewport width allocation from 88vw to 75vw */
     font-size: min(calc(75vw / (7 * 0.9)), 15rem);
 }
 

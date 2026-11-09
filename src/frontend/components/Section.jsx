@@ -10,7 +10,6 @@ export default function Section({ id, tone = "dark", watermark, children }) {
         offset: ["start end", "end start"],
     });
 
-    // starts lower in the section, ends higher: rises as you scroll down
     const y = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
 
     return (
