@@ -1,0 +1,43 @@
+/*  ---------- FONT FAMILIES ----------  */
+
+.momo-trust-display-regular {
+    font-family: var(--font-special), sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.unbounded-bold {
+    font-family: var(--font-section), sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.lexend-deca-bold {
+    font-family: var(--font-title), sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.lexend-zetta-black {
+    font-family: "Lexend Zetta", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+}
+
+.host-grotesk-bold {
+    font-family: var(--font-normal), sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.jetbrains-mono-regular {
+    font-family: var(--font-detail), monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}

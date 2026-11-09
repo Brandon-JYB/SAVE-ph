@@ -1,0 +1,24 @@
+:root {
+    /*  ---------- COLOR PALETTE ----------  */
+    --color-major: #124C11;
+    --color-minor: #50975B;
+    --color-accent: #EAC400;
+    --color-cream: #F6F2E4;
+    --color-mint: #DCEBD8;
+    --color-light: #FFFFFF;
+    --color-dark: #000000;
+    --color-gray: #626262;
+    --shadow: #00000080;
+    
+    /*  ---------- TRANSPARENT COLORS ----------  */
+    --color-text-brand-muted: #114B10F2; 
+    --color-tagline-opacity: #A0A0A066;
+
+    /*  ---------- FONT NAMES ----------  */
+    --font-special: "Momo Trust Display";
+    --font-section: "Unbounded";
+    --font-title: "Lexend Deca";
+    --font-normal: "Host Grotesk";
+    --font-detail: "JetBrains Mono";
+    --font-branding: "Lexend Zetta";
+}
