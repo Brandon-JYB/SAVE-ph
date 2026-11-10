@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
     return (
@@ -11,7 +11,7 @@ export default function Footer() {
                     <span className="footer__slogan-text">th.</span>
                 </p>
 
-                <button className="footer__cta-button" type="button">
+                <Link to="/register" className="footer__cta-button">
                     <span className="footer__cta-text">Volunteer Now</span>
                     <svg
                         className="footer__cta-icon"
@@ -28,22 +28,22 @@ export default function Footer() {
                         <path d="M12 16l4-4-4-4" />
                         <path d="M8 12h8" />
                     </svg>
-                </button>
+                </Link>
             </div>
 
             <div className="footer__links-section">
                 <div className="footer__column">
                     <h4 className="footer__column-title">PAGE</h4>
-                    <a href="#Home" className="footer__link">Home</a>
-                    <a href="#About" className="footer__link">About</a>
-                    <a href="#Process" className="footer__link">Process</a>
-                    <a href="#Questions" className="footer__link">FAQ</a>
-                    <a href="#Discover" className="footer__link">Discover</a>
+                    <a href="/#Home" className="footer__link">Home</a>
+                    <a href="/#About" className="footer__link">About</a>
+                    <a href="/#Process" className="footer__link">Process</a>
+                    <a href="/#Questions" className="footer__link">FAQ</a>
+                    <a href="/#Discover" className="footer__link">Discover</a>
                 </div>
                 <div className="footer__column">
                     <h4 className="footer__column-title">CONNECT</h4>
-                    <a href="#Register" className="footer__link">Register</a>
-                    <a href="#Register" className="footer__link">Email</a>
+                    <Link to="/register" className="footer__link">Register</Link>
+                    <Link to="/register" className="footer__link">Email</Link>
                 </div>
             </div>
 
