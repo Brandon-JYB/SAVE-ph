@@ -14,7 +14,7 @@ body {
 }
 
 main {
-    flex: 1; /* Pushes the footer to bottom ofscreen */
+    flex: 1;
     padding: 120px 26px 60px 26px; 
     color: var(--color-light);
 }

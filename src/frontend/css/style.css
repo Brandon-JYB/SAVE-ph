@@ -7,3 +7,6 @@
 @import "./navbar.css";
 @import "./footer.css";
 @import "./section.css";
+
+/*  ---------- PAGE STYLING ----------  */
+@import "./landing.css";

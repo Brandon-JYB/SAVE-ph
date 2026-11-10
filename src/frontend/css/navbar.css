@@ -8,7 +8,7 @@
     right: 26px;
     display: flex;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
     z-index: 100;
 }
 
@@ -31,7 +31,7 @@
     width: 582px;
     margin: 0;
     padding-left: 12px;
-    padding-right: 9px; 
+    padding-right: 9px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -39,7 +39,7 @@
     z-index: 2;
     display: flex;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 .nav-links > a {
@@ -50,37 +50,43 @@
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 50px;
-    text-shadow: 0 0 10px 5px color-mix(in srgb, var(--color-accent) 70%, transparent);
-    transition: transform 0.2s ease, background-color 0.2s ease, text-shadow 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.nav-links > a.is-active {
+    background-color: var(--color-major);
+    color: var(--color-light);
 }
 
 .nav-links > a:hover:not(.contact-link) {
     color: var(--color-accent);
-    text-shadow: 0 0 8px color-mix(in srgb, var(--color-accent) 70%, transparent);
-    text-shadow: 0 0 4px #fff, 0 0 12px color-mix(in srgb, var(--color-accent) 70%, transparent);
+    text-shadow: 0 0 12px color-mix(in srgb, var(--color-accent) 70%, transparent);
     transform: translateY(-1px);
 }
+
+/* ---------- CONTACT (call-to-action pill) ---------- */
 .nav-links .contact-link {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 35px;
     width: 79px;
+    padding: 0;
     text-decoration: none;
     position: relative;
 }
 
 .nav-links .contact-link .special-bg {
-    background-color: var(--color-major);
+    background-color: var(--color-accent);          /* was var(--color-major) */
     border-radius: 40px;
     height: 70%;
     width: 100%;
     position: absolute;
-    transition: background-color 0.3s ease; 
+    transition: background-color 0.3s ease;
 }
 
 .nav-links .contact-link span {
-    color: var(--color-light);
+    color: var(--color-major);                      /* was var(--color-light) */
     font-family: var(--font-normal), sans-serif;
     font-size: 15px;
     font-weight: 700;
@@ -88,20 +94,18 @@
     z-index: 2;
     text-align: center;
     width: 100%;
-    text-shadow: 0 0 0px transparent;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 .nav-links .contact-link:hover span {
-    color: var(--color-major);
-    text-shadow: 0 0 8px color-mix(in srgb, var(--color-major) 70%, transparent);
-    transform: translateY(-1px);
+    color: var(--color-light);                      /* was var(--color-major) */
 }
 
 .nav-links .contact-link:hover .special-bg {
-    background-color: var(--color-accent);
+    background-color: var(--color-major);           /* was var(--color-accent) */
 }
 
+/* ---------- ACCOUNT BUTTON ---------- */
 .account-btn {
     height: 47px;
     width: 150px;
@@ -113,27 +117,21 @@
     z-index: 1;
 }
 
-.account-btn:hover .action-bg { 
-    background: var(--color-major); 
-    border-radius: 40px; 
-    box-shadow: 0px 0px 8px var(--shadow); 
-    transform: translateY(2px);
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.account-btn:hover span {
-    transform: translateY(2px);
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
 .account-btn .action-bg {
-    backdrop-filter: blur(2px);
+    background: var(--color-major);                 /* solid, so it's readable on light panels */
     border: 1px solid var(--color-light);
     border-radius: 40px;
     box-shadow: 0px 4px 8px var(--shadow);
     height: 100%;
     width: 100%;
     position: absolute;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.account-btn:hover .action-bg {
+    background: var(--color-minor);
+    box-shadow: 0px 0px 8px var(--shadow);
+    transform: translateY(2px);
 }
 
 .account-btn span {
@@ -148,6 +146,9 @@
     width: 100%;
     position: relative;
     z-index: 2;
-    text-shadow: 0px 4px 8px var(--shadow);
+    transition: transform 0.2s ease;
 }
 
+.account-btn:hover span {
+    transform: translateY(2px);
+}
