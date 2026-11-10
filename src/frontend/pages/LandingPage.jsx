@@ -1,9 +1,10 @@
 import React from 'react';
-import "../css/style.css"; 
+import Section from "../components/Section";
 
 function LandingPage() {
     return (
         <>
+            {/* Hero stays a plain section */}
             <section id="Home">
                 <div className="home-text">
                     <h1>CULTIVATE CHANGE</h1>
@@ -18,11 +19,11 @@ function LandingPage() {
                 </div>
 
                 <div className="home-image">
-                    <img src="images/home-bg.jpg" alt="Farming background" width="1000" /> 
+                    <img src="images/home-bg.jpg" alt="Farming background" width="1000" />
                 </div>
-            </section> 
+            </section>
 
-            <section id="About">
+            <Section id="About" tone="light" watermark="ABOUT">
                 <h2 className="about-title">About Our Program</h2>
 
                 <div className="about-row">
@@ -31,7 +32,7 @@ function LandingPage() {
                     </div>
                     <div className="about-text">
                         <p>
-                            SAVE is a program dedicated to promoting the agricultural industry in the Philippines by engaging college students from different schools in volunteer activities on local farms. 
+                            SAVE is a program dedicated to promoting the agricultural industry in the Philippines by engaging college students from different schools in volunteer activities on local farms.
                         </p>
                     </div>
                 </div>
@@ -57,9 +58,9 @@ function LandingPage() {
                         </p>
                     </div>
                 </div>
-            </section>
+            </Section>
 
-            <section id="WhyDoIt">
+            <Section id="WhyDoIt" tone="dark" watermark="GROW">
                 <div className="why-do-it-header">
                     <span className="subtitle">why do it?</span>
                     <h2>YOUR COMMUNITY NEEDS YOU</h2>
@@ -91,9 +92,9 @@ function LandingPage() {
                         </p>
                     </div>
                 </div>
-            </section>
+            </Section>
 
-            <section id="Process">
+            <Section id="Process" tone="mint" watermark="JOIN">
                 <div className="process-header">
                     <span className="subtitle">how do i sign up?</span>
                     <h2>THE WHOLE PROCESS</h2>
@@ -141,9 +142,9 @@ function LandingPage() {
                         <span className="step-arrow">&gt;</span>
                     </div>
                 </div>
-            </section>
+            </Section>
 
-            <section id="Questions">
+            <Section id="Questions" tone="light" watermark="ASK">
                 <div className="faq-header">
                     <span className="subtitle">you might be wondering...</span>
                     <h2>DIGGING DEEPER IN THE FIELD</h2>
@@ -176,9 +177,9 @@ function LandingPage() {
                         <p>...</p>
                     </div>
                 </div>
-            </section>
+            </Section>
 
-            <section id="Discover">
+            <Section id="Discover" tone="dark" watermark="HARVEST">
                 <div className="ai-header">
                     <span className="subtitle">check out our predictions!</span>
                     <h2>NEXT GENERATION OF CROPS</h2>
@@ -193,23 +194,7 @@ function LandingPage() {
                         <button type="button">Learn More &rarr;</button>
                     </div>
                 </div>
-            </section>
-
-            <section id="Register">
-                <h1>Register Here!</h1>
-                <form>
-                    <label htmlFor="full-name">Full Name:</label><br />
-                    <input type="text" id="full-name" name="full-name" /><br /><br />
-                    
-                    <label htmlFor="email">Email:</label><br />
-                    <input type="email" id="email" name="email" /><br /><br />
-                    
-                    <label htmlFor="subject">Subject:</label><br />
-                    <input type="text" id="subject" name="subject" /><br /><br />
-                    
-                    <button type="submit">Register</button>
-                </form>
-            </section>
+            </Section>
         </>
     );
 }
