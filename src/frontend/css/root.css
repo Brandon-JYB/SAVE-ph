@@ -3,6 +3,7 @@
     --color-major: #124C11;
     --color-minor: #50975B;
     --color-accent: #EAC400;
+    --color-accent-deep: #A38700;
 
     --color-cream: #F6F2E4;
     --color-mint: #DCEBD8;
@@ -11,11 +12,32 @@
     --color-light: #FFFFFF;
     --color-gray: #626262;
     --color-dark: #000000;
+    --color-clear: transparent;
+
+    /*  ---------- SHADOWS ----------  */
     --shadow: #00000080;
-    
-    /*  ---------- TRANSPARENT COLORS ----------  */
-    --color-text-brand-muted: #114B10F2; 
+    --shadow-strong: #00000047;
+    --shadow-medium: #00000033;
+    --shadow-light: #0000001F;
+    --shadow-text: #00000059;
+
+    /*  ---------- TRANSPARENT & TINTED COLORS ----------  */
+    --color-text-brand-muted: #114B10F2;
     --color-tagline-opacity: #A0A0A066;
+    --color-rule: #50975B99;            /* the lines beside section subtitles */
+    --glow-accent: #EAC400B3;           /* navbar link hover glow */
+    --glow-ai-core: #A0C8A066;          /* radial glow behind the AI text */
+    --glow-ai-mid: #50975B26;
+
+    /*  ---------- WATERMARK WORDS ----------  */
+    --watermark-on-dark: #FFFFFF0F;
+    --watermark-on-light: #124C1114;
+    --watermark-on-accent: #124C111A;
+
+    /*  ---------- HERO OVERLAY ----------  */
+    --overlay-hero-strong: #0C3A0BD9;
+    --overlay-hero-mid: #124C1180;
+    --overlay-hero-soft: #124C1133;
 
     /*  ---------- FONT NAMES ----------  */
     --font-special: "Momo Trust Display";
