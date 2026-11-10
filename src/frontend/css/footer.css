@@ -59,6 +59,8 @@
     cursor: pointer;
     margin-top: 15px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    color: inherit;
 }
 
 .footer__cta-button:hover {
@@ -75,6 +77,7 @@
     font-family: var(--font-normal), sans-serif;
     font-size: 16px;
     font-weight: 700;
+    text-decoration: none;
 }
 
 .footer__links-section {
