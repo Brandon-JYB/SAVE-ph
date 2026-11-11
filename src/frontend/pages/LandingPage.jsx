@@ -1,9 +1,10 @@
 import React from 'react';
-import "../css/style.css"; 
+import Section from "../components/Section";
 
 function LandingPage() {
     return (
         <>
+            {/* Hero stays a plain section */}
             <section id="Home">
                 <div className="home-text">
                     <h1>CULTIVATE CHANGE</h1>
@@ -18,27 +19,27 @@ function LandingPage() {
                 </div>
 
                 <div className="home-image">
-                    <img src="images/home-bg.jpg" alt="Farming background" width="1000" /> 
+                    <img src="frontend/images/home-bg.jpg" alt="Farming background" width="1000" />
                 </div>
-            </section> 
+            </section>
 
-            <section id="About">
+            <Section id="About" tone="light" watermark="ABOUT">
                 <h2 className="about-title">About Our Program</h2>
 
                 <div className="about-row">
                     <div className="about-image">
-                        <img src="images/about-img-1.jpg" alt="Students volunteering on farm" />
+                        <img src="frontend/images/about-img-1.jpg" alt="Students volunteering on farm" />
                     </div>
                     <div className="about-text">
                         <p>
-                            SAVE is a program dedicated to promoting the agricultural industry in the Philippines by engaging college students from different schools in volunteer activities on local farms. 
+                            SAVE is a program dedicated to promoting the agricultural industry in the Philippines by engaging college students from different schools in volunteer activities on local farms.
                         </p>
                     </div>
                 </div>
 
                 <div className="about-row-reverse">
                     <div className="about-image">
-                        <img src="images/about-img-2.jpg" alt="Hands-on farming experience" />
+                        <img src="frontend/images/about-img-2.jpg" alt="Hands-on farming experience" />
                     </div>
                     <div className="about-text">
                         <p>
@@ -49,7 +50,7 @@ function LandingPage() {
 
                 <div className="about-row">
                     <div className="about-image">
-                        <img src="images/about-img-3.jpg" alt="Community impact" />
+                        <img src="frontend/images/about-img-3.jpg" alt="Community impact" />
                     </div>
                     <div className="about-text">
                         <p>
@@ -57,9 +58,9 @@ function LandingPage() {
                         </p>
                     </div>
                 </div>
-            </section>
+            </Section>
 
-            <section id="WhyDoIt">
+            <Section id="WhyDoIt" tone="dark" watermark="GROW">
                 <div className="why-do-it-header">
                     <span className="subtitle">why do it?</span>
                     <h2>YOUR COMMUNITY NEEDS YOU</h2>
@@ -91,23 +92,109 @@ function LandingPage() {
                         </p>
                     </div>
                 </div>
-            </section>
+            </Section>
 
-            <section id="Register">
-                <h1>Register Here!</h1>
-                <form>
-                    <label htmlFor="full-name">Full Name:</label><br />
-                    <input type="text" id="full-name" name="full-name" /><br /><br />
-                    
-                    <label htmlFor="email">Email:</label><br />
-                    <input type="email" id="email" name="email" /><br /><br />
-                    
-                    <label htmlFor="subject">Subject:</label><br />
-                    <input type="text" id="subject" name="subject" /><br /><br />
-                    
-                    <button type="submit">Register</button>
-                </form>
-            </section>
+            <Section id="Process" tone="mint" watermark="JOIN">
+                <div className="process-header">
+                    <span className="subtitle">how do i sign up?</span>
+                    <h2>THE WHOLE PROCESS</h2>
+                    <p>join the force in a few simple steps</p>
+                </div>
+
+                <div className="process-steps-container">
+                    <div className="process-step-card">
+                        <span className="step-number">01</span>
+                        <div className="step-content">
+                            <h3>Email & Number</h3>
+                        </div>
+                        <span className="step-arrow">&gt;</span>
+                    </div>
+
+                    <div className="process-step-card">
+                        <span className="step-number">02</span>
+                        <div className="step-content">
+                            <h3>Farm Selection</h3>
+                        </div>
+                        <span className="step-arrow">&gt;</span>
+                    </div>
+
+                    <div className="process-step-card">
+                        <span className="step-number">03</span>
+                        <div className="step-content">
+                            <h3>Confirm Match</h3>
+                        </div>
+                        <span className="step-arrow">&gt;</span>
+                    </div>
+
+                    <div className="process-step-card">
+                        <span className="step-number">04</span>
+                        <div className="step-content">
+                            <h3>Receive Confirmation Feedback</h3>
+                        </div>
+                        <span className="step-arrow">&gt;</span>
+                    </div>
+
+                    <div className="process-step-card">
+                        <span className="step-number">05</span>
+                        <div className="step-content">
+                            <h3>Keep In Touch</h3>
+                        </div>
+                        <span className="step-arrow">&gt;</span>
+                    </div>
+                </div>
+            </Section>
+
+            <Section id="Questions" tone="light" watermark="ASK">
+                <div className="faq-header">
+                    <span className="subtitle">you might be wondering...</span>
+                    <h2>DIGGING DEEPER IN THE FIELD</h2>
+                    <p>a couple questions you might have</p>
+                </div>
+
+                <div className="faq-grid">
+                    <div className="faq-item">
+                        <span className="faq-icon">+</span>
+                        <p>Do I need to pay any registration or processing fees to sign up?</p>
+                    </div>
+                    <div className="faq-item">
+                        <span className="faq-icon">+</span>
+                        <p>Can I sign up as a group or do we have to apply individually?</p>
+                    </div>
+                    <div className="faq-item">
+                        <span className="faq-icon">+</span>
+                        <p>What should I pack or wear for the farm immersion?</p>
+                    </div>
+                    <div className="faq-item">
+                        <span className="faq-icon">+</span>
+                        <p>I have zero experience in farming. Can I still join?</p>
+                    </div>
+                    <div className="faq-item">
+                        <span className="faq-icon">+</span>
+                        <p>...</p>
+                    </div>
+                    <div className="faq-item">
+                        <span className="faq-icon">+</span>
+                        <p>...</p>
+                    </div>
+                </div>
+            </Section>
+
+            <Section id="Discover" tone="dark" watermark="HARVEST">
+                <div className="ai-header">
+                    <span className="subtitle">check out our predictions!</span>
+                    <h2>NEXT GENERATION OF CROPS</h2>
+                    <p>analytics meets crop optimization</p>
+                </div>
+
+                <div className="ai-content-box">
+                    <p>
+                        The latest development in Artificial Intelligence has made it possible for us to help the farmers even more by providing an AI prediction model that predicts which plants are most optimal to plant within that quarter of the year based on historical data regarding weather, price, and other external factors.
+                    </p>
+                    <div className="home-btn">
+                        <button type="button">Learn More &rarr;</button>
+                    </div>
+                </div>
+            </Section>
         </>
     );
 }

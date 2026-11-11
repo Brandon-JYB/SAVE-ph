@@ -1,0 +1,155 @@
+/*  ---------- NAVBAR ----------  */
+.navbar {
+    background-color: var(--color-clear);
+    position: fixed;
+    height: 50px;
+    top: 16px;
+    left: 26px;
+    right: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+}
+
+.logo-container {
+    align-items: center;
+    color: var(--color-light);
+    display: flex;
+    position: relative;
+    z-index: 1;
+}
+
+.logo-container img {
+    padding-top: 10px;
+    width: 60px;
+    height: 60px;
+    max-width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+.nav-links {
+    background-color: var(--color-light);
+    border-radius: 40px;
+    box-shadow: 0px 4px 4px var(--shadow);
+    height: 50px;
+    width: 582px;   /* widen to ~620px if the links feel cramped */
+    margin: 0;
+    padding-left: 12px;
+    padding-right: 9px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* every link, including Contact, shares this exact size and shape */
+.nav-links > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    position: relative;
+    color: var(--color-major);
+    font-family: var(--font-normal), sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.nav-links > a.is-active {
+    background-color: var(--color-major);
+    color: var(--color-light);
+}
+
+.nav-links > a:hover:not(.contact-link) {
+    color: var(--color-accent);
+    text-shadow: 0 0 12px var(--glow-accent);
+    transform: translateY(-1px);
+}
+
+/* ---------- CONTACT (call-to-action pill) ---------- */
+.nav-links .contact-link .special-bg {
+    position: absolute;
+    inset: 0;                                  /* fills the whole link, same size as the active pill */
+    background-color: var(--color-accent);
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-links .contact-link span {
+    position: relative;
+    z-index: 2;
+    color: var(--color-major);
+    font-family: var(--font-normal), sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    transition: color 0.3s ease;
+}
+
+.nav-links .contact-link:hover span {
+    color: var(--color-light);
+}
+
+.nav-links .contact-link:hover .special-bg {
+    background-color: var(--color-major);
+}
+
+/* ---------- ACCOUNT BUTTON ---------- */
+.account-btn {
+    height: 47px;
+    width: 150px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.account-btn .action-bg {
+    background: var(--color-major);
+    border: 1px solid var(--color-light);
+    border-radius: 40px;
+    box-shadow: 0px 4px 8px var(--shadow);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.account-btn:hover .action-bg {
+    background: var(--color-minor);
+    box-shadow: 0px 0px 8px var(--shadow);
+    transform: translateY(2px);
+}
+
+.account-btn span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-light);
+    font-family: var(--font-normal), sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.2s ease;
+}
+
+.account-btn:hover span {
+    transform: translateY(2px);
+}
