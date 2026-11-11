@@ -19,7 +19,7 @@ function LandingPage() {
                 </div>
 
                 <div className="home-image">
-                    <img src="images/home-bg.jpg" alt="Farming background" width="1000" />
+                    <img src="frontend/images/home-bg.jpg" alt="Farming background" width="1000" />
                 </div>
             </section>
 
@@ -28,7 +28,7 @@ function LandingPage() {
 
                 <div className="about-row">
                     <div className="about-image">
-                        <img src="images/about-img-1.jpg" alt="Students volunteering on farm" />
+                        <img src="frontend/images/about-img-1.jpg" alt="Students volunteering on farm" />
                     </div>
                     <div className="about-text">
                         <p>
@@ -39,7 +39,7 @@ function LandingPage() {
 
                 <div className="about-row-reverse">
                     <div className="about-image">
-                        <img src="images/about-img-2.jpg" alt="Hands-on farming experience" />
+                        <img src="frontend/images/about-img-2.jpg" alt="Hands-on farming experience" />
                     </div>
                     <div className="about-text">
                         <p>
@@ -50,7 +50,7 @@ function LandingPage() {
 
                 <div className="about-row">
                     <div className="about-image">
-                        <img src="images/about-img-3.jpg" alt="Community impact" />
+                        <img src="frontend/images/about-img-3.jpg" alt="Community impact" />
                     </div>
                     <div className="about-text">
                         <p>
