@@ -10,7 +10,9 @@ export default function NavBar() {
     return (
         <div className="box">
             <nav className="navbar">
-                <div className="logo-container">[LOGO]</div>
+                <div className="logo-container">
+                    <img src="frontend/images/SAVE.png" alt="Logo" />
+                </div>
 
                 <div className="nav-links">
                     <a href="/#Home" className={active === "Home" ? "is-active" : ""}>Home</a>

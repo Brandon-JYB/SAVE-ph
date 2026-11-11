@@ -16,12 +16,20 @@
     align-items: center;
     color: var(--color-light);
     display: flex;
-    height: 50px;
-    font-family: var(--font-title), sans-serif;
-    font-weight: 700;
     position: relative;
     z-index: 1;
 }
+
+.logo-container img {
+    padding-top: 10px;
+    width: 60px;
+    height: 60px;
+    max-width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
 
 .nav-links {
     background-color: var(--color-light);

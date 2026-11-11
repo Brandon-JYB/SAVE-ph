@@ -15,10 +15,9 @@ body {
 
 main {
     flex: 1;
-    padding: 120px 26px 60px 26px; 
+    padding: 0;
     color: var(--color-light);
 }
-
 .app-container {
     display: flex;
     flex-direction: column;
