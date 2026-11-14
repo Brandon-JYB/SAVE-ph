@@ -4,7 +4,6 @@ import Section from "../components/Section";
 function LandingPage() {
     return (
         <>
-            {/* Hero stays a plain section */}
             <section id="Home">
                 <div className="home-text">
                     <h1>CULTIVATE CHANGE</h1>
@@ -198,5 +197,4 @@ function LandingPage() {
         </>
     );
 }
-
 export default LandingPage;
