@@ -30,6 +30,10 @@
     --glow-ai-core: #A0C8A066;          /* radial glow behind the AI text */
     --glow-ai-mid: #50975B26;
 
+    /*  ---------- GLASS ----------  */
+    --glass-green: #124C1199;          /* dark green at 60% */
+    --glass-green-hover: #124C11CC;    /* dark green at 80% */
+
     /*  ---------- WATERMARK WORDS ----------  */
     --watermark-on-dark: #FFFFFF0F;
     --watermark-on-light: #124C1114;

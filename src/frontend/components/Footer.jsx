@@ -12,7 +12,7 @@ export default function Footer() {
                     <span className="footer__slogan-text">th.</span>
                 </p>
 
-                <Link to="/register" className="footer__cta-button">
+                <Link to="/contact" className="footer__cta-button">
                     <span className="footer__cta-text">Volunteer Now</span>
                     <ArrowCircleIcon className="footer__cta-icon" />
                 </Link>
@@ -29,8 +29,8 @@ export default function Footer() {
                 </div>
                 <div className="footer__column">
                     <h4 className="footer__column-title">CONNECT</h4>
-                    <Link to="/register" className="footer__link">Register</Link>
-                    <Link to="/register" className="footer__link">Email</Link>
+                    <Link to="/contact" className="footer__link">Register</Link>
+                    <Link to="/contact" className="footer__link">Email</Link>
                 </div>
             </div>
 

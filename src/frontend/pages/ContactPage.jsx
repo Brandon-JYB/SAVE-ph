@@ -86,7 +86,7 @@ function Field({ id, label, error, hint, children }) {
     );
 }
 
-export default function RegisterPage() {
+export default function ContactPage() {
     const [mode, setMode] = useState("register"); // "register" | "feedback" | "inquiry"
     const [step, setStep] = useState(0);
     const [form, setForm] = useState(EMPTY_FORM);
@@ -513,7 +513,7 @@ export default function RegisterPage() {
 
     /* ---------- page ---------- */
     return (
-        <Section id="Register" tone="light">
+        <Section id="Contact" tone="light">
             <div className="reg">
                 <header className="reg-header">
                     <p className="reg-eyebrow">{current.eyebrow}</p>

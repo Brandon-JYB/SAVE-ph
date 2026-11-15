@@ -125,7 +125,7 @@
 
 .hero__content {
     width: 100%;
-    padding-left: clamp(0px, 9vw, 180px);   /* pushes the text block in from the left edge */
+    padding-left: clamp(0px, 9vw, 180px);
     padding-top: 8vh;
     box-sizing: border-box;
 }

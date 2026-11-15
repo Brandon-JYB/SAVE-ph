@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from "react-router-dom";
 import Section from "../components/Section";
 import homeBg from "../images/home-bg.jpg";
 import ArrowCircleIcon from "../svg/ArrowCircleIcon";
@@ -23,10 +23,10 @@ function LandingPage() {
                         Immerse yourself in the daily realities of Philippine agriculture to understand, appreciate, and actively sustain the future of food production.
                     </p>
 
-                    <a className="cta-btn" href="#Register">
+                    <Link className="cta-btn" to="/contact">
                         <span className="cta-btn__text">Get Involved</span>
                         <ArrowCircleIcon className="cta-btn__icon" />
-                    </a>
+                    </Link>
                 </div>
 
                 <div className="home-image">
