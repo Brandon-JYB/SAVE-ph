@@ -1,7 +1,7 @@
 /*  ---------- REGISTER PAGE ----------  */
 
 .reg {
-    max-width: 720px;
+    max-width: 730px;
     margin: 0 auto;
     padding: 0 1rem;
     font-family: var(--font-normal), sans-serif;   /* inputs and buttons inherit this via font: inherit */
