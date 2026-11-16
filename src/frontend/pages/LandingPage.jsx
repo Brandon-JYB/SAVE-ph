@@ -1,62 +1,123 @@
-import React from 'react';
+import { Link } from "react-router-dom";
 import Section from "../components/Section";
+import homeBg from "../images/home-bg.jpg";
+import aboutImg2 from "../images/about-img-2.jpg";
+import aboutImg3 from "../images/about-img-3.jpg";
+import ArrowCircleIcon from "../svg/ArrowCircleIcon";
+
+const HERO_TITLE_LINES = ["SUPPORTING", "AGRICULTURE VIA", "VOLUNTEER", "ENGAGEMENT"];
+
+const PROGRAM_STATS = [
+    { value: "4", label: "program pillars" },
+    { value: "5", label: "steps to sign up" },
+    { value: "AI", label: "crop predictions for farmers" },
+];
+
+const PROGRAM_PILLARS = [
+    "Volunteer Mobilization",
+    "Agricultural Immersion",
+    "AI Predictive Analytics",
+    "Crop Optimization",
+];
 
 function LandingPage() {
     return (
         <>
-            {/* Hero stays a plain section */}
             <section id="Home">
-                <div className="home-text">
-                    <h1>CULTIVATE CHANGE</h1>
-                    <h3>Volunteer to Support Sustainable Agriculture</h3>
-                    <p>
-                        Connecting passionate individuals with local farms to provide hands-on help, strengthen food security, and grow resilient communities
-                    </p>
-                </div>
+                <div className="hero__content">
+                    <h1 className="hero__title">
+                        {HERO_TITLE_LINES.map((line) => (
+                            <span className="hero__line" key={line}>
+                                <span className="hero__initial">{line[0]}</span>
+                                {line.slice(1)}
+                            </span>
+                        ))}
+                    </h1>
 
-                <div className="home-btn">
-                    <button type="button">Register Here</button>
+                    <p className="hero__text">
+                        Immerse yourself in the daily realities of Philippine agriculture to understand, appreciate, and actively sustain the future of food production.
+                    </p>
+
+                    <Link className="cta-btn" to="/contact">
+                        <span className="cta-btn__text">Get Involved</span>
+                        <ArrowCircleIcon className="cta-btn__icon" />
+                    </Link>
                 </div>
 
                 <div className="home-image">
-                    <img src="frontend/images/home-bg.jpg" alt="Farming background" width="1000" />
+                    <img src={homeBg} alt="" />
                 </div>
             </section>
 
             <Section id="About" tone="light" watermark="ABOUT">
-                <h2 className="about-title">About Our Program</h2>
+                <div className="program-header">
+                    <span className="subtitle">what do we offer?</span>
+                    <h2>OUR PROGRAM</h2>
+                    <p>in pursuing the future’s preservation</p>
+                </div>
 
-                <div className="about-row">
-                    <div className="about-image">
-                        <img src="frontend/images/about-img-1.jpg" alt="Students volunteering on farm" />
+                <div className="bento">
+                    <article className="bento__card bento__card--statement">
+                        <span className="bento__label">THE PROGRAM</span>
+                        <span className="bento__quote" aria-hidden="true">“</span>
+                        <h3 className="bento__heading">
+                            EMPOWERING LOCAL FARMS
+                            <span>THROUGH YOUTH ACTION.</span>
+                        </h3>
+                        <p className="bento__text">
+                            Through hands-on volunteer experience, participants gain a deeper understanding of sustainable farming practices and develop a fresh perspective on the daily lives and challenges of Filipino farmers. Join us in recognizing and supporting the vital role they play in the country’s food security and agricultural development.
+                        </p>
+                        <div className="bento__foot">
+                            <span>SAVE PHILIPPINES · VOLUNTEER PROGRAM</span>
+                            <span className="bento__status">OPEN FOR VOLUNTEERS</span>
+                        </div>
+                    </article>
+
+                    <aside className="bento__card bento__card--stats">
+                        <span className="bento__label">AT A GLANCE</span>
+                        <dl className="bento__stats">
+                            {PROGRAM_STATS.map((stat) => (
+                                <div className="bento__stat" key={stat.label}>
+                                    <dt>{stat.label}</dt>
+                                    <dd>{stat.value}</dd>
+                                </div>
+                            ))}
+                        </dl>
+                    </aside>
+
+                    <div className="bento__card bento__card--pillars">
+                        <span className="bento__label">PROGRAM PILLARS</span>
+                        <ul className="bento__pills">
+                            {PROGRAM_PILLARS.map((pillar) => (
+                                <li key={pillar}>{pillar}</li>
+                            ))}
+                        </ul>
                     </div>
-                    <div className="about-text">
-                        <p>
+
+                    <figure className="bento__card bento__photo">
+                        <img src={aboutImg3} alt="A smiling farmer holding freshly harvested rice" />
+                        <figcaption className="bento__chip">ON THE FIELD</figcaption>
+                    </figure>
+
+                    <article className="bento__card bento__card--about">
+                        <span className="bento__label">ABOUT SAVE</span>
+                        <p className="bento__lead">
                             SAVE is a program dedicated to promoting the agricultural industry in the Philippines by engaging college students from different schools in volunteer activities on local farms.
                         </p>
-                    </div>
-                </div>
-
-                <div className="about-row-reverse">
-                    <div className="about-image">
-                        <img src="frontend/images/about-img-2.jpg" alt="Hands-on farming experience" />
-                    </div>
-                    <div className="about-text">
-                        <p>
-                            Through hands-on experience, students gain a deeper understanding of agriculture, develop a fresh perspective on the daily lives and challenges of Filipino farmers, and appreciate the vital role they play in the country's food production and agricultural development.
+                        <div className="bento__bridge">
+                            <span>Urban youth</span>
+                            <i aria-hidden="true">↔</i>
+                            <span>Rural farmers</span>
+                        </div>
+                        <p className="bento__small">
+                            Bridging the gap to cultivate a new generation of agricultural advocates who drive innovation and sustainable food security.
                         </p>
-                    </div>
-                </div>
+                    </article>
 
-                <div className="about-row">
-                    <div className="about-image">
-                        <img src="frontend/images/about-img-3.jpg" alt="Community impact" />
-                    </div>
-                    <div className="about-text">
-                        <p>
-                            By bridging the gap between urban youth and rural farmers, we aim to cultivate a new generation of agricultural advocates who can drive innovation and sustainable food security initiatives.
-                        </p>
-                    </div>
+                    <figure className="bento__card bento__photo">
+                        <img src={aboutImg2} alt="A volunteer planting a seedling in sunlit soil" />
+                        <figcaption className="bento__chip">HANDS-ON</figcaption>
+                    </figure>
                 </div>
             </Section>
 
@@ -179,7 +240,7 @@ function LandingPage() {
                 </div>
             </Section>
 
-            <Section id="Discover" tone="dark" watermark="HARVEST">
+            <Section id="Discover" tone="dark" watermark="REAP">
                 <div className="ai-header">
                     <span className="subtitle">check out our predictions!</span>
                     <h2>NEXT GENERATION OF CROPS</h2>
@@ -198,5 +259,4 @@ function LandingPage() {
         </>
     );
 }
-
 export default LandingPage;

@@ -21,7 +21,7 @@ export default function NavBar() {
                     <a href="/#Questions" className={active === "Questions" ? "is-active" : ""}>Questions</a>
                     <a href="/#Discover" className={active === "Discover" ? "is-active" : ""}>Discover</a>
                     
-                    <Link to="/register" className="contact-link">
+                    <Link to="/contact" className="contact-link">
                         <div className="special-bg" />
                         <span>Contact</span>
                     </Link>

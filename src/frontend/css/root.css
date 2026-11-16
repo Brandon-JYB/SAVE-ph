@@ -6,8 +6,10 @@
     --color-accent-deep: #A38700;
 
     --color-cream: #F6F2E4;
+    --color-muted: #A0A0A0;
     --color-mint: #DCEBD8;
     --color-deep: #0C3A0B;
+    --color-error: red;
 
     --color-light: #FFFFFF;
     --color-gray: #626262;
@@ -28,6 +30,10 @@
     --glow-accent: #EAC400B3;           /* navbar link hover glow */
     --glow-ai-core: #A0C8A066;          /* radial glow behind the AI text */
     --glow-ai-mid: #50975B26;
+
+    /*  ---------- GLASS ----------  */
+    --glass-green: #124C1199;          /* dark green at 60% */
+    --glass-green-hover: #124C11CC;    /* dark green at 80% */
 
     /*  ---------- WATERMARK WORDS ----------  */
     --watermark-on-dark: #FFFFFF0F;

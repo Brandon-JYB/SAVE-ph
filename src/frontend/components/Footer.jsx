@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ArrowCircleIcon from "../svg/ArrowCircleIcon";
 
 export default function Footer() {
     return (
@@ -11,23 +12,9 @@ export default function Footer() {
                     <span className="footer__slogan-text">th.</span>
                 </p>
 
-                <Link to="/register" className="footer__cta-button">
+                <Link to="/contact" className="footer__cta-button">
                     <span className="footer__cta-text">Volunteer Now</span>
-                    <svg
-                        className="footer__cta-icon"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        width="24"
-                        height="24"
-                    >
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 16l4-4-4-4" />
-                        <path d="M8 12h8" />
-                    </svg>
+                    <ArrowCircleIcon className="footer__cta-icon" />
                 </Link>
             </div>
 
@@ -42,8 +29,8 @@ export default function Footer() {
                 </div>
                 <div className="footer__column">
                     <h4 className="footer__column-title">CONNECT</h4>
-                    <Link to="/register" className="footer__link">Register</Link>
-                    <Link to="/register" className="footer__link">Email</Link>
+                    <Link to="/contact" className="footer__link">Register</Link>
+                    <Link to="/contact" className="footer__link">Email</Link>
                 </div>
             </div>
 
