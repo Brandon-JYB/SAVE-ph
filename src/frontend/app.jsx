@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LandingPage from './pages/LandingPage'; 
 import RegisterPage from './pages/RegisterPage';
+import PredictionsPage from "./pages/PredictionsPage";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/predictions" element={<PredictionsPage />} />
                 </Routes>
             </main>
 

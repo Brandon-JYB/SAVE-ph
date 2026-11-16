@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import Section from "../components/Section";
 
 function LandingPage() {
+    const navigate = useNavigate();
+
     return (
         <>
             {/* Hero stays a plain section */}
@@ -15,7 +18,7 @@ function LandingPage() {
                 </div>
 
                 <div className="home-btn">
-                    <button type="button">Register Here</button>
+                    <button type="button" onClick={() => navigate("/register")}>Register Here</button>
                 </div>
 
                 <div className="home-image">
@@ -191,7 +194,9 @@ function LandingPage() {
                         The latest development in Artificial Intelligence has made it possible for us to help the farmers even more by providing an AI prediction model that predicts which plants are most optimal to plant within that quarter of the year based on historical data regarding weather, price, and other external factors.
                     </p>
                     <div className="home-btn">
-                        <button type="button">Learn More &rarr;</button>
+                        <button type="button" onClick={() => navigate("/predictions")}>
+                            Learn More &rarr;
+                        </button>
                     </div>
                 </div>
             </Section>
