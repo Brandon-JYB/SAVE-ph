@@ -844,10 +844,17 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
-    align-items: start;               /* opening one card doesn't stretch its neighbour */
+    align-items: stretch; /* both cards in each row match the taller one */
+}
+
+.acc--faq {
+    display: flex;
+    flex-direction: column;
 }
 
 .acc--faq .acc__head {
+    flex: 1; /* fills the full card height when closed */
+    min-height: 76px;
     padding: 20px 24px;
 }
 
@@ -861,6 +868,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
+    height: 100%; /* matches the height of the bottom-left FAQ card */
     box-sizing: border-box;
     padding: 20px 24px;
     background: var(--color-accent);

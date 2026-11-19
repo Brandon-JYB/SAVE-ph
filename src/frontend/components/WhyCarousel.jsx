@@ -10,7 +10,6 @@ const WHY_CARDS = [
         id: "food",
         title: "GROWING FOOD INSECURITY",
         Icon: WheatIcon,
-        source: "",   // paste a link here to show a "SOURCE →" link
         body: (
             <>
                 A dramatic drop in farm workers translates directly to an inability to maintain food <strong>self-sufficiency</strong>, forcing the country to rely heavily on expensive imported commodities.
@@ -21,7 +20,6 @@ const WHY_CARDS = [
         id: "workforce",
         title: "GRAYING WORKFORCE",
         Icon: OldPersonIcon,
-        source: "",
         body: (
             <>
                 The average age of the Filipino farmer ranges between <strong>57 and 59 years old</strong>. Experts predict a critical shortage of farmers within the next 10 to 12 years if younger generations do not step up.
@@ -32,7 +30,6 @@ const WHY_CARDS = [
         id: "stereotypes",
         title: "BREAKING STEREOTYPES",
         Icon: MythIcon,
-        source: "",
         body: (
             <>
                 Agriculture is widely stigmatized in rural communities as an unprofitable, low-status, and physically exhausting <strong>"poor man's profession."</strong>
@@ -75,8 +72,15 @@ export default function WhyCarousel() {
             aria-label="Why your community needs you"
             onKeyDown={handleKeyDown}
         >
-            <div className="why__viewport" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-                <div className="why__track" style={{ transform: `translateX(-${active * 100}%)` }}>
+            <div
+                className="why__viewport"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+            >
+                <div
+                    className="why__track"
+                    style={{ transform: `translateX(-${active * 100}%)` }}
+                >
                     {WHY_CARDS.map(({ id, title, Icon, body, source }, index) => (
                         <div
                             className="why__slide"
@@ -97,7 +101,12 @@ export default function WhyCarousel() {
                                     <h3>{title}</h3>
                                     <p>{body}</p>
                                     {source && (
-                                        <a className="why__source" href={source} target="_blank" rel="noopener noreferrer">
+                                        <a
+                                            className="why__source"
+                                            href={source}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
                                             SOURCE →
                                         </a>
                                     )}
@@ -109,7 +118,12 @@ export default function WhyCarousel() {
             </div>
 
             <div className="why__controls">
-                <button type="button" className="why__arrow" onClick={prev} aria-label="Previous card">
+                <button
+                    type="button"
+                    className="why__arrow"
+                    onClick={prev}
+                    aria-label="Previous card"
+                >
                     <ArrowLeftCircleIcon className="why__arrow-icon" />
                 </button>
 
@@ -126,7 +140,12 @@ export default function WhyCarousel() {
                     ))}
                 </div>
 
-                <button type="button" className="why__arrow" onClick={next} aria-label="Next card">
+                <button
+                    type="button"
+                    className="why__arrow"
+                    onClick={next}
+                    aria-label="Next card"
+                >
                     <ArrowRightCircleIcon className="why__arrow-icon" />
                 </button>
             </div>

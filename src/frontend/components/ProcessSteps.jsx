@@ -30,7 +30,7 @@ const PROCESS_STEPS = [
     {
         title: "Keep In Touch",
         Icon: HeartIcon,
-        description: "Choose how you'd like to hear from us, by email or text, before your visit.",
+        description: "Thank you for volunteering with us! After your schedule concludes, we’d appreciate hearing how your experience went.",
     },
 ];
 
