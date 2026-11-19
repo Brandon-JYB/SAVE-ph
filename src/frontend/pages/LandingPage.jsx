@@ -159,13 +159,13 @@ function LandingPage() {
                     <p>
                         The latest development in Artificial Intelligence has made it possible for us to help the farmers even more by providing an AI prediction model that predicts which plants are most optimal to plant within that quarter of the year based on historical data regarding weather, price, and other external factors.
                     </p>
-                    <div className="home-btn">
-                        <button type="button">Learn More &rarr;</button>
-                    </div>
+                    <Link className="ai-btn" to="/predictions">
+                        <span className="ai-btn__text">Learn More</span>
+                        <ArrowCircleIcon className="ai-btn__icon" />
+                    </Link>
                 </div>
             </Section>
         </>
     );
 }
-
 export default LandingPage;

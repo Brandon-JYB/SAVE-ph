@@ -937,6 +937,43 @@
     justify-content: center;
 }
 
+.ai-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    height: 3.5rem;
+    margin-top: 32px;
+    padding: 0 1rem 0 2rem;
+    box-sizing: border-box;
+    background: var(--color-accent);
+    border-radius: 999px;
+    box-shadow: 0px 4px 12px var(--shadow);
+    color: var(--color-text-brand-muted);
+    font-family: var(--font-normal), sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ai-btn:hover {
+    transform: translateY(2px);
+    box-shadow: 0px 0px 8px var(--shadow);
+}
+
+.ai-btn:focus-visible {
+    outline: 3px solid var(--color-light);
+    outline-offset: 3px;
+}
+
+.ai-btn__icon {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-major);
+    opacity: 0.95;
+}
+
 /*  ---------- RESPONSIVE ----------  */
 
 @media (max-width: 1000px) {
