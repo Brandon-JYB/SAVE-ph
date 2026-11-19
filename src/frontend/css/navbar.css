@@ -103,52 +103,82 @@
     background-color: var(--color-major);
 }
 
-/* ---------- ACCOUNT BUTTON ---------- */
-.account-btn {
-    height: 47px;
-    width: 150px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
+/* ---------- STATUS PILL ---------- */
+.status-pill {
     position: relative;
     z-index: 1;
-}
-
-.account-btn .action-bg {
-    background: var(--glass-green);
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
-    border: 1px solid var(--color-light);
-    border-radius: 40px;
-    box-shadow: 0px 4px 8px var(--shadow);
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.account-btn:hover .action-bg {
-    background: var(--glass-green-hover);
-    box-shadow: 0px 0px 8px var(--shadow);
-    transform: translateY(2px);
-}
-
-.account-btn span {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    color: var(--color-light);
-    font-family: var(--font-normal), sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    z-index: 2;
-    transition: transform 0.2s ease;
+    gap: 0.7rem;
+    height: 50px;                                  /* same height as the nav-links pill */
+    padding: 0 1.4rem 0 1.15rem;
+    box-sizing: border-box;
+    background-color: var(--color-light);
+    border-radius: 40px;
+    box-shadow: 0px 4px 4px var(--shadow);         /* same shadow as the nav-links pill */
+    cursor: default;
 }
 
-.account-btn:hover span {
-    transform: translateY(2px);
+.status-pill__text {
+    color: var(--color-major);
+    font-family: var(--font-normal), sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.status-pill__dot {
+    position: relative;
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-minor);
+}
+
+/* two soft rings that expand and fade out, one after the other */
+.status-pill__dot::before,
+.status-pill__dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-color: var(--color-minor);
+    animation: status-ripple 2.4s ease-out infinite;
+}
+
+.status-pill__dot::after {
+    animation-delay: 1.2s;
+}
+
+@keyframes status-ripple {
+    0%   { transform: scale(1);   opacity: 0.55; }
+    100% { transform: scale(3.2); opacity: 0; }
+}
+
+/* below this width the pill would run into the centered nav links,
+   so it shrinks to just the glowing dot (the text stays for screen readers) */
+@media (max-width: 1100px) {
+    .status-pill {
+        width: 50px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .status-pill__text {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .status-pill__dot::before,
+    .status-pill__dot::after {
+        animation: none;
+        opacity: 0;
+    }
 }
