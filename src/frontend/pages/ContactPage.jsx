@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import Section from "../components/Section";
 import { getFarms, submitRegistration, saveContactPreferences, submitFeedback, submitInquiry } from "../api/Client";
+
 
 const STEPS = [
     "Email & Number",
@@ -87,7 +89,14 @@ function Field({ id, label, error, hint, children }) {
 }
 
 export default function ContactPage() {
-    const [mode, setMode] = useState("register"); // "register" | "feedback" | "inquiry"
+    const [searchParams] = useSearchParams();
+    const requestedMode = searchParams.get("mode");
+    const isValidMode = MODES.some((m) => m.id === requestedMode);
+    const [mode, setMode] = useState(isValidMode ? requestedMode : "register");
+    useEffect(() => {
+        if (isValidMode) setMode(requestedMode);
+    }, [requestedMode, isValidMode]);
+    
     const [step, setStep] = useState(0);
     const [form, setForm] = useState(EMPTY_FORM);
     const [feedback, setFeedback] = useState(EMPTY_FEEDBACK);

@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import Section from "../components/Section";
+import WhyCarousel from "../components/WhyCarousel";
+import ProcessSteps from "../components/ProcessSteps";
+import FaqList from "../components/FaqList";
 import homeBg from "../images/home-bg.jpg";
 import aboutImg2 from "../images/about-img-2.jpg";
 import aboutImg3 from "../images/about-img-3.jpg";
@@ -69,7 +72,6 @@ function LandingPage() {
                         </p>
                         <div className="bento__foot">
                             <span>SAVE PHILIPPINES · VOLUNTEER PROGRAM</span>
-                            <span className="bento__status">OPEN FOR VOLUNTEERS</span>
                         </div>
                     </article>
 
@@ -104,11 +106,6 @@ function LandingPage() {
                         <p className="bento__lead">
                             SAVE is a program dedicated to promoting the agricultural industry in the Philippines by engaging college students from different schools in volunteer activities on local farms.
                         </p>
-                        <div className="bento__bridge">
-                            <span>Urban youth</span>
-                            <i aria-hidden="true">↔</i>
-                            <span>Rural farmers</span>
-                        </div>
                         <p className="bento__small">
                             Bridging the gap to cultivate a new generation of agricultural advocates who drive innovation and sustainable food security.
                         </p>
@@ -128,31 +125,7 @@ function LandingPage() {
                     <p>that is more than enough reason</p>
                 </div>
 
-                <div className="cards-container">
-                    <div className="card">
-                        <div className="card-icon">[ ICON ]</div>
-                        <h3>GROWING FOOD INSECURITY</h3>
-                        <p>
-                            A dramatic drop in farm workers translates directly to an inability to maintain food <strong>self-sufficiency</strong>, forcing the country to rely heavily on expensive imported commodities.
-                        </p>
-                    </div>
-
-                    <div className="card">
-                        <div className="card-icon">[ ICON ]</div>
-                        <h3>GRAYING WORKFORCE</h3>
-                        <p>
-                            The average age of the Filipino farmer ranges between <strong>57 and 59 years old</strong>. Experts predict a critical shortage of farmers within the next 10 to 12 years if younger generations do not step up.
-                        </p>
-                    </div>
-
-                    <div className="card">
-                        <div className="card-icon">[ ICON ]</div>
-                        <h3>BREAKING STEREOTYPES</h3>
-                        <p>
-                            Agriculture is widely stigmatized in rural communities as an unprofitable, low-status, and physically exhausting <strong>"poor man's profession."</strong>
-                        </p>
-                    </div>
-                </div>
+                <WhyCarousel />
             </Section>
 
             <Section id="Process" tone="mint" watermark="JOIN">
@@ -162,47 +135,7 @@ function LandingPage() {
                     <p>join the force in a few simple steps</p>
                 </div>
 
-                <div className="process-steps-container">
-                    <div className="process-step-card">
-                        <span className="step-number">01</span>
-                        <div className="step-content">
-                            <h3>Email & Number</h3>
-                        </div>
-                        <span className="step-arrow">&gt;</span>
-                    </div>
-
-                    <div className="process-step-card">
-                        <span className="step-number">02</span>
-                        <div className="step-content">
-                            <h3>Farm Selection</h3>
-                        </div>
-                        <span className="step-arrow">&gt;</span>
-                    </div>
-
-                    <div className="process-step-card">
-                        <span className="step-number">03</span>
-                        <div className="step-content">
-                            <h3>Confirm Match</h3>
-                        </div>
-                        <span className="step-arrow">&gt;</span>
-                    </div>
-
-                    <div className="process-step-card">
-                        <span className="step-number">04</span>
-                        <div className="step-content">
-                            <h3>Receive Confirmation Feedback</h3>
-                        </div>
-                        <span className="step-arrow">&gt;</span>
-                    </div>
-
-                    <div className="process-step-card">
-                        <span className="step-number">05</span>
-                        <div className="step-content">
-                            <h3>Keep In Touch</h3>
-                        </div>
-                        <span className="step-arrow">&gt;</span>
-                    </div>
-                </div>
+                <ProcessSteps />
             </Section>
 
             <Section id="Questions" tone="light" watermark="ASK">
@@ -212,32 +145,7 @@ function LandingPage() {
                     <p>a couple questions you might have</p>
                 </div>
 
-                <div className="faq-grid">
-                    <div className="faq-item">
-                        <span className="faq-icon">+</span>
-                        <p>Do I need to pay any registration or processing fees to sign up?</p>
-                    </div>
-                    <div className="faq-item">
-                        <span className="faq-icon">+</span>
-                        <p>Can I sign up as a group or do we have to apply individually?</p>
-                    </div>
-                    <div className="faq-item">
-                        <span className="faq-icon">+</span>
-                        <p>What should I pack or wear for the farm immersion?</p>
-                    </div>
-                    <div className="faq-item">
-                        <span className="faq-icon">+</span>
-                        <p>I have zero experience in farming. Can I still join?</p>
-                    </div>
-                    <div className="faq-item">
-                        <span className="faq-icon">+</span>
-                        <p>...</p>
-                    </div>
-                    <div className="faq-item">
-                        <span className="faq-icon">+</span>
-                        <p>...</p>
-                    </div>
-                </div>
+                <FaqList />
             </Section>
 
             <Section id="Discover" tone="dark" watermark="REAP">
@@ -259,4 +167,5 @@ function LandingPage() {
         </>
     );
 }
+
 export default LandingPage;

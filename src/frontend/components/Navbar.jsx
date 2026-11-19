@@ -27,10 +27,10 @@ export default function NavBar() {
                     </Link>
                 </div>
 
-                <button className="account-btn">
-                    <div className="action-bg" />
-                    <span>Account</span>
-                </button>
+                <div className="status-pill">
+                    <span className="status-pill__dot" aria-hidden="true" />
+                    <span className="status-pill__text">open for volunteers</span>
+                </div>
             </nav>
         </div>
     );
