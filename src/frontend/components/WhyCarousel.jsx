@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { WheatIcon, HourglassIcon, MythIcon, ChevronIcon } from "../svg/Icons";
+import WheatIcon from "../svg/WheatIcon";
+import OldPersonIcon from "../svg/OldPersonIcon";
+import MythIcon from "../svg/MythIcon";
+import ArrowLeftCircleIcon from "../svg/ArrowLeftCircleIcon";
+import ArrowRightCircleIcon from "../svg/ArrowRightCircleIcon";
 
 const WHY_CARDS = [
     {
@@ -16,7 +20,7 @@ const WHY_CARDS = [
     {
         id: "workforce",
         title: "GRAYING WORKFORCE",
-        Icon: HourglassIcon,
+        Icon: OldPersonIcon,
         source: "",
         body: (
             <>
@@ -106,7 +110,7 @@ export default function WhyCarousel() {
 
             <div className="why__controls">
                 <button type="button" className="why__arrow" onClick={prev} aria-label="Previous card">
-                    <ChevronIcon className="why__chevron why__chevron--prev" />
+                    <ArrowLeftCircleIcon className="why__arrow-icon" />
                 </button>
 
                 <div className="why__dots">
@@ -123,7 +127,7 @@ export default function WhyCarousel() {
                 </div>
 
                 <button type="button" className="why__arrow" onClick={next} aria-label="Next card">
-                    <ChevronIcon className="why__chevron" />
+                    <ArrowRightCircleIcon className="why__arrow-icon" />
                 </button>
             </div>
         </div>

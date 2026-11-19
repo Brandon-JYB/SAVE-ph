@@ -1,4 +1,6 @@
 import { useId } from "react";
+import PlusIcon from "../svg/PlusIcon";
+import MinusIcon from "../svg/MinusIcon";
 
 export default function AccordionItem({ className = "", header, open, onToggle, children }) {
     const panelId = useId();
@@ -13,7 +15,10 @@ export default function AccordionItem({ className = "", header, open, onToggle, 
                 onClick={onToggle}
             >
                 <span className="acc__label">{header}</span>
-                <span className="acc__toggle" aria-hidden="true" />
+                <span className="acc__toggle" aria-hidden="true">
+                    <PlusIcon className="acc__plus" />
+                    <MinusIcon className="acc__minus" />
+                </span>
             </button>
 
             <div className="acc__panel" id={panelId}>

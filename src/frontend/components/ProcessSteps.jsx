@@ -1,6 +1,10 @@
 import { useState } from "react";
 import AccordionItem from "./AccordionItem";
-import { MailIcon, PinIcon, CheckCircleIcon, SendIcon, HeartIcon } from "../svg/Icons";
+import MailIcon from "../svg/MailIcon";
+import PinIcon from "../svg/PinIcon";
+import ConfirmIcon from "../svg/ConfirmIcon";
+import SendIcon from "../svg/SendIcon";
+import HeartIcon from "../svg/HeartIcon";
 
 const PROCESS_STEPS = [
     {
@@ -15,7 +19,7 @@ const PROCESS_STEPS = [
     },
     {
         title: "Confirm Match",
-        Icon: CheckCircleIcon,
+        Icon: ConfirmIcon,
         description: "Review your details and your chosen farm, then confirm your registration.",
     },
     {
