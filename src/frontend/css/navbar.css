@@ -48,6 +48,31 @@
     justify-content: space-between;
 }
 
+/* the one green pill that slides under the active link */
+.nav-indicator {
+    position: absolute;
+    top: 7.5px;                                /* (50px bar - 35px link) / 2 */
+    left: 0;
+    height: 35px;
+    border-radius: 50px;
+    background-color: var(--color-major);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform, width;
+}
+
+.nav-indicator.is-visible {
+    opacity: 1;
+}
+
+.nav-indicator.is-ready {
+    transition:
+        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.2s ease;
+}
+
 .nav-links > a {
     display: flex;
     align-items: center;
@@ -56,6 +81,7 @@
     padding: 0 16px;
     box-sizing: border-box;
     position: relative;
+    z-index: 1;                                /* text stays above the sliding pill */
     color: var(--color-major);
     font-family: var(--font-normal), sans-serif;
     font-size: 15px;
@@ -65,8 +91,8 @@
     transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
 }
 
+/* the pill is the background now; the active link only changes its text color */
 .nav-links > a.is-active {
-    background-color: var(--color-major);
     color: var(--color-light);
 }
 
@@ -79,7 +105,7 @@
 /* ---------- CONTACT (call-to-action pill) ---------- */
 .nav-links .contact-link .special-bg {
     position: absolute;
-    inset: 0;                                  /* fills the whole link, same size as the active pill */
+    inset: 0;
     background-color: var(--color-accent);
     border-radius: 50px;
     transition: background-color 0.3s ease;
@@ -103,19 +129,25 @@
     background-color: var(--color-major);
 }
 
-/* ---------- STATUS PILL ---------- */
+/* ---------- RIGHT SIDE: status pill (+ hamburger on phones) ---------- */
+.navbar__end {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .status-pill {
     position: relative;
     z-index: 1;
     display: inline-flex;
     align-items: center;
     gap: 0.7rem;
-    height: 50px;                                  /* same height as the nav-links pill */
+    height: 50px;
     padding: 0 1.4rem 0 1.15rem;
     box-sizing: border-box;
     background-color: var(--color-light);
     border-radius: 40px;
-    box-shadow: 0px 4px 4px var(--shadow);         /* same shadow as the nav-links pill */
+    box-shadow: 0px 4px 4px var(--shadow);
     cursor: default;
 }
 
@@ -156,29 +188,36 @@
     100% { transform: scale(3.2); opacity: 0; }
 }
 
-/* below this width the pill would run into the centered nav links,
-   so it shrinks to just the glowing dot (the text stays for screen readers) */
-@media (max-width: 1100px) {
-    .status-pill {
-        width: 50px;
-        padding: 0;
-        justify-content: center;
-    }
-
-    .status-pill__text {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
-        white-space: nowrap;
-    }
+/* hamburger: hidden on desktop and tablet, shown by media.css on phones */
+.nav-burger {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: var(--color-light);
+    box-shadow: 0px 4px 4px var(--shadow);
+    cursor: pointer;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .status-pill__dot::before,
-    .status-pill__dot::after {
-        animation: none;
-        opacity: 0;
-    }
+.nav-burger:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
 }
+
+.nav-burger__bar {
+    width: 20px;
+    height: 2.5px;
+    border-radius: 2px;
+    background-color: var(--color-major);
+    transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.nav-burger[aria-expanded="true"] .nav-burger__bar:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.nav-burger[aria-expanded="true"] .nav-burger__bar:nth-child(2) { opacity: 0; }
+.nav-burger[aria-expanded="true"] .nav-burger__bar:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }

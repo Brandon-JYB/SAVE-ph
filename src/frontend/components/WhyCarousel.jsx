@@ -4,12 +4,25 @@ import OldPersonIcon from "../svg/OldPersonIcon";
 import MythIcon from "../svg/MythIcon";
 import ArrowLeftCircleIcon from "../svg/ArrowLeftCircleIcon";
 import ArrowRightCircleIcon from "../svg/ArrowRightCircleIcon";
+import ArrowUpRightIcon from "../svg/ArrowUpRightIcon";
 
+/*
+  Every card links to its source, for transparency.
+    source.name -> tag shown on the card
+    source.type -> tag: NEWS | STUDY | DATA | REPORT
+    source.url  -> where the round ↗ button goes
+  Open each link and check that it still says what the card says before publishing.
+*/
 const WHY_CARDS = [
     {
         id: "food",
         title: "GROWING FOOD INSECURITY",
         Icon: WheatIcon,
+        source: {
+            name: "PIDS · BusinessWorld",
+            type: "News",
+            url: "https://pids.gov.ph/details/news/in-the-news/hunger-knocks-on-door-as-philippine-farmers-vanish",
+        },
         body: (
             <>
                 A dramatic drop in farm workers translates directly to an inability to maintain food <strong>self-sufficiency</strong>, forcing the country to rely heavily on expensive imported commodities.
@@ -20,6 +33,11 @@ const WHY_CARDS = [
         id: "workforce",
         title: "GRAYING WORKFORCE",
         Icon: OldPersonIcon,
+        source: {
+            name: "Manila Times via SEARCA",
+            type: "Editorial",
+            url: "https://www.searca.org/press/aging-farmers-could-add-food-insecurity",
+        },
         body: (
             <>
                 The average age of the Filipino farmer ranges between <strong>57 and 59 years old</strong>. Experts predict a critical shortage of farmers within the next 10 to 12 years if younger generations do not step up.
@@ -30,6 +48,11 @@ const WHY_CARDS = [
         id: "stereotypes",
         title: "BREAKING STEREOTYPES",
         Icon: MythIcon,
+        source: {
+            name: "Mercado & Osbahr, 2023",
+            type: "Study",
+            url: "https://doi.org/10.37801/ajad2023.20.2.3",
+        },
         body: (
             <>
                 Agriculture is widely stigmatized in rural communities as an unprofitable, low-status, and physically exhausting <strong>"poor man's profession."</strong>
@@ -77,43 +100,61 @@ export default function WhyCarousel() {
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleTouchEnd}
             >
-                <div
-                    className="why__track"
-                    style={{ transform: `translateX(-${active * 100}%)` }}
-                >
-                    {WHY_CARDS.map(({ id, title, Icon, body, source }, index) => (
-                        <div
-                            className="why__slide"
-                            key={id}
-                            role="group"
-                            aria-roledescription="slide"
-                            aria-label={`${index + 1} of ${total}`}
-                            aria-hidden={index !== active}
-                        >
-                            <article className="why__card">
-                                <span className="why__count">
-                                    {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-                                </span>
-                                <span className="why__icon">
-                                    <Icon />
-                                </span>
-                                <div className="why__body">
-                                    <h3>{title}</h3>
-                                    <p>{body}</p>
+                <div className="why__track" style={{ "--active": active }}>
+                    {WHY_CARDS.map(({ id, title, Icon, body, source }, index) => {
+                        const isActive = index === active;
+
+                        return (
+                            <div
+                                className={"why__slide" + (isActive ? " is-active" : "")}
+                                key={id}
+                                role="group"
+                                aria-roledescription="slide"
+                                aria-label={`${index + 1} of ${total}`}
+                                aria-hidden={!isActive}
+                                onClick={() => {
+                                    if (!isActive) goTo(index);   // tapping a peeking card brings it forward
+                                }}
+                            >
+                                <article className="why__card">
                                     {source && (
                                         <a
-                                            className="why__source"
-                                            href={source}
+                                            className="why__source-btn"
+                                            href={source.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
+                                            aria-label={`Read the source: ${source.name} (opens in a new tab)`}
+                                            title={`Read the source: ${source.name}`}
+                                            tabIndex={isActive ? 0 : -1}
                                         >
-                                            SOURCE →
+                                            <ArrowUpRightIcon className="why__source-icon" />
                                         </a>
                                     )}
-                                </div>
-                            </article>
-                        </div>
-                    ))}
+
+                                    <span className="why__icon">
+                                        <Icon />
+                                    </span>
+
+                                    <div className="why__body">
+                                        <h3>{title}</h3>
+                                        <p>{body}</p>
+                                    </div>
+
+                                    <div className="why__foot">
+                                        <span className="why__count">
+                                            {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+                                        </span>
+                                        {source && (
+                                            <span className="why__tags">
+                                                <span className="why__tag why__tag--type">{source.type}</span>
+                                                <span className="why__tag">{source.name}</span>
+                                            </span>
+                                        )}
+                                    </div>
+                                </article>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
