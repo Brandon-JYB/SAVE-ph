@@ -105,10 +105,7 @@ function LandingPage() {
                     <article className="bento__card bento__card--about">
                         <span className="bento__label">ABOUT SAVE</span>
                         <p className="bento__lead">
-                            SAVE is a program dedicated to promoting the agricultural industry in the Philippines by engaging college students from different schools in volunteer activities on local farms.
-                        </p>
-                        <p className="bento__small">
-                            Bridging the gap to cultivate a new generation of agricultural advocates who drive innovation and sustainable food security.
+                            SAVE is a program dedicated to promoting the agricultural industry in the Philippines by engaging college students from different schools in volunteer activities on local farms. Bridging the gap to cultivate a new generation of agricultural advocates who drive innovation and sustainable food security.
                         </p>
                     </article>
 

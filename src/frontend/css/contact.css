@@ -358,19 +358,3 @@
     clip: rect(0 0 0 0);
     white-space: nowrap;
 }
-
-/* ---------- mobile ---------- */
-@media (max-width: 600px) {
-    .reg-modes { width: 100%; }
-    .reg-mode {
-        flex: 1;
-        padding: 0.6rem 0.4rem;
-        font-size: 0.8rem;
-        white-space: normal;
-        text-align: center;
-    }
-    .reg-steps__label { display: none; }
-    .reg-steps__item.is-current .reg-steps__label { display: block; }
-    .reg-actions { flex-direction: column-reverse; }
-    .reg-btn { width: 100%; }
-}

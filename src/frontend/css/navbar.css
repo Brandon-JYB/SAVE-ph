@@ -48,7 +48,7 @@
     justify-content: space-between;
 }
 
-/* the one green pill that slides under the active link */
+/* the one pill that slides under the active link */
 .nav-indicator {
     position: absolute;
     top: 7.5px;                                /* (50px bar - 35px link) / 2 */

@@ -1,14 +1,11 @@
-/* ==========================================================================
-   ALL MEDIA QUERIES LIVE HERE. Import this file LAST in style.css so it can override.
-
-   Desktop-first: the other css files are the desktop design.
-     Desktop  1101px and up   no query needed
-     Tablet   up to 1100px
-     Phone    up to 760px     (the navbar turns into a hamburger menu)
-   ========================================================================== */
+/*  ============================================================
+    RESPONSIVE
+    Order matters: widest breakpoint first, narrowest last, so
+    the phone rules win over the tablet ones where they overlap.
+    ============================================================  */
 
 
-/* ------------------------------ TABLET ------------------------------ */
+/* ------------------------------ TABLET (≤ 1100px) ------------------------------ */
 @media (max-width: 1100px) {
 
     /* navbar: the status pill shrinks to just the glowing dot (its text stays for screen readers) */
@@ -25,6 +22,10 @@
         overflow: hidden;
         clip: rect(0 0 0 0);
         white-space: nowrap;
+    }
+
+    .section {
+        max-width: 65vw;
     }
 
     /* about: bento grid */
@@ -54,10 +55,10 @@
 }
 
 
-/* ------------------------------ PHONE ------------------------------ */
+/* ------------------------------ PHONE (≤ 760px) ------------------------------ */
 @media (max-width: 760px) {
 
-    /* navbar becomes a hamburger menu */
+    /* ---- navbar becomes a hamburger menu ---- */
     .navbar {
         left: 16px;
         right: 16px;
@@ -110,9 +111,11 @@
         color: var(--color-light);
     }
 
-    /* sections */
+    /* ---- sections: centered with an even 12px gutter ---- */
     .section {
-        margin: 0 12px 16px;
+        width: calc(100% - 24px);       /* 12px on each side */
+        max-width: 85vw;                /* drop the desktop/tablet cap */
+        margin: 0 auto 32px;            /* auto keeps the panel centered */
         padding: 72px 18px;
         border-radius: 28px;
     }
@@ -125,20 +128,20 @@
         margin-bottom: 40px;
     }
 
-    /* hero */
+    /* ---- hero ---- */
     .hero__content {
         padding-left: 0;
         padding-top: 4vh;
     }
 
-    /* about: bento grid */
+    /* ---- about: bento grid ---- */
     .bento__card--stats,
     .bento__card--pillars,
     .bento__photo {
         grid-column: span 12;
     }
 
-    /* why do it: wider card, smaller peek */
+    /* ---- why do it: wider card, smaller peek ---- */
     .why {
         --slide: 88%;
     }
@@ -153,7 +156,7 @@
         height: 72px;
     }
 
-    /* process + faq accordions */
+    /* ---- process + faq accordions ---- */
     .acc--process .acc__head {
         padding: 14px 16px;
     }
@@ -175,7 +178,7 @@
         grid-template-columns: 1fr;
     }
 
-    /* discover: teaser card */
+    /* ---- discover: teaser card ---- */
     .teaser__card {
         padding: 18px;
     }
@@ -184,7 +187,7 @@
         grid-template-columns: 1.5rem 4.4rem minmax(0, 1fr) 1.8rem;
     }
 
-    /* predictions page */
+    /* ---- predictions page ---- */
     .pred-form {
         grid-template-columns: 1fr;
     }
@@ -193,7 +196,7 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    /* contact page */
+    /* ---- contact page ---- */
     .reg-modes {
         width: 100%;
     }
@@ -222,23 +225,35 @@
         width: 100%;
     }
 
-    /* footer */
+    /* ---- footer ---- */
     .footer {
         grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
         gap: 28px;
         padding-top: 44px;
     }
 
     .footer__branding {
         grid-column: 1;
+        align-items: center;
         padding: 0 24px;
+    }
+
+    .footer__cta-button {
+        justify-self: center;
     }
 
     .footer__links-section {
         grid-column: 1;
-        justify-content: flex-start;
-        gap: 48px;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 32px 48px;
         padding: 0 24px;
+    }
+
+    .footer__column {
+        align-items: center;
     }
 
     .footer__slogan {
@@ -255,6 +270,8 @@
 
 /* ------------------- REDUCED MOTION (all of them) ------------------- */
 @media (prefers-reduced-motion: reduce) {
+
+    /* navbar */
     .status-pill__dot::before,
     .status-pill__dot::after {
         animation: none;
@@ -267,6 +284,7 @@
         transition: none;
     }
 
+    /* about, why do it, accordions, charts */
     .bento__photo img,
     .why__track,
     .why__slide,
@@ -279,6 +297,7 @@
         transition: none;
     }
 
+    /* discover */
     .teaser__fill {
         animation: none;
     }

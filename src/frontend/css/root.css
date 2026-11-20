@@ -4,17 +4,20 @@
     --color-minor: #50975B;
     --color-accent: #EAC400;
     --color-accent-deep: #A38700;
+    --color-deep: #0C3A0B;
 
-    --color-cream: #F6F2E4;
+    --color-body-mid:rgba(0, 128, 0, 0.24);
+    --color-body-edge: #0c3a0b81;
+    --color-error: red;
+    
     --color-muted: #A0A0A0;
     --color-mint: #DCEBD8;
-    --color-deep: #0C3A0B;
-    --color-error: red;
-
+    
+    --color-cream: #F6F2E4;
     --color-light: #FFFFFF;
     --color-gray: #626262;
     --color-dark: #000000;
-    --color-clear: transparent;
+    
 
     /*  ---------- SHADOWS ----------  */
     --shadow: #00000080;
@@ -24,6 +27,8 @@
     --shadow-text: #00000059;
 
     /*  ---------- TRANSPARENT & TINTED COLORS ----------  */
+    --color-clear: transparent;
+
     --color-text-brand-muted: #114B10F2;
     --color-tagline-opacity: #A0A0A066;
     --color-rule: #50975B99;

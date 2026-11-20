@@ -7,11 +7,10 @@ import ArrowRightCircleIcon from "../svg/ArrowRightCircleIcon";
 import ArrowUpRightIcon from "../svg/ArrowUpRightIcon";
 
 /*
-  Every card links to its source, for transparency.
-    source.name -> tag shown on the card
-    source.type -> tag: NEWS | STUDY | DATA | REPORT
-    source.url  -> where the round ↗ button goes
-  Open each link and check that it still says what the card says before publishing.
+    Every card links to its source, for transparency.
+        source.name -> tag shown on the card
+        source.type -> tag: NEWS | STUDY | DATA | REPORT
+        source.url  -> where the round ↗ button goes
 */
 const WHY_CARDS = [
     {
