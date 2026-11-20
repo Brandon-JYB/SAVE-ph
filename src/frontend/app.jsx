@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import LandingPage from './pages/LandingPage';
 import ContactPage from './pages/ContactPage';
-import PredictionsPage from "./pages/PredictionsPage";
+import PredictionsPage from './pages/PredictionsPage';
 
 function App() {
     return (
@@ -25,4 +25,5 @@ function App() {
         </div>
     );
 }
+
 export default App;

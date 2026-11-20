@@ -19,6 +19,11 @@ main {
     color: var(--color-light);
 }
 
+/* anchor links stop below the floating navbar */
+section[id] {
+    scroll-margin-top: 96px;
+}
+
 .app-container {
     display: flex;
     flex-direction: column;
@@ -26,3 +31,4 @@ main {
     max-width: 100vw;
     position: relative;
 }
+

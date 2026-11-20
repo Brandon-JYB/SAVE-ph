@@ -21,11 +21,11 @@ export default function Footer() {
             <div className="footer__links-section">
                 <div className="footer__column">
                     <h4 className="footer__column-title">PAGE</h4>
-                    <a href="/#Home" className="footer__link">Home</a>
-                    <a href="/#About" className="footer__link">About</a>
-                    <a href="/#Process" className="footer__link">Process</a>
-                    <a href="/#Questions" className="footer__link">FAQ</a>
-                    <a href="/#Discover" className="footer__link">Discover</a>
+                        <Link to="/#Home" className="footer__link">Home</Link>
+                        <Link to="/#About" className="footer__link">About</Link>
+                        <Link to="/#Process" className="footer__link">Process</Link>
+                        <Link to="/#Questions" className="footer__link">FAQ</Link>
+                        <Link to="/#Discover" className="footer__link">Discover</Link>
                 </div>
                 <div className="footer__column">
                     <h4 className="footer__column-title">CONNECT</h4>

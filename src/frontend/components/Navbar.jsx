@@ -1,8 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "../css/style.css";
+import logo from "../images/SAVE.png";
 import useActiveSection from "../hooks/useActiveSection";
 
-const SECTION_IDS = ["Home", "About", "Process", "Questions", "Discover"];
+const NAV_LINKS = [
+    { id: "Home", label: "Home" },
+    { id: "About", label: "About" },
+    { id: "Process", label: "Process" },
+    { id: "Questions", label: "Questions" },
+    { id: "Discover", label: "Discover" },
+];
+
+const SECTION_IDS = NAV_LINKS.map((link) => link.id);
 
 export default function NavBar() {
     const active = useActiveSection(SECTION_IDS);
@@ -10,17 +19,21 @@ export default function NavBar() {
     return (
         <div className="box">
             <nav className="navbar">
-                <div className="logo-container">
-                    <img src="frontend/images/SAVE.png" alt="Logo" />
-                </div>
+                <Link to="/#Home" className="logo-container" aria-label="Save Philippines, back to the top">
+                    <img src={logo} alt="Save Philippines logo" />
+                </Link>
 
                 <div className="nav-links">
-                    <a href="/#Home" className={active === "Home" ? "is-active" : ""}>Home</a>
-                    <a href="/#About" className={active === "About" ? "is-active" : ""}>About</a>
-                    <a href="/#Process" className={active === "Process" ? "is-active" : ""}>Process</a>
-                    <a href="/#Questions" className={active === "Questions" ? "is-active" : ""}>Questions</a>
-                    <a href="/#Discover" className={active === "Discover" ? "is-active" : ""}>Discover</a>
-                    
+                    {NAV_LINKS.map(({ id, label }) => (
+                        <Link
+                            key={id}
+                            to={`/#${id}`}
+                            className={active === id ? "is-active" : ""}
+                        >
+                            {label}
+                        </Link>
+                    ))}
+
                     <Link to="/contact" className="contact-link">
                         <div className="special-bg" />
                         <span>Contact</span>

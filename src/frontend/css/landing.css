@@ -430,7 +430,8 @@
 /*  ---------- WHY DO IT (carousel) ----------  */
 
 .why {
-    max-width: 920px;
+    --slide: 76%;                     /* width of the centered card; the rest shows the neighbours peeking in */
+    max-width: 1080px;
     margin: 0 auto;
 }
 
@@ -440,14 +441,29 @@
 
 .why__track {
     display: flex;
+    transform: translateX(calc((100% - var(--slide)) / 2 - var(--active, 0) * var(--slide)));
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .why__slide {
     display: flex;
-    flex: 0 0 100%;
+    flex: 0 0 var(--slide);
     box-sizing: border-box;
-    padding: 6px 6px 30px;            /* room for the card's shadow inside the clipped viewport */
+    padding: 6px 12px 30px;           /* gap between cards + room for the shadow */
+    opacity: 0.45;
+    transform: scale(0.92);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    cursor: pointer;
+}
+
+.why__slide:not(.is-active):hover {
+    opacity: 0.7;
+}
+
+.why__slide.is-active {
+    opacity: 1;
+    transform: scale(1);
+    cursor: default;
 }
 
 .why__card {
@@ -465,14 +481,38 @@
     color: var(--color-dark);
 }
 
-.why__count {
+/* round ↗ button: opens the source */
+.why__source-btn {
     position: absolute;
     top: 18px;
-    right: 24px;
-    font-family: var(--font-detail), monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-    color: var(--color-muted);
+    right: 18px;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--color-mint);
+    color: var(--color-major);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.why__source-btn:hover {
+    background: var(--color-accent);
+    transform: scale(1.08);
+}
+
+.why__source-btn:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+.why__slide:not(.is-active) .why__source-btn {
+    pointer-events: none;             /* a tap on a peeking card brings it forward instead */
+}
+
+.why__source-icon {
+    width: 22px;
+    height: 22px;
 }
 
 .why__icon {
@@ -492,6 +532,7 @@
 
 .why__body h3 {
     margin: 0 0 14px;
+    padding-right: 3rem;              /* keeps long titles clear of the ↗ button */
     font-family: var(--font-title), sans-serif;
     font-weight: 800;
     font-size: clamp(1.3rem, 2.6vw, 1.9rem);
@@ -513,18 +554,57 @@
     font-weight: 700;
 }
 
-.why__source {
-    display: inline-block;
-    margin-top: 16px;
-    font-family: var(--font-detail), monospace;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    color: var(--color-minor);
+/* bottom row: count on the left, source tags on the right */
+.why__foot {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-tagline-opacity);
 }
 
-.why__source:hover {
+.why__count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-detail), monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    color: var(--color-muted);
+}
+
+.why__count::before {
+    content: "";
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 2px;
+    background: var(--color-accent);
+}
+
+.why__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.why__tag {
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: var(--color-mint);
+    font-family: var(--font-detail), monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--color-major);
+}
+
+.why__tag--type {
+    background: var(--glow-accent-soft);
+    color: var(--color-accent-deep);
 }
 
 .why__controls {
@@ -562,15 +642,6 @@
 .why__dot:focus-visible {
     outline: 3px solid var(--color-light);
     outline-offset: 3px;
-}
-
-.why__chevron {
-    width: 24px;
-    height: 24px;
-}
-
-.why__chevron--prev {
-    transform: scaleX(-1);
 }
 
 .why__dots {
@@ -614,6 +685,7 @@
 
 @media (prefers-reduced-motion: reduce) {
     .why__track,
+    .why__slide,
     .why__dot {
         transition: none;
     }
@@ -990,6 +1062,8 @@
     .bento__photo {
         grid-column: span 12;
     }
+
+    .why { --slide: 88%; }
 
     .why__card {
         grid-template-columns: 1fr;

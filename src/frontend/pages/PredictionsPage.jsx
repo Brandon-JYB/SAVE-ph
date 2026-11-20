@@ -1,260 +1,288 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getOptions, getPrediction } from "../lib/api";
-import "../css/predictions.css";
+import { useRef, useState } from "react";
+import Section from "../components/Section";
+import PriceChart from "../components/PriceChart";
+import WeatherChart from "../components/WeatherChart";
+import ArrowCircleIcon from "../svg/ArrowCircleIcon";
+import { getPrediction } from "../api/Client";
+import { getMockPrediction } from "../api/PredictionsMock";
 
-const QUARTER_LABELS = {
-  1: "Q1 (Jan to Mar)",
-  2: "Q2 (Apr to Jun)",
-  3: "Q3 (Jul to Sep)",
-  4: "Q4 (Oct to Dec)",
+const USE_MOCK = import.meta.env.VITE_USE_MOCK_PREDICTIONS === "true";
+const fetchPrediction = USE_MOCK ? getMockPrediction : getPrediction;
+
+/* The values are what gets sent to the API: match them to what the model was trained on. */
+const REGIONS = [
+    { value: "ncr", name: "NCR · National Capital Region" },
+    { value: "car", name: "CAR · Cordillera Administrative Region" },
+    { value: "r1", name: "Region I · Ilocos Region" },
+    { value: "r2", name: "Region II · Cagayan Valley" },
+    { value: "r3", name: "Region III · Central Luzon" },
+    { value: "r4a", name: "Region IV-A · CALABARZON" },
+    { value: "r4b", name: "MIMAROPA" },
+    { value: "r5", name: "Region V · Bicol Region" },
+    { value: "r6", name: "Region VI · Western Visayas" },
+    { value: "r7", name: "Region VII · Central Visayas" },
+    { value: "r8", name: "Region VIII · Eastern Visayas" },
+    { value: "r9", name: "Region IX · Zamboanga Peninsula" },
+    { value: "r10", name: "Region X · Northern Mindanao" },
+    { value: "r11", name: "Region XI · Davao Region" },
+    { value: "r12", name: "Region XII · SOCCSKSARGEN" },
+    { value: "r13", name: "Region XIII · Caraga" },
+    { value: "barmm", name: "BARMM · Bangsamoro" },
+];
+
+const QUARTERS = [
+    { value: 1, label: "Q1", months: "Jan–Mar" },
+    { value: 2, label: "Q2", months: "Apr–Jun" },
+    { value: 3, label: "Q3", months: "Jul–Sep" },
+    { value: 4, label: "Q4", months: "Oct–Dec" },
+];
+
+const TREND = {
+    up: { arrow: "▲", label: "Prices rising" },
+    down: { arrow: "▼", label: "Prices falling" },
+    flat: { arrow: "▬", label: "Prices steady" },
 };
 
-const LINE_COLORS = ["#f2c500", "#7fd17f", "#8ec5ff"];
+const currentQuarter = () => Math.floor(new Date().getMonth() / 3) + 1;
 
-const peso = (n) => `₱${Number(n).toLocaleString("en-PH")}`;
+export default function PredictionsPage() {
+    const [region, setRegion] = useState("");
+    const [quarter, setQuarter] = useState(currentQuarter());
+    const [regionError, setRegionError] = useState("");
+    const [status, setStatus] = useState("idle");          // idle | loading | done | error
+    const [result, setResult] = useState(null);
+    const [submitted, setSubmitted] = useState(null);
+    const [selectedId, setSelectedId] = useState(null);
 
-// Simple line chart (plain SVG, no extra library needed)
-function PriceChart({ history, names }) {
-  const W = 640, H = 280, L = 52, R = 16, T = 16, B = 40;
-  const values = history.flatMap((row) => names.map((n) => row[n]));
-  const min = Math.floor(Math.min(...values) * 0.9);
-  const max = Math.ceil(Math.max(...values) * 1.05);
-  const x = (i) => L + (i * (W - L - R)) / Math.max(history.length - 1, 1);
-  const y = (v) => T + ((max - v) * (H - T - B)) / (max - min || 1);
-  const ticks = [0, 1, 2, 3].map((i) => min + ((max - min) * i) / 3);
+    const requestId = useRef(0);
+    const resultsRef = useRef(null);
 
-  return (
-    <svg
-      viewBox={`0 0 ${W} ${H}`}
-      className="pred-chart"
-      role="img"
-      aria-label="Price per kilo of the top crops over the last 8 quarters"
-    >
-      {ticks.map((t) => (
-        <g key={t}>
-          <line x1={L} x2={W - R} y1={y(t)} y2={y(t)} className="pred-grid" />
-          <text x={L - 8} y={y(t) + 4} textAnchor="end" className="pred-axis">
-            ₱{Math.round(t)}
-          </text>
-        </g>
-      ))}
+    const regionName = REGIONS.find((r) => r.value === submitted?.region)?.name ?? "";
+    const quarterInfo = QUARTERS.find((q) => q.value === submitted?.quarter);
+    const selected = result?.crops?.find((c) => c.id === selectedId) ?? result?.crops?.[0];
 
-      {history.map((row, i) => (
-        <text key={row.label} x={x(i)} y={H - 14} textAnchor="middle" className="pred-axis">
-          {row.label}
-        </text>
-      ))}
+    async function handleSubmit(event) {
+        event.preventDefault();
 
-      {names.map((name, ci) => (
-        <g key={name}>
-          <polyline
-            fill="none"
-            stroke={LINE_COLORS[ci]}
-            strokeWidth="3"
-            points={history.map((row, i) => `${x(i)},${y(row[name])}`).join(" ")}
-          />
-          {history.map((row, i) => (
-            <circle key={i} cx={x(i)} cy={y(row[name])} r="4" fill={LINE_COLORS[ci]} />
-          ))}
-        </g>
-      ))}
-    </svg>
-  );
-}
+        if (!region) {
+            setRegionError("Choose your region first.");
+            return;
+        }
 
-function Trend({ pct }) {
-  if (pct == null) return null;
-  const up = pct >= 0;
-  return (
-    <span className={up ? "pred-up" : "pred-down"}>
-      {up ? "▲" : "▼"} {Math.abs(pct)}% vs. a year ago
-    </span>
-  );
-}
+        const id = ++requestId.current;
+        setRegionError("");
+        setStatus("loading");
 
-function PredictionsPage() {
-  const [regions, setRegions] = useState([]);
-  const [region, setRegion] = useState("");
-  const [quarter, setQuarter] = useState(1);
-  const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+        try {
+            const data = await fetchPrediction({ region, quarter });
+            if (id !== requestId.current) return;          // ignore an older, slower answer
 
-  // Fill the region dropdown from the server
-  useEffect(() => {
-    getOptions()
-      .then((o) => {
-        setRegions(o.regions);
-        setRegion(o.regions[0] || "");
-      })
-      .catch((e) => setError(e.message));
-  }, []);
+            setSubmitted({ region, quarter });
+            setResult(data);
+            setSelectedId(data.crops?.[0]?.id ?? null);
+            setStatus("done");
 
-  const run = async (e) => {
-    e.preventDefault();
-    if (!region) return;
-    setLoading(true);
-    setError("");
-    try {
-      setResult(await getPrediction(region, quarter));
-    } catch (err) {
-      setResult(null);
-      setError(err.message);
-    } finally {
-      setLoading(false);
+            requestAnimationFrame(() => {
+                resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+        } catch {
+            if (id !== requestId.current) return;
+            setStatus("error");
+        }
     }
-  };
 
-  const best = result?.crops[0];
-  const others = result?.crops.slice(1) ?? [];
-  const names = result?.crops.map((c) => c.name) ?? [];
+    function renderResults() {
+        if (status === "idle") {
+            return (
+                <div className="pred-state">
+                    <strong>Ready when you are</strong>
+                    Choose a region and a quarter, then tap “Show recommendations”.
+                </div>
+            );
+        }
 
-  return (
-    <main className="pred-page">
-      <header className="pred-hero">
-        <p className="pred-eyebrow">check out our predictions</p>
-        <h1>Next generation of crops</h1>
-        <p className="pred-sub">
-          Pick a region and a quarter to see which crops are expected to do best,
-          and how their prices moved in recent quarters.
-        </p>
-      </header>
+        if (status === "loading") {
+            return (
+                <div className="pred-state" role="status">
+                    <strong>Crunching the data…</strong>
+                    Checking past weather and prices for your region.
+                </div>
+            );
+        }
 
-      <section className="pred-card pred-form-card">
-        <form onSubmit={run} className="pred-form">
-          <label>
-            Region
-            <select value={region} onChange={(e) => setRegion(e.target.value)} disabled={!regions.length}>
-              {regions.map((r) => (
-                <option key={r} value={r}>{r}</option>
-              ))}
-            </select>
-          </label>
+        if (status === "error") {
+            return (
+                <div className="pred-state pred-state--error" role="alert">
+                    <strong>We couldn't get predictions</strong>
+                    Check your connection and try again in a moment.
+                </div>
+            );
+        }
 
-          <label>
-            Quarter
-            <select value={quarter} onChange={(e) => setQuarter(Number(e.target.value))}>
-              {[1, 2, 3, 4].map((q) => (
-                <option key={q} value={q}>{QUARTER_LABELS[q]}</option>
-              ))}
-            </select>
-          </label>
+        if (!result?.crops?.length || !selected) {
+            return (
+                <div className="pred-state">
+                    <strong>No recommendation for this combination yet</strong>
+                    Try another quarter or region.
+                </div>
+            );
+        }
 
-          <button type="submit" className="pred-btn" disabled={loading || !region}>
-            {loading ? "Loading…" : "Show predictions"}
-          </button>
-        </form>
-        {error && <p className="pred-error" role="alert">{error}</p>}
-      </section>
+        return (
+            <>
+                <div className="pred-summary">
+                    <h2>Best bets for {regionName} · {quarterInfo?.label}</h2>
+                    {result.isSample && <span className="pred-sample">SAMPLE DATA</span>}
+                </div>
 
-      {result && best && (
-        <>
-          {/* BEST CROP */}
-          <section className="pred-best" aria-label="Best crop">
-            <p className="pred-best-label">
-              Best crop for {QUARTER_LABELS[result.quarter]} in {result.region}
-            </p>
-            <p className="pred-season">{result.season}</p>
-            <h2>{best.name}</h2>
+                <div className="pred-grid">
+                    <section className="pred-card pred-card--picks" aria-label="Recommended crops">
+                        <span className="pred-label">TOP PICKS</span>
+                        <h3>What to plant</h3>
+                        <ol className="pred-picks">
+                            {result.crops.map((crop, index) => {
+                                const pct = Math.round(crop.confidence * 100);
+                                const trend = TREND[crop.trend] ?? TREND.flat;
+                                const isSelected = crop.id === selected.id;
 
-            <div className="pred-score">
-              <div className="pred-score-bar"><span style={{ width: `${best.score}%` }} /></div>
-              <strong>{best.score}/100</strong>
+                                return (
+                                    <li key={crop.id}>
+                                        <button
+                                            type="button"
+                                            className={"pred-pick" + (isSelected ? " is-selected" : "")}
+                                            aria-pressed={isSelected}
+                                            onClick={() => setSelectedId(crop.id)}
+                                        >
+                                            <span className="pred-pick__rank">{index + 1}</span>
+                                            <span className="pred-pick__main">
+                                                <span className="pred-pick__name">{crop.name}</span>
+                                                <span className="pred-conf" aria-hidden="true">
+                                                    <span className="pred-conf__fill" style={{ width: `${pct}%` }} />
+                                                </span>
+                                                <span className="pred-pick__meta">
+                                                    <span>{pct}% confidence</span>
+                                                    <span className={`pred-trend pred-trend--${crop.trend}`}>
+                                                        {trend.arrow} {trend.label}
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </button>
+                                    </li>
+                                );
+                            })}
+                        </ol>
+                    </section>
+
+                    <section className="pred-card pred-card--price" aria-label="Price trend">
+                        <span className="pred-label">PRICE TREND</span>
+                        <h3>{selected.name}</h3>
+                        <div className="pred-chart-scroll">
+                            <PriceChart series={selected.priceSeries} unit={selected.priceUnit} />
+                        </div>
+                        <ul className="pred-legend" aria-hidden="true">
+                            <li><i /> Past prices</li>
+                            <li><i className="is-forecast" /> Forecast</li>
+                            <li><i className="is-band" /> Likely range</li>
+                        </ul>
+                        {selected.reasons?.length > 0 && (
+                            <ul className="pred-reasons">
+                                {selected.reasons.map((reason) => (
+                                    <li key={reason}>{reason}</li>
+                                ))}
+                            </ul>
+                        )}
+                    </section>
+
+                    {result.weather?.months?.length > 0 && (
+                        <section className="pred-card pred-card--weather" aria-label="Weather outlook">
+                            <span className="pred-label">WEATHER OUTLOOK</span>
+                            <h3>Rain and temperature</h3>
+                            <div className="pred-chart-scroll">
+                                <WeatherChart months={result.weather.months} />
+                            </div>
+                        </section>
+                    )}
+
+                    <aside className="pred-card pred-card--note">
+                        <span className="pred-label">HOW TO READ THIS</span>
+                        <h3>Estimates, not promises</h3>
+                        <p>
+                            Confidence is the model's own score: the higher it is, the more certain the model is about that crop.
+                        </p>
+                        <p>
+                            The shaded band on the price chart is the likely range. Weather and prices can change, so check with your local agriculture office before you plant.
+                        </p>
+                    </aside>
+                </div>
+            </>
+        );
+    }
+
+    return (
+        <Section id="Predictions" tone="light" watermark="PLAN">
+            <div className="pred">
+                <header className="pred-header">
+                    <p className="pred-eyebrow">check out our predictions!</p>
+                    <h1>Next generation of crops</h1>
+                    <p className="pred-lede">
+                        Pick your region and the quarter you plan to plant in. Our AI model suggests which crops fit best, using past weather and price data.
+                    </p>
+                </header>
+
+                <form className="pred-form" onSubmit={handleSubmit} noValidate>
+                    <div className="pred-field">
+                        <label htmlFor="pred-region">Region</label>
+                        <select
+                            id="pred-region"
+                            value={region}
+                            onChange={(e) => {
+                                setRegion(e.target.value);
+                                setRegionError("");
+                            }}
+                            aria-invalid={!!regionError}
+                            aria-describedby={regionError ? "pred-region-error" : undefined}
+                        >
+                            <option value="">Select your region</option>
+                            {REGIONS.map((r) => (
+                                <option key={r.value} value={r.value}>{r.name}</option>
+                            ))}
+                        </select>
+                        {regionError && (
+                            <p className="pred-error" id="pred-region-error" role="alert">{regionError}</p>
+                        )}
+                    </div>
+
+                    <fieldset className="pred-quarters">
+                        <legend>Quarter</legend>
+                        <div className="pred-quarters__row">
+                            {QUARTERS.map((q) => (
+                                <label key={q.value} className="pred-quarter">
+                                    <input
+                                        type="radio"
+                                        name="quarter"
+                                        value={q.value}
+                                        checked={quarter === q.value}
+                                        onChange={() => setQuarter(q.value)}
+                                    />
+                                    <span>
+                                        <strong>{q.label}</strong>
+                                        <small>{q.months}</small>
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                    </fieldset>
+
+                    <button type="submit" className="pred-submit" disabled={status === "loading"}>
+                        <span>{status === "loading" ? "Crunching the data…" : "Show recommendations"}</span>
+                        <ArrowCircleIcon className="pred-submit__icon" />
+                    </button>
+                </form>
+
+                <div className="pred-results" ref={resultsRef} aria-live="polite">
+                    {renderResults()}
+                </div>
             </div>
-
-            <dl className="pred-stats">
-              <div>
-                <dt>Estimated income per hectare</dt>
-                <dd>{peso(best.est_income_php_ha)}</dd>
-              </div>
-              <div>
-                <dt>Latest price ({result.latest_period})</dt>
-                <dd>
-                  {peso(best.latest_price_php_kg)}<small> / kg</small>
-                  <Trend pct={best.price_change_pct} />
-                </dd>
-              </div>
-              <div>
-                <dt>Usual price in this quarter</dt>
-                <dd>{peso(best.avg_price_php_kg)}<small> / kg</small></dd>
-              </div>
-              <div>
-                <dt>Usual rainfall in this quarter</dt>
-                <dd>{best.avg_rainfall_mm}<small> mm</small></dd>
-              </div>
-            </dl>
-          </section>
-
-          {/* OTHER TOP CROPS */}
-          <section className="pred-others" aria-label="Other recommended crops">
-            {others.map((c) => (
-              <article key={c.name} className="pred-card pred-other">
-                <p className="pred-rank">#{c.rank} choice</p>
-                <h3>{c.name}</h3>
-                <p className="pred-other-score">Score: <strong>{c.score}/100</strong></p>
-                <p>Est. income per hectare: <strong>{peso(c.est_income_php_ha)}</strong></p>
-                <p>
-                  Latest price: <strong>{peso(c.latest_price_php_kg)} / kg</strong>
-                  <br /><Trend pct={c.price_change_pct} />
-                </p>
-              </article>
-            ))}
-          </section>
-
-          {/* PRICE HISTORY */}
-          <section className="pred-card pred-history">
-            <h2>Price per kilo, last 8 quarters</h2>
-            <p className="pred-note">
-              Average farm-gate price in {result.region}. Newest quarter is on the right.
-            </p>
-
-            <PriceChart history={result.price_history} names={names} />
-
-            <ul className="pred-legend">
-              {names.map((n, i) => (
-                <li key={n}><span style={{ background: LINE_COLORS[i] }} />{n}</li>
-              ))}
-            </ul>
-
-            <div className="pred-table-wrap">
-              <table className="pred-table">
-                <caption className="pred-sr">Price per kilo by quarter</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Quarter</th>
-                    {names.map((n) => <th key={n} scope="col">{n}</th>)}
-                  </tr>
-                </thead>
-                <tbody>
-                  {[...result.price_history].reverse().map((row) => (
-                    <tr key={row.label}>
-                      <th scope="row">{row.label}</th>
-                      {names.map((n) => <td key={n}>{peso(row[n])}</td>)}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          {/* HOW TO READ + DISCLAIMER + CTA */}
-          <section className="pred-card pred-info">
-            <h2>How to read this</h2>
-            <p>
-              The score (0 to 100) compares each crop's expected income per hectare
-              against the best result in our data. Higher is better. The prices are
-              what farmers were paid per kilo in earlier quarters.
-            </p>
-            <p className="pred-disclaimer">{result.disclaimer}</p>
-            <Link to="/register" className="pred-btn pred-cta">
-              Volunteer on a farm
-            </Link>
-          </section>
-        </>
-      )}
-    </main>
-  );
+        </Section>
+    );
 }
-
-export default PredictionsPage;

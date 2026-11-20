@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function useActiveSection(ids) {
+    const { pathname } = useLocation();
+    const onLanding = pathname === "/";
     const [active, setActive] = useState(ids[0]);
 
     useEffect(() => {
+        if (!onLanding) return undefined;   
+        // no landing sections on other pages
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) setActive(entry.target.id);
                 });
             },
-            // a thin band in the middle of the screen: whichever section crosses it is "active"
             { rootMargin: "-45% 0px -50% 0px" }
         );
 
@@ -20,7 +25,8 @@ export default function useActiveSection(ids) {
         });
 
         return () => observer.disconnect();
-    }, [ids]);
+    }, [ids, onLanding]);                   
+    // re-runs when you come back to the landing page
 
-    return active;
+    return onLanding ? active : "";
 }
