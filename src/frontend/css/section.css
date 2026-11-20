@@ -5,9 +5,19 @@
     overflow: hidden;                       /* clips the watermark to the rounded panel */
     padding: 110px clamp(20px, 4vw, 60px);  /* space inside the panel */
     border-radius: 40px;
-    margin: 0 auto 24px; 
+    margin: 0 auto 50px; 
     width: calc(100% - (var(--side-padding) * 2));
     max-width: 70vw;
+}
+
+.section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;                            /* behind the watermark (0) and content (1) */
+    background: var(--section-bg);
+    backdrop-filter: blur(3px);             /* optional frosted look; delete for a plain see-through */
+    -webkit-backdrop-filter: blur(3px);
 }
 
 .section__content {
@@ -38,7 +48,7 @@
 
 /* ---- tones ---- */
 .section--dark {
-    background: var(--color-major);
+    background: color-mix(in srgb, var(--color-major) 85%, transparent);
     color: var(--color-light);
 }
 .section--dark .section__watermark {
@@ -46,7 +56,7 @@
 }
 
 .section--light {
-    background: var(--color-cream);
+    background: color-mix(in srgb, var(--color-cream) 82%, transparent);
     color: var(--color-dark);
 }
 .section--light .section__watermark {
@@ -54,7 +64,7 @@
 }
 
 .section--mint {
-    background: var(--color-mint);
+    background: color-mix(in srgb, var(--color-mint) 82%, transparent);
     color: var(--color-dark);
 }
 .section--mint .section__watermark {
@@ -62,7 +72,7 @@
 }
 
 .section--accent {
-    background: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 88%, transparent);
     color: var(--color-major);
 }
 .section--accent .section__watermark {

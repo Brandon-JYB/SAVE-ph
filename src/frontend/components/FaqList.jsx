@@ -22,7 +22,8 @@ const FAQS = [
     },
     {
         question: "How long does a typical farm immersion last?",
-        answer: "Sessions vary depending on the partner farm and schedule—ranging from single-day visits to weekend or multi-day immersions. Check each farm's listing or details when planning your visit so you know what to expect.",
+        answer: "Right now, each registration covers a single day—feel free to submit a separate one if you'd like to visit more than once!",
+        // answer: "Sessions vary depending on the partner farm and schedule—ranging from single-day visits to weekend or multi-day immersions. Check each farm's listing or details when planning your visit so you know what to expect.",
     },
     {
         question: "What should I pack or wear for the farm immersion?",
