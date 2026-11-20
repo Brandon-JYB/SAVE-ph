@@ -36,10 +36,10 @@
     color: var(--color-gray);
 }
 
-/* ---------- form ---------- */
+/* ---------- inputs ---------- */
 .pred-form {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr) auto;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
     gap: 1.25rem;
     align-items: end;
     padding: 1.5rem;
@@ -78,20 +78,10 @@
     border-radius: 0.75rem;
 }
 
-.pred-field select[aria-invalid="true"] {
-    border-color: var(--color-error);
-}
-
 .pred-field select:focus-visible,
 .pred-pick:focus-visible {
     outline: 3px solid var(--color-accent);
     outline-offset: 2px;
-}
-
-.pred-error {
-    margin: 0;
-    font-size: 0.875rem;
-    color: var(--color-error);
 }
 
 .pred-quarters__row {
@@ -111,10 +101,13 @@
     pointer-events: none;
 }
 
-.pred-quarter span {
+.pred-quarter > span {
     display: grid;
     justify-items: center;
+    align-content: start;
     gap: 0.1rem;
+    height: 100%;
+    box-sizing: border-box;
     padding: 0.55rem 0.4rem;
     border: 2px solid var(--color-rule);
     border-radius: 0.9rem;
@@ -132,6 +125,17 @@
     color: var(--color-gray);
 }
 
+.pred-quarter em {
+    margin-top: 0.25rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    background: var(--color-mint);
+    color: var(--color-major);
+    font-family: var(--font-detail), monospace;
+    font-size: 0.65rem;
+    font-style: normal;
+}
+
 .pred-quarter input:checked + span {
     background: var(--color-major);
     border-color: var(--color-major);
@@ -147,49 +151,9 @@
     outline-offset: 2px;
 }
 
-.pred-submit {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    height: 3.25rem;
-    padding: 0 0.9rem 0 1.6rem;
-    border: 0;
-    border-radius: 999px;
-    background: var(--color-accent);
-    color: var(--color-major);
-    font-family: var(--font-normal), sans-serif;
-    font-size: 1.05rem;
-    font-weight: 800;
-    box-shadow: 0px 4px 12px var(--shadow);
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-}
-
-.pred-submit:hover:not(:disabled) {
-    transform: translateY(2px);
-    box-shadow: 0px 0px 8px var(--shadow);
-}
-
-.pred-submit:disabled {
-    opacity: 0.7;
-    cursor: progress;
-}
-
-.pred-submit:focus-visible {
-    outline: 3px solid var(--color-major);
-    outline-offset: 3px;
-}
-
-.pred-submit__icon {
-    flex-shrink: 0;
-    width: 2rem;
-    height: 2rem;
-}
-
 /* ---------- results ---------- */
 .pred-results {
     margin-top: 2rem;
-    scroll-margin-top: 96px;
 }
 
 .pred-state {
@@ -230,6 +194,12 @@
     font-weight: 800;
     font-size: clamp(1.3rem, 2.6vw, 1.8rem);
     color: var(--color-deep);
+}
+
+.pred-season {
+    margin: 0.25rem 0 0;
+    font-size: 0.95rem;
+    color: var(--color-gray);
 }
 
 .pred-sample {
@@ -294,6 +264,13 @@
     color: var(--color-dark);
 }
 
+.pred-caption {
+    margin: 0.75rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-gray);
+}
+
 /* ---------- top picks ---------- */
 .pred-picks {
     display: grid;
@@ -305,7 +282,7 @@
 
 .pred-pick {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.9rem;
     width: 100%;
     padding: 0.9rem 1rem;
@@ -335,15 +312,15 @@
     width: 2.2rem;
     height: 2.2rem;
     border-radius: 50%;
-    background: var(--color-mint);
-    color: var(--color-major);
+    color: var(--color-light);
     font-family: var(--font-title), sans-serif;
     font-weight: 800;
 }
 
-.pred-pick.is-selected .pred-pick__rank {
-    background: var(--color-accent);
-}
+/* same colors as the matching lines in the price chart */
+.pred-pick__rank--1 { background: var(--color-major); }
+.pred-pick__rank--2 { background: var(--color-accent-deep); }
+.pred-pick__rank--3 { background: var(--color-minor); }
 
 .pred-pick__main {
     display: grid;
@@ -352,9 +329,29 @@
     min-width: 0;
 }
 
+.pred-pick__top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
 .pred-pick__name {
     font-family: var(--font-title), sans-serif;
     font-weight: 700;
+}
+
+.pred-score {
+    font-family: var(--font-title), sans-serif;
+    font-weight: 800;
+    color: var(--color-major);
+}
+
+.pred-score small {
+    font-family: var(--font-detail), monospace;
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: var(--color-muted);
 }
 
 .pred-conf {
@@ -379,15 +376,25 @@
     gap: 0.25rem 0.75rem;
     font-family: var(--font-detail), monospace;
     font-size: 0.72rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     color: var(--color-gray);
+}
+
+.pred-trend {
+    font-family: var(--font-detail), monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
 }
 
 .pred-trend--up   { color: var(--color-major); }
 .pred-trend--down { color: var(--color-error); }
 .pred-trend--flat { color: var(--color-gray); }
 
-/* ---------- price card extras ---------- */
+/* ---------- chart cards ---------- */
+.pred-chart-scroll {
+    overflow-x: auto;                 /* on phones the chart scrolls sideways instead of shrinking its text */
+}
+
 .pred-legend {
     display: flex;
     flex-wrap: wrap;
@@ -401,48 +408,33 @@
     color: var(--color-gray);
 }
 
-.pred-legend li {
+.pred-legend__item {
     display: flex;
     align-items: center;
     gap: 0.45rem;
 }
 
-.pred-legend i {
-    display: inline-block;
-    width: 1.5rem;
-    height: 0;
-    border-top: 3px solid var(--color-major);
+.pred-legend__item::before {
+    content: "";
+    width: 1.6rem;
+    border-top: 3px solid var(--line);
 }
 
-.pred-legend i.is-forecast {
-    border-top: 3px dashed var(--color-accent-deep);
-}
+.pred-legend__item--1 { --line: var(--color-major); }
+.pred-legend__item--2 { --line: var(--color-accent-deep); }
+.pred-legend__item--3 { --line: var(--color-minor); }
+.pred-legend__item--3::before { border-top-style: dashed; }
 
-.pred-legend i.is-band {
-    height: 0.7rem;
-    border: 0;
-    border-radius: 3px;
-    background: var(--glow-accent-soft);
-}
-
-.pred-reasons {
-    margin: 1rem 0 0;
-    padding-left: 1.1rem;
-    font-size: 0.95rem;
-    line-height: 1.55;
-    color: var(--color-gray);
-}
-
-/* ---------- charts (drawn by PriceChart and WeatherChart) ---------- */
-.pred-chart-scroll {
-    overflow-x: auto;                 /* on phones the chart scrolls sideways instead of shrinking its text */
-}
-
+/* ---------- charts (drawn by PriceChart and RainChart) ---------- */
 .chart {
     display: block;
     width: 100%;
     height: auto;
     min-width: 440px;
+}
+
+.chart--rain {
+    min-width: 320px;
 }
 
 .chart__grid {
@@ -457,31 +449,34 @@
     font-size: 12px;
 }
 
+.chart__series {
+    transition: opacity 0.2s ease;
+}
+
+.chart__series--1 { color: var(--color-major); }
+.chart__series--2 { color: var(--color-accent-deep); }
+.chart__series--3 { color: var(--color-minor); }
+
+.chart__series.is-dim {
+    opacity: 0.28;
+}
+
 .chart__line {
     fill: none;
-    stroke: var(--color-major);
+    stroke: currentColor;
     stroke-width: 3;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 
-.chart__line--forecast {
-    stroke: var(--color-accent-deep);
-    stroke-dasharray: 7 7;
-}
-
-.chart__band {
-    fill: var(--glow-accent-soft);
+.chart__series--3 .chart__line {
+    stroke-dasharray: 7 6;
 }
 
 .chart__dot {
     fill: var(--color-light);
-    stroke: var(--color-major);
+    stroke: currentColor;
     stroke-width: 2.5;
-}
-
-.chart__dot--forecast {
-    stroke: var(--color-accent-deep);
 }
 
 .chart__bar {
@@ -491,6 +486,10 @@
 
 .chart__bar:hover {
     fill: var(--color-major);
+}
+
+.chart__bar.is-selected {
+    fill: var(--color-accent);
 }
 
 .chart__value {
@@ -503,38 +502,5 @@
 .chart__temp {
     fill: var(--color-accent-deep);
     font-family: var(--font-detail), monospace;
-    font-size: 12px;
-}
-
-/* ---------- responsive ---------- */
-@media (max-width: 900px) {
-    .pred-form {
-        grid-template-columns: 1fr;
-    }
-
-    .pred-submit {
-        justify-content: center;
-    }
-
-    .pred-card--picks,
-    .pred-card--price,
-    .pred-card--weather,
-    .pred-card--note {
-        grid-column: span 12;
-    }
-}
-
-@media (max-width: 520px) {
-    .pred-quarters__row {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .pred-pick,
-    .pred-submit,
-    .pred-quarter span,
-    .chart__bar {
-        transition: none;
-    }
+    font-size: 11px;
 }

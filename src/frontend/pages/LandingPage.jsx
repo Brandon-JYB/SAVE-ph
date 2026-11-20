@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Section from "../components/Section";
 import WhyCarousel from "../components/WhyCarousel";
 import ProcessSteps from "../components/ProcessSteps";
+import PredictionTeaser from "../components/PredictionTeaser";
 import FaqList from "../components/FaqList";
 import homeBg from "../images/home-bg.jpg";
 import aboutImg2 from "../images/about-img-2.jpg";
@@ -155,15 +156,7 @@ function LandingPage() {
                     <p>analytics meets crop optimization</p>
                 </div>
 
-                <div className="ai-content-box">
-                    <p>
-                        The latest development in Artificial Intelligence has made it possible for us to help the farmers even more by providing an AI prediction model that predicts which plants are most optimal to plant within that quarter of the year based on historical data regarding weather, price, and other external factors.
-                    </p>
-                    <Link className="ai-btn" to="/predictions">
-                        <span className="ai-btn__text">Learn More</span>
-                        <ArrowCircleIcon className="ai-btn__icon" />
-                    </Link>
-                </div>
+                <PredictionTeaser />
             </Section>
         </>
     );

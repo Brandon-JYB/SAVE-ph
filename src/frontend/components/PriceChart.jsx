@@ -2,51 +2,46 @@ const W = 640;
 const H = 280;
 const PAD = { top: 22, right: 20, bottom: 34, left: 46 };
 
-export default function PriceChart({ series, unit = "PHP/kg" }) {
-    if (!series?.length) return null;
+// "2024 Q1" -> "Q1 ’24"
+const shortLabel = (label) => label.replace(/^\d{2}(\d{2}) (Q\d)$/, "$2 ’$1");
+
+export default function PriceChart({ history, crops, highlight }) {
+    if (!history?.length || !crops?.length) return null;
+
+    const values = history.flatMap((row) => crops.map((crop) => row[crop])).filter(Number.isFinite);
+    if (!values.length) return null;
 
     const innerW = W - PAD.left - PAD.right;
     const innerH = H - PAD.top - PAD.bottom;
 
-    const all = series.flatMap((d) => [d.price, d.low ?? d.price, d.high ?? d.price]);
-    const spread = Math.max(...all) - Math.min(...all) || 1;
-    const yMin = Math.floor(Math.min(...all) - spread * 0.15);
-    const yMax = Math.ceil(Math.max(...all) + spread * 0.15);
+    const spread = Math.max(...values) - Math.min(...values) || 1;
+    const yMin = Math.max(0, Math.floor(Math.min(...values) - spread * 0.15));
+    const yMax = Math.ceil(Math.max(...values) + spread * 0.15);
 
-    const x = (i) => PAD.left + (series.length > 1 ? (i / (series.length - 1)) * innerW : innerW / 2);
+    const x = (i) => PAD.left + (history.length > 1 ? (i / (history.length - 1)) * innerW : innerW / 2);
     const y = (v) => PAD.top + innerH - ((v - yMin) / (yMax - yMin)) * innerH;
 
-    const firstForecast = series.findIndex((d) => d.forecast);
-    const lastPast = firstForecast === -1 ? series.length - 1 : Math.max(firstForecast - 1, 0);
-
-    const line = (from, to) =>
-        series
-            .slice(from, to + 1)
-            .map((d, n) => `${n ? "L" : "M"}${x(from + n)},${y(d.price)}`)
+    const pathFor = (crop) =>
+        history
+            .map((row, i) => (Number.isFinite(row[crop]) ? `${x(i)},${y(row[crop])}` : null))
+            .filter(Boolean)
+            .map((point, n) => `${n ? "L" : "M"}${point}`)
             .join(" ");
-
-    const pastPath = line(0, lastPast);
-    const forecastPath = firstForecast === -1 ? "" : line(lastPast, series.length - 1);
-
-    // shaded "likely range" around the forecast
-    let bandPath = "";
-    if (firstForecast !== -1) {
-        const idx = series.map((_, i) => i).filter((i) => i >= lastPast);
-        const upper = idx.map((i, n) => `${n ? "L" : "M"}${x(i)},${y(series[i].high ?? series[i].price)}`);
-        const lower = [...idx].reverse().map((i) => `L${x(i)},${y(series[i].low ?? series[i].price)}`);
-        bandPath = `${upper.join(" ")} ${lower.join(" ")} Z`;
-    }
 
     const ticks = Array.from({ length: 5 }, (_, k) => yMin + ((yMax - yMin) * k) / 4);
     const decimals = yMax - yMin < 8 ? 1 : 0;
-    const last = series[series.length - 1];
+
+    // draw the highlighted crop last so it sits on top
+    const order = crops
+        .map((crop, index) => ({ crop, index }))
+        .sort((a, b) => Number(a.crop === highlight) - Number(b.crop === highlight));
 
     return (
         <svg
             className="chart"
             viewBox={`0 0 ${W} ${H}`}
             role="img"
-            aria-label={`Price in ${unit} from ${series[0].label} to ${last.label}, ending near ${last.price}`}
+            aria-label={`Past quarterly prices in pesos per kilogram for ${crops.join(", ")}`}
         >
             {ticks.map((t) => (
                 <g key={t}>
@@ -57,24 +52,31 @@ export default function PriceChart({ series, unit = "PHP/kg" }) {
                 </g>
             ))}
 
-            <text className="chart__tick" x={PAD.left} y={11}>{unit}</text>
+            <text className="chart__tick" x={PAD.left} y={11}>₱ / kg</text>
 
-            {bandPath && <path className="chart__band" d={bandPath} />}
-            <path className="chart__line" d={pastPath} />
-            {forecastPath && <path className="chart__line chart__line--forecast" d={forecastPath} />}
-
-            {series.map((d, i) => (
-                <g key={`${d.label}-${i}`}>
-                    <circle
-                        className={"chart__dot" + (d.forecast ? " chart__dot--forecast" : "")}
-                        cx={x(i)}
-                        cy={y(d.price)}
-                        r="4.5"
-                    >
-                        <title>{`${d.label}: ${d.price} ${unit}${d.forecast ? " (forecast)" : ""}`}</title>
-                    </circle>
-                    <text className="chart__tick" x={x(i)} y={H - 10} textAnchor="middle">{d.label}</text>
+            {order.map(({ crop, index }) => (
+                <g
+                    key={crop}
+                    className={
+                        `chart__series chart__series--${index + 1}` +
+                        (highlight && highlight !== crop ? " is-dim" : "")
+                    }
+                >
+                    <path className="chart__line" d={pathFor(crop)} />
+                    {history.map((row, n) =>
+                        Number.isFinite(row[crop]) ? (
+                            <circle key={row.label} className="chart__dot" cx={x(n)} cy={y(row[crop])} r="3.5">
+                                <title>{`${crop} · ${row.label}: ₱${row[crop]} per kg`}</title>
+                            </circle>
+                        ) : null
+                    )}
                 </g>
+            ))}
+
+            {history.map((row, n) => (
+                <text key={row.label} className="chart__tick" x={x(n)} y={H - 10} textAnchor="middle">
+                    {shortLabel(row.label)}
+                </text>
             ))}
         </svg>
     );

@@ -11,4 +11,8 @@
 /*  ---------- PAGE STYLING ----------  */
 @import "./landing.css";
 @import "./contact.css";
-@import "./predictions.css"
+@import "./teaser.css";
+@import "./predictions.css";
+
+/*  ---------- PAGE STYLING ----------  */
+@import "./media.css";

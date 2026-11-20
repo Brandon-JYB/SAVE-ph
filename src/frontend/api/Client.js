@@ -5,7 +5,10 @@ async function request(path, options) {
         headers: { "Content-Type": "application/json" },
         ...options,
     });
-    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).message || "Request failed");
+    if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.message || (typeof body.detail === "string" ? body.detail : "") || "Request failed");
+    }
     return res.status === 204 ? null : res.json();
 }
 
@@ -25,4 +28,8 @@ export const submitFeedback = (data) =>
 export const submitInquiry = (data) =>
     request("/inquiries", { method: "POST", body: JSON.stringify(data) });
 
-export const getPrediction = (params) => request(`/predictions?${new URLSearchParams(params)}`);
+// crop predictor (FastAPI: GET /options and GET /predict)
+export const getOptions = () => request("/options");
+
+export const getPrediction = ({ region, quarter }) =>
+    request(`/predict?${new URLSearchParams({ region, quarter })}`);
