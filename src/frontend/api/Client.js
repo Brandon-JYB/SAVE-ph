@@ -1,15 +1,27 @@
-const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
 async function request(path, options) {
-    const res = await fetch(`${BASE_URL}${path}`, {
-        headers: { "Content-Type": "application/json" },
-        ...options,
-    });
-    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).message || "Request failed");
+    let res;
+    try {
+        res = await fetch(`${BASE_URL}${path}`, {
+            headers: { "Content-Type": "application/json" },
+            ...options,
+        });
+    } catch {
+        throw new Error("Can't reach the server. Check your connection and try again.");
+    }
+
+    if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        // FastAPI sends { detail: "message" } or, for validation errors, { detail: [{ msg }] }
+        const detail = Array.isArray(body.detail) ? body.detail[0]?.msg?.replace(/^Value error, /, "") : body.detail;
+        throw new Error(typeof detail === "string" ? detail : "Request failed");
+    }
     return res.status === 204 ? null : res.json();
 }
 
-export const getFarms = () => request("/farms");
+// pass a YYYY-MM-DD date to get the spots left on that day
+export const getFarms = (date) => request(date ? `/farms?date=${encodeURIComponent(date)}` : "/farms");
 
 // returns { referenceCode }
 export const submitRegistration = (data) =>
@@ -25,4 +37,4 @@ export const submitFeedback = (data) =>
 export const submitInquiry = (data) =>
     request("/inquiries", { method: "POST", body: JSON.stringify(data) });
 
-export const getPrediction = (params) => request(`/predictions?${new URLSearchParams(params)}`);
+export const getPrediction = (params) => request(`/predict?${new URLSearchParams(params)}`);
