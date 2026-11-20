@@ -15,8 +15,13 @@ body {
 
 main {
     flex: 1;
-    padding: 120px 26px 60px 26px; 
+    padding: 0;
     color: var(--color-light);
+}
+
+/* anchor links stop below the floating navbar */
+section[id] {
+    scroll-margin-top: 96px;
 }
 
 .app-container {
@@ -26,3 +31,4 @@ main {
     max-width: 100vw;
     position: relative;
 }
+

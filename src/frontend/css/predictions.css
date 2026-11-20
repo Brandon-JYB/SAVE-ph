@@ -1,0 +1,506 @@
+/*  ---------- PREDICTIONS PAGE ----------  */
+
+.pred {
+    max-width: 1040px;
+    margin: 0 auto;
+    font-family: var(--font-normal), sans-serif;
+}
+
+.pred-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.pred-eyebrow {
+    margin: 0 0 0.25rem;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--color-accent-deep);
+}
+
+.pred-header h1 {
+    margin: 0;
+    font-family: var(--font-section), sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--color-deep);
+}
+
+.pred-lede {
+    max-width: 38rem;
+    margin: 0.9rem auto 0;
+    line-height: 1.5;
+    color: var(--color-gray);
+}
+
+/* ---------- inputs ---------- */
+.pred-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
+    gap: 1.25rem;
+    align-items: end;
+    padding: 1.5rem;
+    background: var(--color-light);
+    border: 1px solid var(--color-rule);
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 24px var(--shadow-medium);
+}
+
+.pred-field,
+.pred-quarters {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.pred-field label,
+.pred-quarters legend {
+    padding: 0;
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.pred-field select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem 0.9rem;
+    font: inherit;
+    color: var(--color-dark);
+    background: var(--color-light);
+    border: 1.5px solid var(--color-rule);
+    border-radius: 0.75rem;
+}
+
+.pred-field select:focus-visible,
+.pred-pick:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.pred-quarters__row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.pred-quarter {
+    position: relative;
+    cursor: pointer;
+}
+
+.pred-quarter input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.pred-quarter > span {
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 0.1rem;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0.55rem 0.4rem;
+    border: 2px solid var(--color-rule);
+    border-radius: 0.9rem;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.pred-quarter strong {
+    font-family: var(--font-title), sans-serif;
+    font-size: 1rem;
+}
+
+.pred-quarter small {
+    font-family: var(--font-detail), monospace;
+    font-size: 0.7rem;
+    color: var(--color-gray);
+}
+
+.pred-quarter em {
+    margin-top: 0.25rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    background: var(--color-mint);
+    color: var(--color-major);
+    font-family: var(--font-detail), monospace;
+    font-size: 0.65rem;
+    font-style: normal;
+}
+
+.pred-quarter input:checked + span {
+    background: var(--color-major);
+    border-color: var(--color-major);
+    color: var(--color-light);
+}
+
+.pred-quarter input:checked + span small {
+    color: var(--color-mint);
+}
+
+.pred-quarter input:focus-visible + span {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* ---------- results ---------- */
+.pred-results {
+    margin-top: 2rem;
+}
+
+.pred-state {
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    color: var(--color-gray);
+    border: 2px dashed var(--color-rule);
+    border-radius: 1.5rem;
+}
+
+.pred-state strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-family: var(--font-title), sans-serif;
+    color: var(--color-deep);
+}
+
+.pred-state--error {
+    border-color: var(--color-error);
+}
+
+.pred-state--error strong {
+    color: var(--color-error);
+}
+
+.pred-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.pred-summary h2 {
+    margin: 0;
+    font-family: var(--font-title), sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+    color: var(--color-deep);
+}
+
+.pred-season {
+    margin: 0.25rem 0 0;
+    font-size: 0.95rem;
+    color: var(--color-gray);
+}
+
+.pred-sample {
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    color: var(--color-major);
+    font-family: var(--font-detail), monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+}
+
+.pred-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.pred-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-width: 0;
+    padding: clamp(20px, 2.4vw, 32px);
+    background: var(--color-light);
+    border: 1px solid var(--shadow-light);
+    border-radius: 24px;
+    box-shadow: 0px 8px 24px var(--shadow-light);
+    color: var(--color-dark);
+}
+
+.pred-card--picks   { grid-column: span 5; }
+.pred-card--price   { grid-column: span 7; }
+.pred-card--weather { grid-column: span 7; }
+.pred-card--note    { grid-column: span 5; background: var(--color-mint); border-color: var(--color-mint); }
+
+.pred-label {
+    align-self: flex-end;
+    font-family: var(--font-detail), monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--color-muted);
+}
+
+.pred-card--note .pred-label {
+    color: var(--color-major);
+}
+
+.pred-card h3 {
+    margin: 0.25rem 0 1rem;
+    font-family: var(--font-title), sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--color-major);
+}
+
+.pred-card--note p {
+    margin: 0 0 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--color-dark);
+}
+
+.pred-caption {
+    margin: 0.75rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-gray);
+}
+
+/* ---------- top picks ---------- */
+.pred-picks {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pred-pick {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    width: 100%;
+    padding: 0.9rem 1rem;
+    text-align: left;
+    font: inherit;
+    color: var(--color-dark);
+    background: var(--color-light);
+    border: 2px solid var(--color-rule);
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s;
+}
+
+.pred-pick:hover {
+    border-color: var(--color-minor);
+}
+
+.pred-pick.is-selected {
+    border-color: var(--color-accent);
+    background: var(--color-cream);
+}
+
+.pred-pick__rank {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    color: var(--color-light);
+    font-family: var(--font-title), sans-serif;
+    font-weight: 800;
+}
+
+/* same colors as the matching lines in the price chart */
+.pred-pick__rank--1 { background: var(--color-major); }
+.pred-pick__rank--2 { background: var(--color-accent-deep); }
+.pred-pick__rank--3 { background: var(--color-minor); }
+
+.pred-pick__main {
+    display: grid;
+    flex: 1;
+    gap: 0.35rem;
+    min-width: 0;
+}
+
+.pred-pick__top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.pred-pick__name {
+    font-family: var(--font-title), sans-serif;
+    font-weight: 700;
+}
+
+.pred-score {
+    font-family: var(--font-title), sans-serif;
+    font-weight: 800;
+    color: var(--color-major);
+}
+
+.pred-score small {
+    font-family: var(--font-detail), monospace;
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: var(--color-muted);
+}
+
+.pred-conf {
+    display: block;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-mint);
+    overflow: hidden;
+}
+
+.pred-conf__fill {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: var(--color-major);
+}
+
+.pred-pick__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 0.75rem;
+    font-family: var(--font-detail), monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--color-gray);
+}
+
+.pred-trend {
+    font-family: var(--font-detail), monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+}
+
+.pred-trend--up   { color: var(--color-major); }
+.pred-trend--down { color: var(--color-error); }
+.pred-trend--flat { color: var(--color-gray); }
+
+/* ---------- chart cards ---------- */
+.pred-chart-scroll {
+    overflow-x: auto;                 /* on phones the chart scrolls sideways instead of shrinking its text */
+}
+
+.pred-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-detail), monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--color-gray);
+}
+
+.pred-legend__item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.pred-legend__item::before {
+    content: "";
+    width: 1.6rem;
+    border-top: 3px solid var(--line);
+}
+
+.pred-legend__item--1 { --line: var(--color-major); }
+.pred-legend__item--2 { --line: var(--color-accent-deep); }
+.pred-legend__item--3 { --line: var(--color-minor); }
+.pred-legend__item--3::before { border-top-style: dashed; }
+
+/* ---------- charts (drawn by PriceChart and RainChart) ---------- */
+.chart {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-width: 440px;
+}
+
+.chart--rain {
+    min-width: 320px;
+}
+
+.chart__grid {
+    stroke: var(--color-rule);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+}
+
+.chart__tick {
+    fill: var(--color-gray);
+    font-family: var(--font-detail), monospace;
+    font-size: 12px;
+}
+
+.chart__series {
+    transition: opacity 0.2s ease;
+}
+
+.chart__series--1 { color: var(--color-major); }
+.chart__series--2 { color: var(--color-accent-deep); }
+.chart__series--3 { color: var(--color-minor); }
+
+.chart__series.is-dim {
+    opacity: 0.28;
+}
+
+.chart__line {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.chart__series--3 .chart__line {
+    stroke-dasharray: 7 6;
+}
+
+.chart__dot {
+    fill: var(--color-light);
+    stroke: currentColor;
+    stroke-width: 2.5;
+}
+
+.chart__bar {
+    fill: var(--color-minor);
+    transition: fill 0.2s ease;
+}
+
+.chart__bar:hover {
+    fill: var(--color-major);
+}
+
+.chart__bar.is-selected {
+    fill: var(--color-accent);
+}
+
+.chart__value {
+    fill: var(--color-major);
+    font-family: var(--font-title), sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.chart__temp {
+    fill: var(--color-accent-deep);
+    font-family: var(--font-detail), monospace;
+    font-size: 11px;
+}

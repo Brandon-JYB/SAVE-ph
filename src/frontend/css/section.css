@@ -3,9 +3,11 @@
 .section {
     position: relative;
     overflow: hidden;                       /* clips the watermark to the rounded panel */
-    margin: 0 var(--side-padding) 24px;     /* space left/right, and a gap between panels */
     padding: 110px clamp(20px, 4vw, 60px);  /* space inside the panel */
     border-radius: 40px;
+    margin: 0 auto 24px; 
+    width: calc(100% - (var(--side-padding) * 2));
+    max-width: 70vw;
 }
 
 .section__content {

@@ -10,3 +10,9 @@
 
 /*  ---------- PAGE STYLING ----------  */
 @import "./landing.css";
+@import "./contact.css";
+@import "./teaser.css";
+@import "./predictions.css";
+
+/*  ---------- PAGE STYLING ----------  */
+@import "./media.css";

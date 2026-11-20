@@ -1,5 +1,6 @@
 /*  ---------- SHARED SECTION HEADERS ----------  */
 
+.program-header,
 .why-do-it-header,
 .process-header,
 .faq-header,
@@ -18,6 +19,7 @@
     margin-bottom: 6px;
 }
 
+.program-header h2,
 .why-do-it-header h2,
 .process-header h2,
 .faq-header h2,
@@ -32,6 +34,7 @@
 }
 
 /* the small line of text with a rule on each side */
+.program-header p,
 .why-do-it-header p,
 .process-header p,
 .faq-header p,
@@ -45,6 +48,8 @@
     color: var(--color-minor);
 }
 
+.program-header p::before,
+.program-header p::after,
 .why-do-it-header p::before,
 .why-do-it-header p::after,
 .process-header p::before,
@@ -90,18 +95,15 @@
 #Home {
     position: relative;
     isolation: isolate;
-    min-height: 100vh;
-    min-height: 100svh;
+    min-height: min(100svh, 800px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 140px var(--side-padding) 100px;
+    padding: clamp(96px, 13vh, 128px) var(--side-padding);
     margin-bottom: 24px;
     overflow: hidden;
     color: var(--color-light);
 }
 
-/* photo fills the whole hero */
 .home-image {
     position: absolute;
     inset: 0;
@@ -116,7 +118,6 @@
     display: block;
 }
 
-/* green tint, darker behind the text, plus a fade into the page background */
 #Home::before {
     content: "";
     position: absolute;
@@ -127,130 +128,670 @@
         linear-gradient(90deg, var(--overlay-hero-strong) 0%, var(--overlay-hero-mid) 55%, var(--overlay-hero-soft) 100%);
 }
 
-.home-text {
-    max-width: 620px;
+.hero__content {
+    width: 100%;
+    padding-left: clamp(0px, 9vw, 180px);
+    padding-top: 8vh;
+    box-sizing: border-box;
 }
 
-.home-text h1 {
+.hero__title {
+    margin: 0 0 1.25rem;
+    max-width: 36rem;
+    font-family: var(--font-special), sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.75rem, min(4vw, 6.5vh), 6.75rem);   /* max 44px; raise the 2.75rem to go bigger */
+    line-height: 1.15;
+    letter-spacing: -0.0165em;
+    color: var(--color-light);
+    -webkit-text-stroke: 1px var(--color-text-brand-muted);
+    text-shadow: 0px 4px 4px var(--shadow-text);
+}
+
+.hero__line {
+    display: block;
+}
+
+.hero__initial {
+    color: var(--color-mint);
+}
+
+.hero__text {
+    margin: 0 0 2rem;
+    max-width: 31rem;
+    font-family: var(--font-title), sans-serif;
+    font-weight: 500;
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    line-height: 1.4;
+    color: var(--color-light);
+    text-shadow: 0px 4px 4px var(--shadow-text);
+}
+
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    height: 3.5rem;
+    padding: 0 1rem 0 2rem;
+    box-sizing: border-box;
+    background: var(--color-accent);
+    border-radius: 999px;
+    box-shadow: 0px 4px 12px var(--shadow);
+    color: var(--color-text-brand-muted);
+    font-family: var(--font-normal), sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-btn:hover {
+    transform: translateY(2px);
+    box-shadow: 0px 0px 8px var(--shadow);
+}
+
+.cta-btn:focus-visible {
+    outline: 3px solid var(--color-light);
+    outline-offset: 3px;
+}
+
+.cta-btn__icon {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-major);
+    opacity: 0.95;
+}
+
+/*  ---------- ABOUT / OUR PROGRAM (bento grid) ----------  */
+
+.bento {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.bento__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: clamp(20px, 2.4vw, 32px);
+    background: var(--color-light);
+    border: 1px solid var(--shadow-light);
+    border-radius: 24px;
+    box-shadow: 0px 8px 24px var(--shadow-light);
+    color: var(--color-dark);
+    overflow: hidden;
+}
+
+/* grid placement */
+.bento__card--statement { grid-column: span 7; grid-row: span 2; }
+.bento__card--stats     { grid-column: span 5; }
+.bento__card--pillars   { grid-column: span 5; }
+.bento__photo           { grid-column: span 4; }
+.bento__card--about     { grid-column: span 4; }
+
+/* small mono label in the top corner */
+.bento__label {
+    align-self: flex-end;
+    font-family: var(--font-detail), monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--color-muted);
+}
+
+/* ---- statement card ---- */
+.bento__quote {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: var(--font-title), sans-serif;
+    font-weight: 700;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    line-height: 0.8;
+    color: var(--color-accent);
+}
+
+.bento__heading {
+    margin: 0.5rem 0 1.25rem;
+    font-family: var(--font-title), sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+    line-height: 1.2;
+    color: var(--color-dark);
+}
+
+.bento__heading span {
+    display: block;
+    color: var(--color-accent);
+}
+
+.bento__text {
+    margin: 0 0 2rem;
+    font-family: var(--font-normal), sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.55;
+    color: var(--color-gray);
+}
+
+.bento__foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-tagline-opacity);
+    font-family: var(--font-detail), monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+}
+
+/* ---- dark "at a glance" card ---- */
+.bento__card--stats {
+    background: var(--color-major);
+    border-color: var(--color-major);
+    color: var(--color-light);
+}
+
+.bento__card--stats .bento__label {
+    color: var(--color-minor);
+}
+
+.bento__stats {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0.5rem 0 0;
+}
+
+.bento__stat {
+    display: flex;
+    flex-direction: row-reverse;      /* number on the left, label on the right */
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--color-rule);
+}
+
+.bento__stat:last-child {
+    border-bottom: 0;
+}
+
+.bento__stat dd {
+    margin: 0;
     font-family: var(--font-section), sans-serif;
     font-weight: 700;
-    font-size: clamp(2.4rem, 6vw, 4.8rem);
-    line-height: 1.05;
-    text-transform: uppercase;
-    margin: 0 0 20px;
-    text-shadow: 0px 4px 16px var(--shadow-text);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1;
+    color: var(--color-accent);
 }
 
-.home-text h3 {
+.bento__stat dt {
+    max-width: 12rem;
+    font-family: var(--font-detail), monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-align: right;
+    text-transform: uppercase;
+    color: var(--color-mint);
+}
+
+/* ---- pillars ---- */
+.bento__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.bento__pills li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border: 1.5px solid var(--color-major);
+    border-radius: 999px;
     font-family: var(--font-title), sans-serif;
     font-weight: 600;
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
-    margin: 0 0 14px;
-}
-
-.home-text p {
-    font-family: var(--font-title), sans-serif;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin: 0;
-    max-width: 520px;
-    opacity: 0.92;
-}
-
-/*  ---------- ABOUT / OUR PROGRAM ----------  */
-
-.about-title {
-    text-align: center;
-    margin-bottom: 56px;
-}
-
-.about-row,
-.about-row-reverse {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    align-items: center;
-    margin-bottom: 32px;
-}
-
-.about-row-reverse .about-image {
-    order: 2;
-}
-
-.about-image img {
-    display: block;
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    border-radius: 24px;
-    border: 4px solid var(--color-light);
-    box-shadow: 0px 8px 24px var(--shadow-medium);
-}
-
-.about-text {
-    background: var(--color-light);
-    border-radius: 24px;
-    padding: clamp(24px, 3vw, 44px);
-    box-shadow: 0px 8px 24px var(--shadow-light);
-}
-
-.about-text p {
-    margin: 0;
-    color: var(--color-gray);
-    font-family: var(--font-normal), sans-serif;
-    font-size: 1.1rem;
-    line-height: 1.65;
-}
-
-/*  ---------- WHY DO IT (3 CARDS) ----------  */
-
-.cards-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-.card {
-    background: var(--color-light);
-    border-radius: 20px;
-    padding: 32px 28px;
-    box-shadow: 0px 8px 24px var(--shadow-medium);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0px 14px 30px var(--shadow-strong);
-}
-
-.card-icon {
-    text-align: center;
-    font-family: var(--font-detail), monospace;
+    font-size: 0.95rem;
     color: var(--color-major);
-    margin-bottom: 20px;
 }
 
-.card h3 {
-    text-align: center;
+.bento__pills li::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+}
+
+/* ---- photo tiles ---- */
+.bento__photo {
+    min-height: 260px;
+    margin: 0;
+    padding: 0;
+}
+
+.bento__photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.bento__photo:hover img {
+    transform: scale(1.05);
+}
+
+.bento__chip {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    background: var(--overlay-hero-strong);
+    font-family: var(--font-detail), monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--color-light);
+}
+
+/* ---- about card ---- */
+.bento__lead {
+    margin: 0.75rem 0 0;
+    font-family: var(--font-normal), sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--color-gray);
+}
+
+.bento__small {
+    margin: auto 0 0;
+    font-family: var(--font-normal), sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-gray);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bento__photo img {
+        transition: none;
+    }
+}
+
+/*  ---------- WHY DO IT (carousel) ----------  */
+
+.why {
+    --slide: 76%;                     /* width of the centered card; the rest shows the neighbours peeking in */
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.why__viewport {
+    overflow: hidden;
+}
+
+.why__track {
+    display: flex;
+    transform: translateX(calc((100% - var(--slide)) / 2 - var(--active, 0) * var(--slide)));
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.why__slide {
+    display: flex;
+    flex: 0 0 var(--slide);
+    box-sizing: border-box;
+    padding: 6px 12px 30px;           /* gap between cards + room for the shadow */
+    opacity: 0.45;
+    transform: scale(0.92);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    cursor: pointer;
+}
+
+.why__slide:not(.is-active):hover {
+    opacity: 0.7;
+}
+
+.why__slide.is-active {
+    opacity: 1;
+    transform: scale(1);
+    cursor: default;
+}
+
+.why__card {
+    position: relative;
+    display: grid;
+    flex: 1;                          /* every card is as tall as the tallest one, so nothing jumps */
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: clamp(20px, 3vw, 40px);
+    box-sizing: border-box;
+    padding: clamp(24px, 4vw, 48px);
+    background: var(--color-light);
+    border-radius: 24px;
+    box-shadow: 0px 8px 24px var(--shadow-medium);
+    color: var(--color-dark);
+}
+
+/* round ↗ button: opens the source */
+.why__source-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--color-mint);
+    color: var(--color-major);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.why__source-btn:hover {
+    background: var(--color-accent);
+    transform: scale(1.08);
+}
+
+.why__source-btn:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+.why__slide:not(.is-active) .why__source-btn {
+    pointer-events: none;             /* a tap on a peeking card brings it forward instead */
+}
+
+.why__source-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.why__icon {
+    display: grid;
+    place-items: center;
+    width: clamp(72px, 10vw, 104px);
+    height: clamp(72px, 10vw, 104px);
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: var(--color-major);
+}
+
+.why__icon svg {
+    width: 52%;
+    height: 52%;
+}
+
+.why__body h3 {
+    margin: 0 0 14px;
+    padding-right: 3rem;              /* keeps long titles clear of the ↗ button */
     font-family: var(--font-title), sans-serif;
     font-weight: 800;
-    font-size: 1.3rem;
-    line-height: 1.2;
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+    line-height: 1.15;
+    text-align: left;
     color: var(--color-major);
-    margin: 0 0 20px;
 }
 
-.card p {
+.why__body p {
     margin: 0;
+    font-family: var(--font-normal), sans-serif;
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.6;
+    color: var(--color-gray);
+}
+
+.why__body strong {
+    color: var(--color-dark);
+    font-weight: 700;
+}
+
+/* bottom row: count on the left, source tags on the right */
+.why__foot {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-tagline-opacity);
+}
+
+.why__count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-detail), monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    color: var(--color-muted);
+}
+
+.why__count::before {
+    content: "";
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 2px;
+    background: var(--color-accent);
+}
+
+.why__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.why__tag {
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: var(--color-mint);
+    font-family: var(--font-detail), monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-major);
+}
+
+.why__tag--type {
+    background: var(--glow-accent-soft);
+    color: var(--color-accent-deep);
+}
+
+.why__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.why__arrow {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--color-clear);
+    color: var(--color-accent);
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.why__arrow:hover {
+    transform: scale(1.08);
+    color: var(--color-light);
+}
+
+.why__arrow-icon {
+    width: 100%;
+    height: 100%;
+}
+
+.why__arrow:focus-visible,
+.why__dot:focus-visible {
+    outline: 3px solid var(--color-light);
+    outline-offset: 3px;
+}
+
+.why__dots {
+    display: flex;
+    gap: 10px;
+}
+
+.why__dot {
+    position: relative;
+    box-sizing: content-box;
+    width: 10px;
+    height: 26px;                     /* tap target; the visible shape is the ::before */
+    padding: 0;
+    border: 0;
+    background: var(--color-clear);
+    cursor: pointer;
+    transition: width 0.3s ease;
+}
+
+.why__dot::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    margin-top: -5px;
+    border-radius: 50%;               /* circle */
+    background: var(--color-minor);
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+.why__dot.is-active {
+    width: 32px;
+}
+
+.why__dot.is-active::before {
+    border-radius: 5px;               /* rounded rectangle */
+    background: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .why__track,
+    .why__slide,
+    .why__dot {
+        transition: none;
+    }
+}
+
+/*  ---------- ACCORDION (shared by Process and FAQ) ----------  */
+
+.acc {
+    background: var(--color-light);
+    border: 2px solid var(--color-clear);
+    border-radius: 16px;
+    box-shadow: 0px 6px 16px var(--shadow-light);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.acc:hover {
+    box-shadow: 0px 10px 22px var(--shadow-medium);
+}
+
+.acc__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    padding: 18px 24px;
+    background: var(--color-clear);
+    border: 0;
+    border-radius: 14px;
+    font-family: var(--font-normal), sans-serif;
+    text-align: left;
+    color: var(--color-dark);
+    cursor: pointer;
+}
+
+.acc__head:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.acc__label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+/* plus / minus: two SVG icons that swap and rotate (the only toggle drawing now) */
+.acc__toggle {
+    position: relative;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    color: var(--color-major);
+}
+
+.acc__plus,
+.acc__minus {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.acc__minus {
+    opacity: 0;
+    transform: rotate(-90deg);
+}
+
+.acc.is-open .acc__plus {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.acc.is-open .acc__minus {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+/* the answer slides open; hidden content can't be tabbed into or read while closed */
+.acc__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition: grid-template-rows 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.acc.is-open .acc__panel {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.acc__inner {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.acc__inner p {
+    margin: 0;
+    padding: 0 24px 20px;
     font-family: var(--font-normal), sans-serif;
     font-size: 1rem;
     line-height: 1.6;
     color: var(--color-gray);
-}
-
-.card strong {
-    color: var(--color-dark);
-    font-weight: 700;
 }
 
 /*  ---------- PROCESS (5 STEPS) ----------  */
@@ -263,45 +804,42 @@
     margin: 0 auto;
 }
 
-.process-step-card {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    background: var(--color-light);
-    border-radius: 16px;
-    padding: 18px 28px;
-    box-shadow: 0px 6px 16px var(--shadow-light);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.process-step-card:hover {
-    transform: translateX(6px);
-    box-shadow: 0px 10px 22px var(--shadow-medium);
+.acc--process .acc__head {
+    padding: 16px 24px;
 }
 
 .step-number {
     font-family: var(--font-title), sans-serif;
     font-weight: 800;
     font-size: 1.3rem;
-    color: var(--color-accent);
+    color: var(--color-accent-deep);   /* darker gold, readable on white */
 }
 
-.step-content {
-    flex: 1;
+.step-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-mint);
+    color: var(--color-major);
+    transition: background-color 0.25s ease;
 }
 
-.step-content h3 {
-    margin: 0;
+.step-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.acc--process.is-open .step-icon {
+    background: var(--color-accent);
+}
+
+.step-title {
     font-family: var(--font-title), sans-serif;
     font-weight: 700;
-    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
-    color: var(--color-dark);
-}
-
-.step-arrow {
-    font-family: var(--font-title), sans-serif;
-    font-weight: 700;
-    font-size: 1.4rem;
+    font-size: clamp(1.05rem, 2.2vw, 1.4rem);
     color: var(--color-dark);
 }
 
@@ -309,95 +847,148 @@
 
 .faq-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
+    align-items: stretch;              /* both cards in a row match the taller one */
 }
 
-.faq-item {
+.acc--faq {
+    display: flex;
+    flex-direction: column;
+}
+
+.acc--faq .acc__head {
+    flex: 1;                           /* fills the full card height when closed */
+    min-height: 76px;
+    padding: 20px 24px;
+}
+
+.faq-question {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.faq-cta {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 16px;
-    background: var(--color-light);
-    border-radius: 16px;
+    height: 100%;                      /* matches the height of the FAQ card beside it */
+    box-sizing: border-box;
     padding: 20px 24px;
+    background: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    border-radius: 16px;
     box-shadow: 0px 6px 16px var(--shadow-light);
-    cursor: pointer;
+    color: var(--color-major);
+    text-decoration: none;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.faq-item:hover {
+.faq-cta:hover {
     transform: translateY(-3px);
     box-shadow: 0px 10px 22px var(--shadow-medium);
 }
 
-.faq-icon {
-    font-family: var(--font-normal), sans-serif;
-    font-size: 1.9rem;
-    font-weight: 300;
-    line-height: 1;
-    color: var(--color-major);
+.faq-cta:focus-visible {
+    outline: 3px solid var(--color-major);
+    outline-offset: 3px;
 }
 
-.faq-item p {
-    margin: 0;
+.faq-cta__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
     font-family: var(--font-normal), sans-serif;
-    font-size: 1rem;
-    line-height: 1.4;
-    color: var(--color-dark);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.faq-cta__text strong {
+    font-family: var(--font-title), sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.faq-cta__icon {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
 }
 
 /*  ---------- AI / DISCOVER ----------  */
 
-.ai-content-box {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 72px 24px;
-    text-align: center;
-    background: radial-gradient(
-        ellipse at center,
-        var(--glow-ai-core) 0%,
-        var(--glow-ai-mid) 45%,
-        var(--color-clear) 70%
-    );
+.ai-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    height: 3.5rem;
+    margin-top: 32px;
+    padding: 0 1rem 0 2rem;
+    box-sizing: border-box;
+    background: var(--color-accent);
+    border-radius: 999px;
+    box-shadow: 0px 4px 12px var(--shadow);
+    color: var(--color-text-brand-muted);
+    font-family: var(--font-normal), sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ai-content-box p {
-    margin: 0;
-    font-family: var(--font-title), sans-serif;
-    font-size: 1.15rem;
-    line-height: 1.7;
-    text-shadow: 0px 2px 8px var(--shadow-text);
+.ai-btn:hover {
+    transform: translateY(2px);
+    box-shadow: 0px 0px 8px var(--shadow);
 }
 
-.ai-content-box .home-btn {
-    justify-content: center;
+.ai-btn:focus-visible {
+    outline: 3px solid var(--color-light);
+    outline-offset: 3px;
+}
+
+.ai-btn__icon {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-major);
+    opacity: 0.95;
 }
 
 /*  ---------- RESPONSIVE ----------  */
 
-@media (max-width: 900px) {
-    .cards-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 800px) {
-    .about-row,
-    .about-row-reverse {
-        grid-template-columns: 1fr;
-    }
-
-    .about-row-reverse .about-image {
-        order: 0;
-    }
-
-    .about-image img {
-        height: 240px;
-    }
+@media (max-width: 1000px) {
+    .bento__card--statement { grid-column: span 12; grid-row: auto; }
+    .bento__card--stats,
+    .bento__card--pillars   { grid-column: span 6; }
+    .bento__photo           { grid-column: span 6; order: 1; }
+    .bento__card--about     { grid-column: span 12; order: 2; }
 }
 
 @media (max-width: 700px) {
+    .bento__card--stats,
+    .bento__card--pillars,
+    .bento__photo {
+        grid-column: span 12;
+    }
+
+    .why { --slide: 88%; }
+
+    .why__card {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .why__icon {
+        width: 72px;
+        height: 72px;
+    }
+
     .faq-grid {
         grid-template-columns: 1fr;
+    }
+
+    .hero__content {
+        padding-left: 0;
     }
 }
