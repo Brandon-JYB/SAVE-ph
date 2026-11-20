@@ -5,6 +5,8 @@ import pandas as pd
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
+from volunteers import router as volunteers_router
+
 BASE = Path(__file__).parent
 model = joblib.load(BASE / "model.pkl")
 data = pd.read_csv(BASE / "data" / "crops.csv")
@@ -39,9 +41,12 @@ app = FastAPI(title="SAVE PH Crop Predictor")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
-    allow_methods=["GET"],
+    allow_methods=["GET", "POST", "PATCH"],
     allow_headers=["*"],
 )
+
+
+app.include_router(volunteers_router)
 
 
 @app.get("/")

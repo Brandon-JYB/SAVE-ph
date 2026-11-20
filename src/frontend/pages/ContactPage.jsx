@@ -112,10 +112,11 @@ export default function ContactPage() {
     const [farmsError, setFarmsError] = useState("");
 
     useEffect(() => {
-        getFarms()
+        setFarmsError("");
+        getFarms(form.preferredDate)
             .then(setFarms)
             .catch(() => setFarmsError("We couldn't load the farm list. Refresh the page to try again."));
-    }, []);
+    }, [form.preferredDate]);
 
     const selectedFarm = farms.find((farm) => farm.id === form.farmId);
     const current = MODES.find((m) => m.id === mode);
@@ -206,8 +207,8 @@ export default function ContactPage() {
             const result = await submitRegistration(form);
             setReferenceCode(result.referenceCode);
             setStep(3);
-        } catch {
-            setErrors({ form: "We couldn't submit your registration. Check your connection and try again." });
+        } catch (err) {
+            setErrors({ form: err.message || "We couldn't submit your registration. Try again." });
         } finally {
             setBusy(false);
         }
@@ -221,8 +222,8 @@ export default function ContactPage() {
                 smsUpdates: form.smsUpdates,
             });
             setRegistrationDone(true);
-        } catch {
-            setErrors({ form: "We couldn't save your preferences. Try again." });
+        } catch (err) {
+            setErrors({ form: err.message || "We couldn't save your preferences. Try again." });
         } finally {
             setBusy(false);
         }
@@ -287,7 +288,7 @@ export default function ContactPage() {
                                 aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "phone-error" : undefined} />
                         </Field>
                         <Field id="preferredDate" label="Preferred date" error={errors.preferredDate}>
-                            <input id="preferredDate" name="preferredDate" type="date"
+                            <input id="preferredDate" name="preferredDate" type="date" min={new Date().toISOString().slice(0, 10)}
                                 value={form.preferredDate} onChange={updateForm}
                                 aria-invalid={!!errors.preferredDate} aria-describedby={errors.preferredDate ? "preferredDate-error" : undefined} />
                         </Field>
