@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Section from "../components/Section";
 import { getFarms, submitRegistration, saveContactPreferences, submitFeedback, submitInquiry } from "../api/Client";
+import { sendConfirmationEmail } from "../lib/sendConfirmationEmail";
 
 
 const STEPS = [
@@ -110,6 +111,7 @@ export default function ContactPage() {
 
     const [farms, setFarms] = useState([]);
     const [farmsError, setFarmsError] = useState("");
+    const [emailSent, setEmailSent] = useState(false);
 
     useEffect(() => {
         setFarmsError("");
@@ -149,6 +151,7 @@ export default function ContactPage() {
         setFeedbackDone(false);
         setInquiryDone(false);
         setErrors({});
+        setEmailSent(false);
     }
 
     /* ---------- validation ---------- */
@@ -202,17 +205,27 @@ export default function ContactPage() {
     }
 
     async function confirmMatch() {
-        setBusy(true);
-        try {
-            const result = await submitRegistration(form);
-            setReferenceCode(result.referenceCode);
-            setStep(3);
-        } catch (err) {
-            setErrors({ form: err.message || "We couldn't submit your registration. Try again." });
-        } finally {
-            setBusy(false);
-        }
+    setBusy(true);
+    try {
+        const result = await submitRegistration(form);
+        setReferenceCode(result.referenceCode);
+
+        const mail = await sendConfirmationEmail({
+            name: form.fullName,
+            email: form.email,
+            farm: selectedFarm ? `${selectedFarm.name}, ${selectedFarm.location}` : "",
+            date: form.preferredDate,
+            reference: result.referenceCode,
+        });
+        setEmailSent(mail.ok);
+
+        setStep(3);
+    } catch (err) {
+        setErrors({ form: err.message || "We couldn't submit your registration. Try again." });
+    } finally {
+        setBusy(false);
     }
+}
 
     async function finishContactPrefs() {
         setBusy(true);
@@ -337,7 +350,11 @@ export default function ContactPage() {
                 return (
                     <div className="reg-center">
                         <h2 className="reg-step-title">You're registered</h2>
+                        {emailSent ? (
                         <p>We sent a confirmation to <strong>{form.email}</strong>.</p>
+                ) : (
+                        <p>Your registration is saved, but we couldn't send the confirmation email. Please keep your reference code.</p>
+                )}
                         <p className="reg-code">Reference code: <strong>{referenceCode}</strong></p>
                         <p className="reg-hint">Keep this code. You'll need it if you want to change your registration.</p>
                     </div>
