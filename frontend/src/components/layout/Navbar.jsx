@@ -1,8 +1,8 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import "../css/style.css";
-import logo from "../images/SAVE.png";
-import useActiveSection from "../hooks/useActiveSection";
+import "../../css/style.css";
+import logo from "../../images/SAVE.png";
+import useActiveSection from "../../hooks/useActiveSection";
 
 const NAV_LINKS = [
     { id: "Home", label: "Home" },

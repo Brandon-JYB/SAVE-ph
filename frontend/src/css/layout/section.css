@@ -16,8 +16,8 @@
     inset: 0;
     z-index: -1;                            /* behind the watermark (0) and content (1) */
     background: var(--section-bg);
-    backdrop-filter: blur(3px);             /* optional frosted look; delete for a plain see-through */
-    -webkit-backdrop-filter: blur(3px);
+    /* backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px); */
 }
 
 .section__content {

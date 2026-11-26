@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ArrowCircleIcon from "../svg/ArrowCircleIcon";
+import ArrowCircleIcon from "../../svg/ArrowCircleIcon";
 
 export default function Footer() {
     return (
@@ -30,7 +30,9 @@ export default function Footer() {
                 <div className="footer__column">
                     <h4 className="footer__column-title">CONNECT</h4>
                     <Link to="/contact" className="footer__link">Register</Link>
-                    <Link to="/contact" className="footer__link">Email</Link>
+                    <Link to="/contact?mode=inquiry" className="footer__link">Email</Link>
+                    <Link to="/farmer-signup" className="footer__link">Enlist Farm</Link>
+                    <Link to="/privacy" className="footer__link">Privacy</Link>
                 </div>
             </div>
 

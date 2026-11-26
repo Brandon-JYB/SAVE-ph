@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import Section from "../components/Section";
-import PriceChart from "../components/PriceChart";
-import RainChart from "../components/RainChart";
+
+/*  ---------- COMPONENTS/LAYOUT ----------  */
+import Section from "../components/layout/Section";
+
+/*  ---------- COMPONENTS/PREDICTIONS ----------  */
+import PriceChart from "../components/predictions/PriceChart";
+import RainChart from "../components/predictions/RainChart";
+
+/*  ---------- API ----------  */
 import {
     DATA_IS_SAMPLE,
     QUARTERS,

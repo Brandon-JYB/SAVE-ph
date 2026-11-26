@@ -20,9 +20,8 @@ body::before {
     z-index: -1;
     background:
         linear-gradient(var(--color-body-edge),var(--color-body-mid), var(--color-body-edge)),
-        url("../images/body-bg.jpg") center / cover no-repeat;
+        url("../../images/body-bg.jpg") center / cover no-repeat;
     pointer-events: none;
-    filter: blur(4px);
 }
 
 main {

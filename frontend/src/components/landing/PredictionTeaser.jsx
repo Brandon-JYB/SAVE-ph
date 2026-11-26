@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import ArrowCircleIcon from "../svg/ArrowCircleIcon";
+import ArrowCircleIcon from "../../svg/ArrowCircleIcon";
 import {
     DATA_IS_SAMPLE,
     QUARTERS,
     currentQuarter,
     loadOptions,
     loadRegionForecast,
-} from "../api/Predictions";
+} from "../../api/Predictions";
 
 export default function PredictionTeaser() {
     const rootRef = useRef(null);
@@ -145,15 +145,6 @@ export default function PredictionTeaser() {
                         </ol>
                     ) : (
                         <p className="teaser__empty">Warming up the model…</p>
-                    )}
-
-                    {result && (
-                        <Link
-                            className="teaser__more"
-                            to={`/predictions?region=${encodeURIComponent(region)}&quarter=${quarter}`}
-                        >
-                            See prices, rain and the full forecast →
-                        </Link>
                     )}
                 </div>
             )}

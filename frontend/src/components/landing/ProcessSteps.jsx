@@ -1,10 +1,10 @@
 import { useState } from "react";
-import AccordionItem from "./AccordionItem";
-import MailIcon from "../svg/MailIcon";
-import PinIcon from "../svg/PinIcon";
-import ConfirmIcon from "../svg/ConfirmIcon";
-import SendIcon from "../svg/SendIcon";
-import HeartIcon from "../svg/HeartIcon";
+import AccordionItem from "../landing/AccordionItem";
+import MailIcon from "../../svg/MailIcon";
+import PinIcon from "../../svg/PinIcon";
+import ConfirmIcon from "../../svg/ConfirmIcon";
+import SendIcon from "../../svg/SendIcon";
+import HeartIcon from "../../svg/HeartIcon";
 
 const PROCESS_STEPS = [
     {

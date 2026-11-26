@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import AccordionItem from "./AccordionItem";
-import ArrowCircleIcon from "../svg/ArrowCircleIcon";
+import ArrowCircleIcon from "../../svg/ArrowCircleIcon";
 
 const FAQS = [
     {

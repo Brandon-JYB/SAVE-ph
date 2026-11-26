@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
-import Section from "../components/Section";
-import WhyCarousel from "../components/WhyCarousel";
-import ProcessSteps from "../components/ProcessSteps";
-import PredictionTeaser from "../components/PredictionTeaser";
-import FaqList from "../components/FaqList";
+
+/*  ---------- COMPONENTS/LAYOUT ----------  */
+import Section from "../components/layout/Section";
+
+/*  ---------- COMPONENTS/LANDING ----------  */
+import WhyCarousel from "../components/landing/WhyCarousel";
+import ProcessSteps from "../components/landing/ProcessSteps";
+import PredictionTeaser from "../components/landing/PredictionTeaser";
+import FaqList from "../components/landing/FaqList";
+
+/*  ---------- IMAGES ----------  */
 import homeBg from "../images/home-bg.jpg";
 import aboutImg2 from "../images/about-img-2.jpg";
 import aboutImg3 from "../images/about-img-3.jpg";
+
+/*  ---------- SVG ----------  */
 import ArrowCircleIcon from "../svg/ArrowCircleIcon";
 
 const HERO_TITLE_LINES = ["SUPPORTING", "AGRICULTURE VIA", "VOLUNTEER", "ENGAGEMENT"];
@@ -134,6 +142,10 @@ function LandingPage() {
                 </div>
 
                 <ProcessSteps />
+                <p className="reg-switch-banner">
+                    Are you a local farmer interested in hosting volunteers safely?{" "}
+                    <Link to="/farmer-signup">Partner & register your farm →</Link>
+                </p>
             </Section>
 
             <Section id="Questions" tone="light" watermark="ASK">

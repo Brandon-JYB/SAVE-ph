@@ -1,10 +1,10 @@
 import { useState } from "react";
-import WheatIcon from "../svg/WheatIcon";
-import OldPersonIcon from "../svg/OldPersonIcon";
-import MythIcon from "../svg/MythIcon";
-import ArrowLeftCircleIcon from "../svg/ArrowLeftCircleIcon";
-import ArrowRightCircleIcon from "../svg/ArrowRightCircleIcon";
-import ArrowUpRightIcon from "../svg/ArrowUpRightIcon";
+import WheatIcon from "../../svg/WheatIcon";
+import OldPersonIcon from "../../svg/OldPersonIcon";
+import MythIcon from "../../svg/MythIcon";
+import ArrowLeftCircleIcon from "../../svg/ArrowLeftCircleIcon";
+import ArrowRightCircleIcon from "../../svg/ArrowRightCircleIcon";
+import ArrowUpRightIcon from "../../svg/ArrowUpRightIcon";
 
 /*
     Every card links to its source, for transparency.

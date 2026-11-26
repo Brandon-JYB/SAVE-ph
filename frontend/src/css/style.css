@@ -1,18 +1,18 @@
 /*  ---------- THIS IS ALWAYS ON TOP ----------  */
-@import "./root.css";
-@import "./fonts.css";
-@import "./base.css";
+@import "./core/root.css";
+@import "./core/fonts.css";
+@import "./core/base.css";
 
 /*  ---------- COMPONENT STYLING ----------  */
-@import "./navbar.css";
-@import "./footer.css";
-@import "./section.css";
+@import "./layout/navbar.css";
+@import "./layout/footer.css";
+@import "./layout/section.css";
 
 /*  ---------- PAGE STYLING ----------  */
-@import "./landing.css";
-@import "./contact.css";
-@import "./teaser.css";
-@import "./predictions.css";
+@import "./pages/landing.css";
+@import "./pages/contact.css";
+@import "./pages/teaser.css";
+@import "./pages/predictions.css";
 
-/*  ---------- PAGE STYLING ----------  */
-@import "./media.css";
+/*  ---------- RESPONSIVE (ALWAYS LAST) ----------  */
+@import "./core/media.css";

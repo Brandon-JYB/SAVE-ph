@@ -1,0 +1,865 @@
+/*  ---------- REGISTER PAGE ----------  */
+
+.reg {
+    max-width: 730px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    font-family: var(--font-normal), sans-serif;   /* inputs and buttons inherit this via font: inherit */
+}
+
+.reg-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.reg-header h1 {
+    margin: 0;
+    font-family: var(--font-section), sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--color-deep);
+}
+
+.reg-eyebrow {
+    margin: 0 0 0.25rem;
+    font-family: var(--font-normal), sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--color-accent-deep);
+}
+
+.reg-lede {
+    margin: 0.75rem 0 0;
+    color: var(--color-gray);
+}
+
+/* ---------- mode switcher ---------- */
+.reg-modes {
+    display: flex;
+    gap: 0.35rem;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 1.25rem;
+    padding: 0.35rem;
+    background: var(--color-mint);
+    border: 1px solid var(--color-rule);
+    border-radius: 999px;
+}
+
+.reg-mode {
+    padding: 0.65rem 1.4rem;
+    font-family: var(--font-title), sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    white-space: nowrap;
+    color: var(--color-major);
+    background: var(--color-clear);
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.reg-mode:hover:not(.is-active) {
+    background: var(--color-light);
+}
+
+.reg-mode.is-active {
+    background: var(--color-major);
+    color: var(--color-light);
+}
+
+/* ---------- card ---------- */
+.reg-card {
+    background: var(--color-light);
+    border: 1px solid var(--color-rule);
+    border-radius: 1.25rem;
+    box-shadow: 0 8px 24px var(--shadow-medium);
+    overflow: hidden;
+}
+
+.reg-panel {
+    padding: 1.5rem;
+    color: var(--color-dark);
+}
+
+.reg-step-title {
+    margin: 0 0 1rem;
+    font-family: var(--font-title), sans-serif;
+    font-weight: 700;
+    color: var(--color-deep);
+}
+
+/* ---------- stepper ---------- */
+.reg-steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 1rem 1.5rem;
+    list-style: none;
+    background: var(--color-mint);
+    border-bottom: 1px solid var(--color-rule);
+}
+
+.reg-steps__item {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--color-gray);
+}
+
+.reg-steps__num {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 2px solid var(--color-rule);
+    background: var(--color-light);
+    font-family: var(--font-title), sans-serif;
+    font-weight: 700;
+}
+
+.reg-steps__item.is-current { color: var(--color-deep); font-weight: 700; }
+.reg-steps__item.is-current .reg-steps__num {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-deep);
+}
+
+.reg-steps__item.is-done .reg-steps__num {
+    background: var(--color-major);
+    border-color: var(--color-major);
+    color: var(--color-light);
+}
+
+/* ---------- fields ---------- */
+.reg-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.reg-field label,
+.reg-rating legend {
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.reg-field input,
+.reg-field select,
+.reg-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.7rem 0.9rem;
+    font: inherit;
+    color: var(--color-dark);
+    background: var(--color-light);
+    border: 1.5px solid var(--color-rule);
+    border-radius: 0.75rem;
+}
+
+.reg-field textarea {
+    resize: vertical;
+}
+
+.reg-field input[aria-invalid="true"],
+.reg-field select[aria-invalid="true"],
+.reg-field textarea[aria-invalid="true"] {
+    border-color: var(--color-error);
+}
+
+.reg-hint {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-gray);
+}
+
+.reg-error {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    color: var(--color-error);
+}
+
+/* ---------- farm cards ---------- */
+.reg-farms {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.reg-farm {
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.reg-farm input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.reg-farm__body {
+    display: grid;
+    gap: 0.15rem;
+    padding: 1rem 1.1rem;
+    background: var(--color-light);
+    border: 2px solid var(--color-rule);
+    border-radius: 0.9rem;
+    transition: border-color 0.15s, background-color 0.15s;
+}
+
+.reg-farm input:checked + .reg-farm__body {
+    border-color: var(--color-major);
+    background: var(--color-mint);
+}
+
+.reg-farm__name { font-family: var(--font-title), sans-serif; font-weight: 700; color: var(--color-deep); }
+.reg-farm__meta { font-size: 0.9rem; color: var(--color-gray); }
+.reg-farm__slots { font-family: var(--font-detail), monospace; font-size: 0.85rem; color: var(--color-major); }
+
+/* ---------- summary ---------- */
+.reg-summary { margin: 0 0 1rem; }
+
+.reg-summary div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--color-rule);
+}
+
+.reg-summary dt { font-family: var(--font-detail), monospace; font-size: 0.9rem; color: var(--color-gray); }
+.reg-summary dd { margin: 0; font-weight: 600; text-align: right; }
+
+/* ---------- confirmation ---------- */
+.reg-center { text-align: center; }
+
+.reg-code {
+    display: inline-block;
+    padding: 0.6rem 1rem;
+    font-family: var(--font-detail), monospace;
+    background: var(--color-mint);
+    border: 1px dashed var(--color-major);
+    border-radius: 0.75rem;
+}
+
+/* ---------- checkboxes & rating ---------- */
+.reg-check {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+}
+
+.reg-check input { width: 1.15rem; height: 1.15rem; accent-color: var(--color-major); }
+
+.reg-rating {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1rem;
+    padding: 0;
+    border: 0;
+}
+
+.reg-rating legend { width: 100%; margin-bottom: 0.35rem; padding: 0; }
+.reg-rating .reg-hint { width: 100%; }
+
+.reg-rating label {
+    position: relative;
+    cursor: pointer;
+}
+
+.reg-rating input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.reg-rating span {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    font-family: var(--font-title), sans-serif;
+    font-weight: 700;
+    color: var(--color-dark);
+    border: 2px solid var(--color-rule);
+    border-radius: 50%;
+    transition: background-color 0.15s, border-color 0.15s;
+}
+
+.reg-rating input:checked + span {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-deep);
+}
+
+/* ---------- buttons ---------- */
+.reg-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.reg-btn {
+    padding: 0.75rem 1.5rem;
+    font: inherit;
+    font-family: var(--font-title), sans-serif;
+    font-weight: 700;
+    color: var(--color-deep);
+    background: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.reg-btn--ghost {
+    background: var(--color-clear);
+    border-color: var(--color-major);
+    color: var(--color-major);
+}
+
+.reg-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ---------- focus + a11y ---------- */
+.reg input:focus-visible,
+.reg select:focus-visible,
+.reg textarea:focus-visible,
+.reg button:focus-visible,
+.reg-farm input:focus-visible + .reg-farm__body,
+.reg-rating input:focus-visible + span {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.reg-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* ---------- farmer & verification additions ---------- */
+.reg--narrow {
+    max-width: 520px;
+}
+
+.reg-switch-banner {
+    margin: 0 0 1.25rem;
+    padding: 0.75rem 1.1rem;
+    text-align: center;
+    font-size: 0.92rem;
+    color: var(--color-deep);
+    background: var(--color-mint);
+    border: 1px solid var(--color-rule);
+    border-radius: 999px;
+}
+
+.reg-switch-banner a,
+.reg-switch-link a {
+    font-family: var(--font-title), sans-serif;
+    font-weight: 700;
+    color: var(--color-major);
+    text-decoration: underline;
+}
+
+.reg-switch-link {
+    margin: 1.25rem 0 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-gray);
+}
+
+.reg-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.reg-row--spaced {
+    margin-top: 1rem;
+}
+
+.reg-field--small {
+    flex: 0 0 160px;
+}
+
+.reg-step-title--spaced {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-rule);
+}
+
+.reg-safety-intro {
+    margin-bottom: 0.75rem;
+}
+
+.reg-safety-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.reg-safety-list .reg-check {
+    align-items: flex-start;
+}
+
+.reg-safety-list .reg-check input {
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.reg-privacy {
+    margin: 1.25rem 0 0.5rem;
+    padding: 0.9rem 1rem;
+    background: var(--color-cream);
+    border: 1px solid var(--color-rule);
+    border-radius: 0.75rem;
+}
+
+.reg-privacy__text {
+    margin: 0 0 0.65rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--color-gray);
+}
+
+.reg-privacy .reg-check {
+    margin-bottom: 0;
+    align-items: flex-start;
+    font-weight: 600;
+    color: var(--color-deep);
+}
+
+.reg-privacy .reg-check input {
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.reg-otp {
+    text-align: center;
+    font-family: var(--font-detail), monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.45rem;
+}
+
+.reg-actions--between {
+    justify-content: space-between;
+}
+
+.reg-actions--center {
+    justify-content: center;
+}
+
+/* ==========================================================================
+   FARMER, SAFETY, OTP & PRIVACY STYLING (matches landing.css bento/cards)
+   ========================================================================== */
+
+.reg--wide {
+    max-width: 860px;
+}
+
+.reg--narrow {
+    max-width: 540px;
+}
+
+/* Rule-flanked lede matching .program-header p in landing.css */
+.reg-header--ruled .reg-lede {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 14px 0 0;
+    font-size: 0.95rem;
+    color: var(--color-minor);
+}
+
+.reg-header--ruled .reg-lede::before,
+.reg-header--ruled .reg-lede::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--color-rule);
+}
+
+/* Partner strip (dark bento card + gold CTA card) */
+.partner-strip {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 16px;
+    margin-bottom: 1.5rem;
+}
+
+.partner-strip__card--dark {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.9rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--color-major);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px var(--shadow-light);
+    color: var(--color-light);
+}
+
+.partner-strip__card--dark .bento__label {
+    color: var(--color-minor);
+}
+
+.partner-strip__metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.partner-strip__metrics div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.partner-strip__metrics strong {
+    font-family: var(--font-section), sans-serif;
+    font-size: 1.35rem;
+    color: var(--color-accent);
+}
+
+.partner-strip__metrics span {
+    font-size: 0.82rem;
+    line-height: 1.35;
+    color: var(--color-mint);
+}
+
+/* Banner callout card */
+.reg-banner-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    padding: 1.15rem 1.5rem;
+    background: var(--color-mint);
+    border: 1.5px solid var(--color-rule);
+    border-radius: 20px;
+}
+
+.reg-banner-card--bottom {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    background: var(--color-light);
+    box-shadow: 0 6px 16px var(--shadow-light);
+}
+
+.reg-banner-card p {
+    margin: 0.25rem 0 0;
+    font-size: 0.95rem;
+    color: var(--color-deep);
+}
+
+/* Switch banner used inside ContactPage */
+.reg-switch-banner {
+    margin: 0 0 1.25rem;
+    padding: 0.75rem 1.1rem;
+    text-align: center;
+    font-size: 0.92rem;
+    color: var(--color-deep);
+    background: var(--color-mint);
+    border: 1px solid var(--color-rule);
+    border-radius: 999px;
+}
+
+.reg-switch-banner a,
+.reg-switch-link a,
+.reg-inline-link {
+    font-family: var(--font-title), sans-serif;
+    font-weight: 700;
+    color: var(--color-major);
+    text-decoration: underline;
+}
+
+.reg-switch-link {
+    margin: 1.25rem 0 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-gray);
+}
+
+/* Panel section headers */
+.reg-panel__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.reg-panel__head .reg-step-title {
+    margin: 0;
+}
+
+.reg-panel__head--spaced {
+    margin-top: 1.75rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--color-rule);
+}
+
+/* Multi-column rows */
+.reg-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.reg-row--spaced {
+    margin-top: 1.15rem;
+}
+
+.reg-field--small {
+    flex: 0 0 165px;
+}
+
+/* Interactive Safety Cards (reusing .step-icon & .reg-farm aesthetics) */
+.safety-meter {
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: var(--color-mint);
+    font-family: var(--font-detail), monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-major);
+}
+
+.safety-cards {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.safety-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.95rem;
+    padding: 1rem 1.15rem;
+    background: var(--color-light);
+    border: 2px solid var(--color-rule);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+}
+
+.safety-card:hover {
+    border-color: var(--color-major);
+}
+
+.safety-card.is-checked {
+    background: var(--color-mint);
+    border-color: var(--color-major);
+}
+
+.safety-card input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.safety-card__badge {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--color-mint);
+    font-family: var(--font-title), sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--color-major);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.safety-card.is-checked .safety-card__badge {
+    background: var(--color-accent);
+    color: var(--color-deep);
+}
+
+.safety-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+}
+
+.safety-card__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-family: var(--font-title), sans-serif;
+    color: var(--color-deep);
+}
+
+.safety-card__desc {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: var(--color-gray);
+}
+
+/* Inline Data Privacy Notice box */
+.reg-privacy {
+    margin: 1.25rem 0 0.5rem;
+    padding: 1rem 1.15rem;
+    background: var(--color-cream);
+    border: 1.5px solid var(--color-rule);
+    border-radius: 14px;
+}
+
+.reg-privacy__text {
+    margin: 0 0 0.65rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--color-gray);
+}
+
+.reg-privacy .reg-check {
+    margin-bottom: 0;
+    align-items: flex-start;
+    font-weight: 600;
+    color: var(--color-deep);
+}
+
+.reg-privacy .reg-check input {
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.reg-privacy a {
+    font-weight: 700;
+    color: var(--color-major);
+    text-decoration: underline;
+}
+
+/* 6-Digit OTP Verification */
+.otp-banner {
+    padding: 1.15rem 1.5rem;
+    background: var(--color-major);
+    color: var(--color-light);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.otp-banner .bento__label {
+    color: var(--color-minor);
+}
+
+.otp-banner p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--color-mint);
+}
+
+.otp-banner strong {
+    color: var(--color-accent);
+}
+
+.otp-boxes {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.65rem;
+    margin: 0.5rem 0 1rem;
+}
+
+.otp-box {
+    width: 100%;
+    height: 3.6rem;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: var(--font-section), sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-deep);
+    background: var(--color-cream);
+    border: 2px solid var(--color-rule);
+    border-radius: 14px;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.otp-box:focus {
+    background: var(--color-light);
+    border-color: var(--color-major);
+}
+
+/* Privacy Bento Grid (/privacy) */
+.privacy-bento {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.privacy-bento__card {
+    border: 1px solid var(--color-rule);
+}
+
+.privacy-bento__card .reg-step-title {
+    margin: 0.4rem 0 0.75rem;
+}
+
+.privacy-bento__list {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    font-size: 0.94rem;
+    line-height: 1.55;
+    color: var(--color-gray);
+}
+
+/* CTA button inside forms */
+.reg-cta-submit {
+    border: none;
+    cursor: pointer;
+    height: 3.15rem;
+    font-size: 1rem;
+}
+
+.reg-cta-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.reg-success-box {
+    padding: 1rem 0;
+}
+
+.reg-actions--between {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.reg-actions--center {
+    justify-content: center;
+}

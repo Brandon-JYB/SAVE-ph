@@ -1,6 +1,6 @@
 import { useId } from "react";
-import PlusIcon from "../svg/PlusIcon";
-import MinusIcon from "../svg/MinusIcon";
+import PlusIcon from "../../svg/PlusIcon";
+import MinusIcon from "../../svg/MinusIcon";
 
 export default function AccordionItem({ className = "", header, open, onToggle, children }) {
     const panelId = useId();
