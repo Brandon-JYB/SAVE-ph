@@ -1,0 +1,18 @@
+/*  ---------- THIS IS ALWAYS ON TOP ----------  */
+@import "./core/root.css";
+@import "./core/fonts.css";
+@import "./core/base.css";
+
+/*  ---------- COMPONENT STYLING ----------  */
+@import "./layout/navbar.css";
+@import "./layout/footer.css";
+@import "./layout/section.css";
+
+/*  ---------- PAGE STYLING ----------  */
+@import "./pages/landing.css";
+@import "./pages/contact.css";
+@import "./pages/teaser.css";
+@import "./pages/predictions.css";
+
+/*  ---------- RESPONSIVE (ALWAYS LAST) ----------  */
+@import "./core/media.css";
