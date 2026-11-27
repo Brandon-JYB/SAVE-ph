@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { sendConfirmationEmail } from "../../api/sendConfirmationEmail";
 
 /*  ---------- COMPONENTS/FORMS ----------  */
 import FormField from "./FormField";
@@ -109,11 +110,24 @@ export default function VolunteerRegisterForm({ initialStep = 0, initialRef = ""
             return;
         }
 
-        setBusy(true);
+                setBusy(true);
         try {
             const result = await submitRegistration(form);
             const code = result.referenceCode || "";
             setReferenceCode(code);
+
+            try {
+                await sendConfirmationEmail({
+                    name: form.fullName,
+                    email: form.email,
+                    farm: selectedFarm?.name || "",
+                    date: form.preferredDate,
+                    reference: code,
+                });
+            } catch (mailErr) {
+                console.error("Confirmation email failed:", mailErr);
+            }
+
             setStep(3);
             navigate(
                 `/verify-email?role=student&email=${encodeURIComponent(form.email)}&ref=${encodeURIComponent(code)}`
@@ -302,7 +316,7 @@ export default function VolunteerRegisterForm({ initialStep = 0, initialRef = ""
                         <p>
                             {form.email ? (
                                 <>
-                                    We verified and confirmed <strong>{form.email}</strong>.
+                                    We sent a confirmation to <strong>{form.email}</strong>.
                                 </>
                             ) : (
                                 "Your email is verified and your volunteer slot is confirmed."
