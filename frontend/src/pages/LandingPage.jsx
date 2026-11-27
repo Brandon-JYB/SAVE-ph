@@ -35,6 +35,7 @@ const PROGRAM_PILLARS = [
 function LandingPage() {
     return (
         <>
+            {/*  ---------- HOME ----------  */}
             <section id="Home">
                 <div className="hero__content">
                     <h1 className="hero__title">
@@ -60,7 +61,8 @@ function LandingPage() {
                     <img src={homeBg} alt="" />
                 </div>
             </section>
-
+            
+            {/*  ---------- ABOUT INFO ----------  */}
             <Section id="About" tone="light" watermark="ABOUT">
                 <div className="program-header">
                     <span className="subtitle">what do we offer?</span>
@@ -124,6 +126,7 @@ function LandingPage() {
                 </div>
             </Section>
 
+            {/*  ---------- ABOUT WHY ----------  */}
             <Section id="WhyDoIt" tone="dark" watermark="GROW">
                 <div className="why-do-it-header">
                     <span className="subtitle">why do it?</span>
@@ -134,6 +137,7 @@ function LandingPage() {
                 <WhyCarousel />
             </Section>
 
+            {/*  ---------- HOW TO VOLUNTEER ----------  */}
             <Section id="Process" tone="mint" watermark="JOIN">
                 <div className="process-header">
                     <span className="subtitle">how do i sign up?</span>
@@ -142,12 +146,36 @@ function LandingPage() {
                 </div>
 
                 <ProcessSteps />
-                <p className="reg-switch-banner">
-                    Are you a local farmer interested in hosting volunteers safely?{" "}
-                    <Link to="/farmer-signup">Partner & register your farm →</Link>
-                </p>
             </Section>
 
+            {/*  ---------- REGISTER FARM ----------  */}
+            <Section id="Farmers" tone="accent" watermark="PARTNER">
+                <div className="farmer-call">
+                    <div className="farmer-call__copy">
+                        <span className="subtitle">own a local farm?</span>
+                        <h2>HOST STUDENT VOLUNTEERS</h2>
+                        <p>
+                            Partner with Save PH to welcome safety-vetted college volunteers for planting and harvest seasons, plus unlock quarterly AI crop insights for your region.
+                        </p>
+                    </div>
+
+                    <div className="farmer-call__card">
+                        <span className="bento__label">PARTNER ONBOARDING</span>
+                        <ul className="farmer-call__perks">
+                            <li><strong>Extra Hands</strong> — Scheduled student groups matched to your farm's daily capacity.</li>
+                            <li><strong>Safety-First</strong> — Clear boundaries: zero heavy machinery or chemical handling.</li>
+                            <li><strong>Crop Analytics</strong> — Regional quarterly price and rainfall outlooks.</li>
+                        </ul>
+
+                        <Link to="/farmer-signup" className="cta-btn farmer-call__btn">
+                            <span className="cta-btn__text">Register Your Farm</span>
+                            <ArrowCircleIcon className="cta-btn__icon" />
+                        </Link>
+                    </div>
+                </div>
+            </Section>
+
+            {/*  ---------- QUESTIONS ----------  */}
             <Section id="Questions" tone="light" watermark="ASK">
                 <div className="faq-header">
                     <span className="subtitle">you might be wondering...</span>
@@ -158,6 +186,7 @@ function LandingPage() {
                 <FaqList />
             </Section>
 
+            {/*  ---------- AI OPTIMIZATION ----------  */}
             <Section id="Discover" tone="dark" watermark="REAP">
                 <div className="ai-header">
                     <span className="subtitle">check out our predictions!</span>

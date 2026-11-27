@@ -52,7 +52,6 @@ export default function FaqList() {
                 </AccordionItem>
             ))}
 
-            {/* bottom-right card: a button to the Ask Question tab of the Contact page */}
             <Link className="faq-cta" to="/contact?mode=inquiry">
                 <span className="faq-cta__text">
                     <strong>Still curious?</strong>

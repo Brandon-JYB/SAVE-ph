@@ -45,6 +45,15 @@
         text-align: center;
     }
 
+    .farmer-call {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+    }
+
+    .farmer-call__copy {
+        text-align: center;
+    }
+
     /* predictions page: cards stack */
     .pred-card--picks,
     .pred-card--price,
@@ -311,6 +320,11 @@
     .reg-actions--between {
         flex-direction: column-reverse;
         align-items: stretch;
+    }
+
+    .farmer-call__btn {
+    align-self: stretch;
+    justify-content: center;
     }
 }
 

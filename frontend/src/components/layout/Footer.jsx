@@ -29,8 +29,8 @@ export default function Footer() {
                 </div>
                 <div className="footer__column">
                     <h4 className="footer__column-title">CONNECT</h4>
-                    <Link to="/contact" className="footer__link">Register</Link>
                     <Link to="/contact?mode=inquiry" className="footer__link">Email</Link>
+                    <Link to="/contact" className="footer__link">Register</Link>
                     <Link to="/farmer-signup" className="footer__link">Enlist Farm</Link>
                     <Link to="/privacy" className="footer__link">Privacy</Link>
                 </div>
